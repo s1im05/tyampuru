@@ -1,7 +1,5 @@
 <?php
-if (!defined("PATH_SEPARATOR"))
-    define("PATH_SEPARATOR", getenv("COMSPEC")? ";" : ":");
-ini_set("include_path", ini_get("include_path").PATH_SEPARATOR.dirname(__FILE__));
+
 
 define("DB_HOST",'localhost');
 define("DB_USER",'root');

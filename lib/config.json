@@ -1,0 +1,23 @@
+{
+    "project": {
+        "title": "My Project",
+        "description": "Enter something useful here",
+        "version": "0.1",
+        "locale": "ru_RU.UTF-8"
+    },
+    "db": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "my_db",
+        "table_prefix": "prefix__"
+    },
+    "image": {
+        "width": 800,
+        "thumb_width": 200,
+        "thumb_height": 120
+    },
+    "templates": {
+        "path": "/templates/skin_default"
+    }
+}
