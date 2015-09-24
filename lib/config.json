@@ -6,11 +6,12 @@
         "locale": "ru_RU.UTF-8"
     },
     "db": {
+        "lib_path": "/lib/DbSimple",
         "host": "localhost",
         "user": "root",
         "password": "",
-        "database": "my_db",
-        "table_prefix": "prefix__"
+        "database": "tyampuru",
+        "table_prefix": "tyampu__"
     },
     "image": {
         "width": 800,

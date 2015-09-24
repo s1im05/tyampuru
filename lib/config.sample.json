@@ -6,6 +6,7 @@
         "locale": "ru_RU.UTF-8"
     },
     "db": {
+        "lib_path": "/lib/DbSimple",
         "host": "localhost",
         "user": "root",
         "password": "",
