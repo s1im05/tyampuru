@@ -34,6 +34,7 @@ class SSCE_Application {
         
         $this->_oRequest    = new SSCE_Request();
         
+        var_dump($this->getRequest()->getPath(), $this->getRequest()->getParams(), $this->getRequest()->getCurrent() );
     }
     
     public function getConfig() {
