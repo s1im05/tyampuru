@@ -4,6 +4,7 @@ abstract class Controller {
     private $_oDb;
     private $_oConfig;
     private $_oRequest;
+    private $_aViewVars = array();
     
     protected $_sTitle  = '';
     protected $_sLayout  = 'index.php';
@@ -47,4 +48,10 @@ abstract class Controller {
         $this->_sLayout  = $sLayout;
         return $this;
     }
+    
+    public function assign($sKey, $mVar) {
+        $this->_aViewVars[$sKey]    = $mVar;
+        return this;
+    }
+    
 }
