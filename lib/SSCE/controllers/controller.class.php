@@ -1,5 +1,5 @@
 <?php
-class Controller {
+abstract class Controller {
     
     private $_oDb;
     private $_oConfig;
@@ -10,6 +10,8 @@ class Controller {
         $this->_oConfig     = $aObjects['config'];
         $this->_oRequest    = $aObjects['request'];
     }
+    
+    public abstract function run();
     
     public function getDb(){
         return $this->_oDb;

@@ -39,7 +39,7 @@ class SSCE_Application {
             'config'    => $this->getConfig(),
             'request'   => $this->getRequest(),
         ));
-        $this->getDirector()->bootstrap();
+        $this->getDirector()->bootstrap()->runCurrent();
 
     }
     
