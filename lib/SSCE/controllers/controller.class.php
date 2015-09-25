@@ -5,6 +5,10 @@ abstract class Controller {
     private $_oConfig;
     private $_oRequest;
     
+    protected $_sTitle  = '';
+    protected $_sLayout  = 'index.php';
+    protected $_sTemplate  = 'template.php';
+    
     public function __construct($aObjects) {
         $this->_oDb         = $aObjects['db'];
         $this->_oConfig     = $aObjects['config'];
@@ -23,5 +27,24 @@ abstract class Controller {
     
     public function getRequest(){
         return $this->_oRequest;
+    }
+    
+    public function getTitle(){
+        return $this->_sTitle;
+    }
+    
+    public function setTitle($sTitle){
+        $this->_sTitle  = $sTitle;
+        return $this;
+    }
+    
+    public function setTemplate($sTemplate){
+        $this->_sTemplate  = $sTemplate;
+        return $this;
+    }
+    
+    public function setLayout($sLayout){
+        $this->_sLayout  = $sLayout;
+        return $this;
     }
 }
