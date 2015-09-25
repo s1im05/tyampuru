@@ -5,6 +5,7 @@ class SSCE_Application {
     private $_sConfigFile;
     private $_oDb;
     private $_oRequest;
+    private $_oDirector;
  
     public function __construct($sConfigFile){
         $this->_sConfigFile         = $sConfigFile;
@@ -33,8 +34,13 @@ class SSCE_Application {
         $this->getDb()->query("SET NAMES utf8;");
         
         $this->_oRequest    = new SSCE_Request();
-        
-        var_dump($this->getRequest()->getPath(), $this->getRequest()->getParams(), $this->getRequest()->getCurrent() );
+        $this->_oDirector   = new SSCE_Director(array(
+            'db'        => $this->getDb(),
+            'config'    => $this->getConfig(),
+            'request'   => $this->getRequest(),
+        ));
+        $this->getDirector()->bootstrap();
+
     }
     
     public function getConfig() {
@@ -47,5 +53,9 @@ class SSCE_Application {
     
     public function getRequest() {
         return $this->_oRequest;
+    }
+    
+    public function getDirector() {
+        return $this->_oDirector;
     }
 }
