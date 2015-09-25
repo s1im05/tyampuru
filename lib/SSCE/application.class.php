@@ -4,6 +4,7 @@ class SSCE_Application {
     private $_oConfig;
     private $_sConfigFile;
     private $_oDb;
+    private $_oRequest;
  
     public function __construct($sConfigFile){
         $this->_sConfigFile         = $sConfigFile;
@@ -22,12 +23,6 @@ class SSCE_Application {
             }
         }
         
-        if (in_array(strtolower( ini_get('magic_quotes_gpc')), array('1', 'on'))) {
-            $_POST      = array_map('stripslashes', $_POST );
-            $_GET       = array_map('stripslashes', $_GET );
-            $_COOKIE    = array_map('stripslashes', $_COOKIE );
-        }
-        
         $this->_oConfig = new SSCE_Config($this->_sConfigFile);
         setlocale(LC_ALL , $this->getConfig()->project->locale);
         
@@ -37,6 +32,8 @@ class SSCE_Application {
         $this->getDb()->setIdentPrefix($this->getConfig()->db->table_prefix);
         $this->getDb()->query("SET NAMES utf8;");
         
+        $this->_oRequest    = new SSCE_Request();
+        
     }
     
     public function getConfig() {
@@ -45,5 +42,9 @@ class SSCE_Application {
     
     public function getDb() {
         return $this->_oDb;
+    }
+    
+    public function getRequest() {
+        return $this->_oRequest;
     }
 }
