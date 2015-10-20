@@ -6,7 +6,6 @@ class SSCE_Director {
     
     public function __construct($aObjects){
         $this->_aObjects    = $aObjects;
-        
         require_once 'controllers/controller.class.php';
         
     }
