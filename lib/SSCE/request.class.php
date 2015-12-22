@@ -13,11 +13,11 @@ class SSCE_Request {
             $_COOKIE    = array_map('stripslashes', $_COOKIE );
         }
         
-        $aRequestUrl		= parse_url( $_SERVER['REQUEST_URI'] );
-        $aPathUnfrm 		= explode( '/', $aRequestUrl['path'] );
+        $aRequestUrl        = parse_url( $_SERVER['REQUEST_URI'] );
+        $aPathUnfrm         = explode( '/', $aRequestUrl['path'] );
         array_shift( $aPathUnfrm );
 
-        foreach ( $aPathUnfrm as $iKey	=> $mVal ) {
+        foreach ( $aPathUnfrm as $iKey  => $mVal ) {
             if ( $mVal == '' ) {
                 unset( $aPathUnfrm[ $iKey ] );
                 continue;
@@ -29,7 +29,7 @@ class SSCE_Request {
             }
         }
         if (sizeof($this->_aPath) > 0) {
-            $this->_sCurrent	= end($this->_aPath);
+            $this->_sCurrent    = end($this->_aPath);
         } else {
             $this->_sCurrent    = 'main';
         }
@@ -64,22 +64,22 @@ class SSCE_Request {
         return $this->_bIsOk;
     }
     
-	public function go404() {
-		header('Location: /404');
-		exit();
-	}
-	
-	
-	public function go($sUrl) {
-		header('Location: '.$sUrl);
-		exit();
-	}
-	
-	
-	public function refresh() {
-		header('Location: '.substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'?')));
-		exit();
-	}
+    public function go404() {
+        header('Location: /404');
+        exit();
+    }
+
+
+    public function go($sUrl) {
+        header('Location: '.$sUrl);
+        exit();
+    }
+
+
+    public function refresh() {
+        header('Location: '.substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'?')));
+        exit();
+    }
 
 
     public function getHeaders() {

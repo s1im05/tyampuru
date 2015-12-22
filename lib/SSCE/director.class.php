@@ -24,7 +24,6 @@ class SSCE_Director {
         if (file_exists(__DIR__.'/controllers/'.$sCurrent.'.controller.class.php')) {
             require_once __DIR__.'/controllers/'.$sCurrent.'.controller.class.php';
             $oCurrentController = new $sCurrentClassName($this->getObjects());
-            $oCurrentController->run();
         } elseif ($aPage    = $this->getDb()->selectRow("SELECT * FROM ?_pages WHERE name = ? LIMIT 1;", $sCurrent)) {
             var_dump($aPage);
         } else {
