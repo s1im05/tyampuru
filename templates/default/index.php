@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Layout</title>
+    <title><?=$title?></title>
     
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css" />
 </head>
 <body>
     <header class="b-header clearfix">
@@ -118,6 +118,9 @@
                         <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
                     </div>
                 </article>
+                
+                <?include $template;?>
+                
                 <nav>
                     <ul class="pagination">
                         <li>

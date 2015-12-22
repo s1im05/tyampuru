@@ -7,6 +7,6 @@ class Index_Controller extends Controller {
 
 
     public function indexAction(){
-        //
+        $this->assign('test','zzz');
     }
 }

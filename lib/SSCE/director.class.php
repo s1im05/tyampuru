@@ -22,7 +22,11 @@ class SSCE_Director {
         if (file_exists(__DIR__.'/controllers/'.$sCurrent.'.controller.class.php')) {
             require_once __DIR__.'/controllers/'.$sCurrent.'.controller.class.php';
             $oCurrentController = new $sCurrentClassName($this->getObjects());
-            echo $this->getView()->setTemplate($oCurrentController->getTemplate())->setLayout($oCurrentController->getLayout())->render();
+            echo $this->getView()
+                ->setTemplate($oCurrentController->getTemplate())
+                ->setLayout($oCurrentController->getLayout())
+                ->setTitle($oCurrentController->getTitle())
+                ->render();
         } else {
             $this->getRequest()->go404();
         }

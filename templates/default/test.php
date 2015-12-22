@@ -1,1 +1,1 @@
-<p>test template</p>
+<p>123 <?=$test?> template</p>

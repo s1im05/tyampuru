@@ -70,4 +70,9 @@ abstract class Controller {
     public function getLayout(){
         return $this->_sLayout;
     }
+    
+    public function assign($sName, $mVal){
+        $this->getView()->assign($sName, $mVal);
+        return $this;
+    }
 }

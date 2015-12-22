@@ -27,8 +27,7 @@ class SSCE_Application {
         
         $this->_oConfig = new SSCE_Config($this->_sConfigFile);
         setlocale(LC_ALL , $this->getConfig()->project->locale);
-        
-        $this->_oView   = new SSCE_View();
+        $this->_oView   = new SSCE_View($this->getConfig()->templates->path);
         
         require_once $this->getConfig()->db->lib_path.'/Generic.php';
         require_once $this->getConfig()->db->lib_path.'/Mysql.php';
