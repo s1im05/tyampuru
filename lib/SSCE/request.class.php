@@ -1,12 +1,13 @@
 <?php
 class SSCE_Request {
     
-    private $_aPath     = array();
-    private $_aParams   = array();
-    private $_sCurrent  = 'index';
-    private $_bIsOk     = false;
+    private $_sPath         = '';
+    private $_aParams       = array();
+    private $_sController   = '';
+    private $_sAction       = '';
+    private $_sHeader       = '';
     
-    public function __construct(){
+    public function __construct($aRoutes){
         if (in_array(strtolower( ini_get('magic_quotes_gpc')), array('1', 'on'))) {
             $_POST      = array_map('stripslashes', $_POST );
             $_GET       = array_map('stripslashes', $_GET );
@@ -14,48 +15,40 @@ class SSCE_Request {
         }
         
         $aRequestUrl        = parse_url( $_SERVER['REQUEST_URI'] );
-        $aPathUnfrm         = explode( '/', $aRequestUrl['path'] );
-        array_shift( $aPathUnfrm );
-
-        foreach ( $aPathUnfrm as $iKey  => $mVal ) {
-            if ( $mVal == '' ) {
-                unset( $aPathUnfrm[ $iKey ] );
-                continue;
-            }
-            if ($iKey > 0) {
-                $this->_aParams[]   = $mVal;
-            } else {
-                $this->_aPath[]     = $mVal;
-            }
-        }
-        if (sizeof($this->_aPath) > 0) {
-            $this->_sCurrent    = end($this->_aPath);
-        }
+        $this->_sPath       = $aRequestUrl['path'];
         
-        switch ($this->_sCurrent) {
-            case '403':
-                $this->_sCurrent    = 'error';
-                header("HTTP/1.0 403 Forbidden");
-            break;
-            case '404':
-                $this->_sCurrent    = 'error';
-                header("HTTP/1.0 404 Not Found");
-            break;
-            default:
-                $this->_bIsOk   = true;
+        foreach ($aRoutes as $oVal){
+            if (preg_match('/^'.$oVal->path.'(\?.+)?$/', $this->_sPath, $aMatch)){
+                array_shift($aMatch);
+                if (sizeof($aMatch) > 0) {
+                    foreach ($aMatch as $iKey => $sVal){
+                        $this->_aParams[$oVal->params[$iKey]]   = $sVal;
+                    }
+                }
+                $this->_sController = $oVal->controller;
+                $this->_sAction     = $oVal->action;
+                if (isset($oVal->header)) {
+                    header($oVal->header);
+                }
+                break;
+            }
         }
     }
     
     public function getPath() {
-        return $this->_aPath;
+        return $this->_sPath;
     }
     
     public function getParams() {
         return $this->_aParams;
     }
     
-    public function getCurrent() {
-        return $this->_sCurrent;
+    public function getController() {
+        return $this->_sController;
+    }
+
+    public function getAction() {
+        return $this->_sAction;
     }
     
     public function isOk() {
@@ -67,27 +60,13 @@ class SSCE_Request {
         exit();
     }
 
-
     public function go($sUrl) {
         header('Location: '.$sUrl);
         exit();
     }
 
-
     public function refresh() {
         header('Location: '.substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'?')));
         exit();
     }
-
-
-    public function getHeaders() {
-        return $this->aHeader;
-    }
-
-
-    public function addHeader($sHeader) {
-        $this->aHeader[]    = $sHeader;
-        return $this;
-    }
-    
 }

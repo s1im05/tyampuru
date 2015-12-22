@@ -1,10 +1,6 @@
 <?php
 class Error_Controller extends Controller {
     
-    protected $_sTitle      = 'My Test Page';
-    protected $_sTemplate   = 'error.php';
-
-
     public function indexAction(){
         $aPath = $this->getRequest()->getPath();
         switch ($aPath[0]) {
@@ -24,7 +20,7 @@ class Error_Controller extends Controller {
     }
     
     public function error404(){
-        echo '404 not found';
+        $this->setLayout('error404.php');
     }
     
     public function errorDefault(){

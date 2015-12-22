@@ -18,15 +18,15 @@ abstract class Controller {
         $this->_oRequest    = $aObjects['request'];
         $this->_oView       = $aObjects['view'];
 
+        /*
         $aParams    = $this->getRequest()->getParams();
         if (isset($aParams[0]) &&  $aParams[0] !== '' && method_exists($this, $aParams[0].$this->_sActionSuffix)){
             $this->_sAction = $aParams[0];
         }
         $sAction    = $this->_sAction.$this->_sActionSuffix;
         $this->$sAction();
+        */
     }
-    
-    abstract function indexAction();
     
     public function getDb(){
         return $this->_oDb;
