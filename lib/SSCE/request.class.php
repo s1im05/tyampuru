@@ -34,11 +34,11 @@ class SSCE_Request {
         
         switch ($this->_sCurrent) {
             case '403':
-                $this->_sCurrent    = 'error403';
+                $this->_sCurrent    = 'error';
                 header("HTTP/1.0 403 Forbidden");
             break;
             case '404':
-                $this->_sCurrent    = 'error404';
+                $this->_sCurrent    = 'error';
                 header("HTTP/1.0 404 Not Found");
             break;
             default:
