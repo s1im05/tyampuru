@@ -18,11 +18,11 @@ class SSCE_Request {
         $this->_sPath       = $aRequestUrl['path'];
         
         foreach ($aRoutes as $oVal){
-            if (preg_match('/^'.$oVal->path.'(\?.+)?$/', $this->_sPath, $aMatch)){
+            if (preg_match('/^'.$oVal->path.'(\/?|\?.+)?$/', $this->_sPath, $aMatch)){
                 array_shift($aMatch);
-                if (sizeof($aMatch) > 0) {
-                    foreach ($aMatch as $iKey => $sVal){
-                        $this->_aParams[$oVal->params[$iKey]]   = $sVal;
+                if (isset($oVal->params) && sizeof($oVal->params) > 0 && sizeof($aMatch) >= sizeof($oVal->params)){
+                    foreach ($oVal->params as $iKey => $sName){
+                        $this->_aParams[$sName]   = $aMatch[$iKey];
                     }
                 }
                 $this->_sController = $oVal->controller;
@@ -33,6 +33,8 @@ class SSCE_Request {
                 break;
             }
         }
+        
+        
     }
     
     public function getPath() {
@@ -49,10 +51,6 @@ class SSCE_Request {
 
     public function getAction() {
         return $this->_sAction;
-    }
-    
-    public function isOk() {
-        return $this->_bIsOk;
     }
     
     public function go404() {

@@ -5,25 +5,25 @@ class Error_Controller extends Controller {
         $aPath = $this->getRequest()->getPath();
         switch ($aPath[0]) {
             case '403':
-                $this->error403();
+                $this->error403Action();
             break;
             case '404':
-                $this->error404();
+                $this->error404Action();
             break;
             default:
-                $this->errorDefault();
+                $this->errorAction();
         }
     }
     
-    public function error403(){
+    public function error403Action(){
         echo '403 Forbidden';
     }
     
-    public function error404(){
+    public function error404Action(){
         $this->setLayout('error404.php');
     }
     
-    public function errorDefault(){
+    public function errorAction(){
         echo 'Unknown Error';
     }
 }

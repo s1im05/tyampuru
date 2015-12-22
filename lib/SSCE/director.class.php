@@ -2,6 +2,8 @@
 class SSCE_Director {
     
     private $_aObjects;
+    private $_sCNameSuffix  = '_Controller';
+    private $_sANameSuffix  = 'Action';
 
     
     public function __construct($aObjects){
@@ -18,17 +20,18 @@ class SSCE_Director {
     
     public function runCurrent(){
         $sController    = $this->getRequest()->getController();
-        $sAction        = $this->getRequest()->getAction();
-        $sControllerClassName  = ucfirst($sController).'_Controller';
+        $sCClass        = ucfirst($sController).$this->_sCNameSuffix;
+        $sAction        = $this->getRequest()->getAction().$this->_sANameSuffix;
         
         if (file_exists(__DIR__.'/controllers/'.$sController.'.controller.class.php')) {
             require_once __DIR__.'/controllers/'.$sController.'.controller.class.php';
-            $oCurrentController = new $sControllerClassName($this->getObjects());
-            $oCurrentController->$sAction();
+            $oController = new $sCClass($this->getObjects());
+            
+            $oController->$sAction();
             echo $this->getView()
-                ->setTemplate($oCurrentController->getTemplate())
-                ->setLayout($oCurrentController->getLayout())
-                ->setTitle($oCurrentController->getTitle())
+                ->setTemplate($oController->getTemplate())
+                ->setLayout($oController->getLayout())
+                ->setTitle($oController->getTitle())
                 ->render();
         } else {
             $this->getRequest()->go404();
