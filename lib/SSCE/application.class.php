@@ -4,6 +4,7 @@ class SSCE_Application {
     private $_oConfig;
     private $_sConfigFile;
     private $_oDb;
+    private $_oView;
     private $_oRequest;
     private $_oDirector;
  
@@ -27,20 +28,22 @@ class SSCE_Application {
         $this->_oConfig = new SSCE_Config($this->_sConfigFile);
         setlocale(LC_ALL , $this->getConfig()->project->locale);
         
+        $this->_oView   = new SSCE_View();
+        
         require_once $this->getConfig()->db->lib_path.'/Generic.php';
         require_once $this->getConfig()->db->lib_path.'/Mysql.php';
-        $this->_oDb = DbSimple_Generic::connect("mysql://".$this->getConfig()->db->user.":".$this->getConfig()->db->password."@".$this->getConfig()->db->host."/".$this->getConfig()->db->database);
+        $this->_oDb = DbSimple_Generic::connect("mysql://".$this->getConfig()->db->user.($this->getConfig()->db->password ? ":".$this->getConfig()->db->password:'' )."@".$this->getConfig()->db->host."/".$this->getConfig()->db->database);
         $this->getDb()->setIdentPrefix($this->getConfig()->db->table_prefix);
         $this->getDb()->query("SET NAMES utf8;");
-        
+
         $this->_oRequest    = new SSCE_Request();
         $this->_oDirector   = new SSCE_Director(array(
             'db'        => $this->getDb(),
             'config'    => $this->getConfig(),
             'request'   => $this->getRequest(),
+            'view'      => $this->getView(),
         ));
         $this->getDirector()->bootstrap()->runCurrent();
-
     }
     
     public function getConfig() {
@@ -57,5 +60,9 @@ class SSCE_Application {
     
     public function getDirector() {
         return $this->_oDirector;
+    }
+    
+    public function getView() {
+        return $this->_oView;
     }
 }

@@ -7,6 +7,6 @@ class Index_Controller extends Controller {
 
 
     public function indexAction(){
-        var_dump($_GET);
+        //
     }
 }
