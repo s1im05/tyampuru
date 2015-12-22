@@ -3,7 +3,7 @@ class SSCE_Request {
     
     private $_aPath     = array();
     private $_aParams   = array();
-    private $_sCurrent  = '';
+    private $_sCurrent  = 'index';
     private $_bIsOk     = false;
     
     public function __construct(){
@@ -30,8 +30,6 @@ class SSCE_Request {
         }
         if (sizeof($this->_aPath) > 0) {
             $this->_sCurrent    = end($this->_aPath);
-        } else {
-            $this->_sCurrent    = 'main';
         }
         
         switch ($this->_sCurrent) {

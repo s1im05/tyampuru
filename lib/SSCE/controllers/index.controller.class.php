@@ -1,15 +1,12 @@
 <?php
-class Test_Controller extends Controller {
+// can contain only IndexAction
+class Index_Controller extends Controller {
     
     protected $_sTitle      = 'My Test Page';
     protected $_sTemplate   = 'test.php';
 
 
     public function indexAction(){
-        echo 'test index';
-    }
-    
-    public function editAction(){
-        echo 'test edit';
+        var_dump($_GET);
     }
 }

@@ -1,11 +1,13 @@
 <?php
-class Controller {
+abstract class Controller {
     
-    private $_oDb;
-    private $_oConfig;
-    private $_oRequest;
-    private $_aViewVars = array();
-    
+    private $_sActionSuffix = 'Action';
+    //private $_aViewVars = array();
+
+    protected $_oDb;
+    protected $_oConfig;
+    protected $_oRequest;
+    protected $_sAction   = 'index';    
     protected $_sTitle  = '';
     protected $_sLayout  = 'index.php';
     protected $_sTemplate  = 'template.php';
@@ -14,10 +16,16 @@ class Controller {
         $this->_oDb         = $aObjects['db'];
         $this->_oConfig     = $aObjects['config'];
         $this->_oRequest    = $aObjects['request'];
-        
+
         $aParams    = $this->getRequest()->getParams();
+        if (isset($aParams[0]) &&  $aParams[0] !== '' && method_exists($this, $aParams[0].$this->_sActionSuffix)){
+            $this->_sAction = $aParams[0];
+        }
+        $sAction    = $this->_sAction.$this->_sActionSuffix;
+        $this->$sAction();
     }
     
+    abstract function indexAction();
     
     public function getDb(){
         return $this->_oDb;
@@ -49,10 +57,11 @@ class Controller {
         $this->_sLayout  = $sLayout;
         return $this;
     }
-    
+
+/*    
     public function assign($sKey, $mVar) {
         $this->_aViewVars[$sKey]    = $mVar;
         return this;
     }
-    
+  */  
 }

@@ -13,7 +13,6 @@ class SSCE_Director {
     public function bootstrap() {
         require_once __DIR__.'/controllers/bootstrap.controller.class.php';
         $oBootstrap = new Bootstrap_Controller($this->getObjects());
-        $oBootstrap->run();
         return $this;
     }
     
