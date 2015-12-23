@@ -23,7 +23,7 @@
                 <div class="col-sm-9 text-right">
                     <form class="form-inline" method="post" action="/search" id="search">
                         <div class="form-group">
-                            например: <a href="#">sample search</a>
+                            например: <a href="/search/sample search">sample search</a>
                             &nbsp; <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
                         </div>
                         <a href="#" class="btn btn-sm btn-default pull-left visible-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
@@ -143,7 +143,7 @@
             </main>
             <aside class="b-main col-md-3">
                 <div class="list-group h-shadow">
-                    <a class="list-group-item"><i class="fa fa-rss"></i> Cras justo odio</a>
+                    <a class="list-group-item"><i class="fa fa-rss-square"></i> &nbsp;Cras justo odio</a>
                     <a class="list-group-item">Dapibus ac facilisis in</a>
                     <a class="list-group-item">Morbi leo risus</a>
                     <a class="list-group-item">Porta ac consectetur ac</a>

@@ -45,7 +45,6 @@ class SSCE_Application {
         require_once $this->getConfig()->db->lib_path.'/Mysql.php';
         $this->_oDb = DbSimple_Generic::connect("mysql://".$this->getConfig()->db->user.($this->getConfig()->db->password ? ":".$this->getConfig()->db->password:'' )."@".$this->getConfig()->db->host."/".$this->getConfig()->db->database);
         $this->getDb()->setIdentPrefix($this->getConfig()->db->table_prefix);
-        $this->getDb()->query("SET NAMES utf8;");
 
         $this->_oRequest    = new SSCE_Request($this->getConfig()->routes);
         $this->_oDirector   = new SSCE_Director(array(
