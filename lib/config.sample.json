@@ -22,7 +22,8 @@
     "templates": {
         "path": "/templates/default"
     },
-    "routes": [{
+    "routes": [
+        {
             "path": "\\/404",
             "controller": "error",
             "action": "error404",
@@ -46,5 +47,11 @@
             "controller": "chapter",
             "action": "byName",
             "params": ["name","page"]
-        }]
+        },{
+            "path": "\\/search\\/(.{3,255})",
+            "controller": "search",
+            "action": "search",
+            "params": ["query"]
+        }
+    ]
 }

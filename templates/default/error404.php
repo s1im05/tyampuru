@@ -14,10 +14,16 @@
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
 </head>
 <body class="b-errorbody">
-    <div class="container text-center">
-        <h1><i class="fa fa-exclamation-circle "></i> Ошибка 404</h1>
-        <p>Запрашиваемая вами страница не найдена</p>
-        <p><a href="/" class="btn btn-primary">на главную</a></p>
+    <div class="container">
+        <div class="col-sm-3 col-xs-1"></div>
+        <div class="col-sm-6 col-xs-10 text-center">
+            <div class="panel">
+                <h1 class="text-danger"><i class="fa fa-exclamation-circle"></i> Ошибка 404</h1>
+                <p>Запрашиваемая вами страница не найдена</p>
+                <p><a href="/" class="btn btn-primary">на главную</a></p>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-1"></div>
     </div>
 </body>
 </html>
