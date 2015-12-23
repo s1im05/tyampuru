@@ -7,7 +7,8 @@ class SSCE_Application {
     private $_oView;
     private $_oRequest;
     private $_oDirector;
- 
+
+    
     public function __construct($sConfigFile){
         $this->_sConfigFile         = $sConfigFile;
         $this->_boot();
@@ -18,8 +19,12 @@ class SSCE_Application {
         ob_start();
         
         function __autoload($sClassName) {
-            if (preg_match('/SSCE_([A-Za-z]+)/', $sClassName, $aMatch) && isset($aMatch[1])) {
+            if (preg_match('/SSCE_([A-Za-z]+)/', $sClassName, $aMatch) && isset($aMatch[1])){
                 require_once dirname(__FILE__).'/'.strtolower($aMatch[1]).'.class.php';
+            } elseif (preg_match('/^([A-Za-z]+)?_?Controller$/', $sClassName, $aMatch)){
+                require_once dirname(__FILE__).'/controllers/'.(isset($aMatch[1]) ? strtolower($aMatch[1]).'.controller.class.php' : 'controller.class.php' );
+            } elseif (preg_match('/^([A-Za-z]+)?_?Model$/', $sClassName, $aMatch)){
+                require_once dirname(__FILE__).'/models/'.(isset($aMatch[1]) ? strtolower($aMatch[1]).'.model.class.php' : 'model.class.php' );
             } else {
                 throw new Exception("Unable to load {$sClassName}");
             }

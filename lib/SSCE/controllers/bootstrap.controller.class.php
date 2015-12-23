@@ -2,6 +2,7 @@
 class Bootstrap_Controller extends Controller {
 
     public function run(){
-        // echo 'bootstraped';
+        $oChapters  = new ChapterList_Model($this->getDb(), $this->getConfig());
+        $this->assign('aChapters', $oChapters->getList());
     }
 }

@@ -6,11 +6,13 @@ class Chapter_Controller extends Controller {
     protected $_sLayout     = 'index.php';
 
 
-    public function allAction(){
-        $this->assign('test','all');
+    public function allAction($iPage = 0){
+
+        $this->assign('sChapterActive', 'all');
     }
     
-    public function byNameAction(){
-        var_dump($this->getRequest()->getParams());
+    public function byNameAction($sChapter, $iPage = 0){
+        
+        $this->assign('sChapterActive', $sChapter);
     }
 }

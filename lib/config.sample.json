@@ -1,17 +1,18 @@
 {
     "project": {
-        "title": "My Project",
-        "description": "Enter something useful here",
-        "version": "0.1",
-        "locale": "ru_RU.UTF-8"
+        "title":        "My Project",
+        "description":  "Enter something useful here",
+        "version":      "0.1",
+        "locale":       "ru_RU.UTF-8",
+        "postsppage":   "20"
     },
     "db": {
         "lib_path": "/lib/DbSimple",
         "host": "localhost",
         "user": "root",
         "password": "",
-        "database": "my_db",
-        "table_prefix": "prefix__"
+        "database": "tyampuru",
+        "table_prefix": "tyampu__"
     },
     "image": {
         "width": 800,
@@ -26,5 +27,24 @@
             "controller": "error",
             "action": "error404",
             "header": "HTTP/1.0 404 Not Found"
+        },{
+            "path": "\\/",
+            "controller": "chapter",
+            "action": "all"
+        },{
+            "path": "\\/page\\/(\\d+)",
+            "controller": "chapter",
+            "action": "all",
+            "params": ["page"]
+        },{
+            "path": "\\/chapter\\/([A-Za-z_-]{2,})",
+            "controller": "chapter",
+            "action": "byName",
+            "params": ["name"]
+        },{
+            "path": "\\/chapter\\/([A-Za-z_-]{2,})\\/page\\/(\\d+)",
+            "controller": "chapter",
+            "action": "byName",
+            "params": ["name","page"]
         }]
 }

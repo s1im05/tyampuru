@@ -36,14 +36,10 @@
         
         <nav>
             <ul class="b-menu nav nav-pills">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">Profile</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
-                <li role="presentation"><a href="#">Messages</a></li>
+                <li role="presentation" <?=$sChapterActive=='all'?'class="active"':''?>><a href="/">Все разделы</a></li>
+                <? foreach ($aChapters as $aVal) :?>
+                    <li role="presentation" <?=$sChapterActive==$aVal['class']?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
+                <? endforeach;?>
             </ul>
         </nav>
         
@@ -148,7 +144,7 @@
                     <a class="list-group-item">Morbi leo risus</a>
                     <a class="list-group-item">Porta ac consectetur ac</a>
                     <a class="list-group-item">Vestibulum at eros</a>
-                </ul>
+                </div>
             </aside>
         </div>
         
