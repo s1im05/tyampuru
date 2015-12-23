@@ -23,6 +23,9 @@ a.b-white:hover {
     min-height: 250px;
     position: relative;
 }
+.b-menu {
+    margin-bottom: 2em;
+}
 .b-footer {
     background: #ccc;
     padding: .5em 1em 1em 1em;

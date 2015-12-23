@@ -40,106 +40,16 @@
         
         <nav>
             <ul class="b-menu nav nav-pills">
-                <li role="presentation" <?=$sChapterActive=='all'?'class="active"':''?>><a href="/">Все разделы</a></li>
+                <li role="presentation" <?=$sChapter=='all'?'class="active"':''?>><a href="/">Все разделы</a></li>
                 <? foreach ($aChapters as $aVal) :?>
-                    <li role="presentation" <?=$sChapterActive==$aVal['class']?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
+                    <li role="presentation" <?=$sChapter==$aVal['class']?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                 <? endforeach;?>
-            </ul>
-        </nav>
-        
-        <nav>
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
             </ul>
         </nav>
         
         <div class="row">
             <main class="b-main col-md-9">
-                <article class="b-post h-shadow">
-                    <div class="b-post__panel">
-                        <h1 class="b-post__title">Page very very long forever and evar title big</h1>
-                        <div class="clearfix">
-                            <p class="pull-right">share buttons</p>
-                            <p class="pull-left text-muted"><a href="#">&laquo;Chapter&raquo;</a> / 15:02, 12 декабря 2015 г.</p>
-                        </div>
-                    </div>
-                    <div class="b-post__data">
-                        <div class="b-post__imgdiv">
-                            <div class="b-post__imgbtns">
-                                <span class="label label-default">1</span>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-flag"></i> пожаловаться на изображение</a>
-                            </div>
-                            <a href="#" class="b-post__imglink"><img src="" class="b-post__img" /></a>
-                        </div>
-                        <div class="b-post__imgdiv">
-                            <div class="b-post__imgbtns">
-                                <span class="label label-default">2</span>
-                                <a class="btn btn-default btn-xs"><i class="fa fa-flag"></i> пожаловаться на изображение</a>
-                            </div>
-                            <a href="#" class="b-post__imglink"><img src="" class="b-post__img" /></a>
-                        </div>
-                    </div>
-                    <div class="b-post__tags">
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                        <a href="#" class="btn btn-default btn-sm"><i class="fa fa-tag"></i> tag_data1</a>
-                    </div>
-                </article>
-                
                 <?include $template;?>
-                
-                <nav>
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </main>
             <aside class="b-main col-md-3">
                 <div class="list-group h-shadow">
@@ -151,8 +61,6 @@
                 </div>
             </aside>
         </div>
-        
-
 
         <footer class="b-footer">
             <div class="row">

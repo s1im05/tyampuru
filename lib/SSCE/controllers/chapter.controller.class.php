@@ -2,21 +2,32 @@
 class Chapter_Controller extends Controller {
     
     protected $_sTitle      = 'My Test Page';
-    protected $_sTemplate   = 'test.php';
+    protected $_sTemplate   = 'chapter.php';
     protected $_sLayout     = 'index.php';
 
 
     public function allAction($iPage = 1){
-        $oChapter   = new Chapter_Model($this->getDb(), $this->getConfig());
-        var_dump($oChapter->setPage($iPage)->getPosts());
-
-        $this->assign('sChapterActive', 'all');
+        $this->_process('all', $iPage);
     }
     
     public function byNameAction($sChapter, $iPage = 1){
+        $this->_process($sChapter, $iPage);
+    }
+    
+    
+    private function _process($sChapter, $iPage){
         $oChapter   = new Chapter_Model($this->getDb(), $this->getConfig());
-        var_dump($oChapter->setPage($iPage)->setChapter($sChapter)->getPosts());
+        $oChapter->setChapter($sChapter)->setPage($iPage);
         
-        $this->assign('sChapterActive', $sChapter);
+        $aPosts     = $oChapter->getPosts();
+        $iPageCount = (int)ceil($oChapter->getPostsCount()/$this->getConfig()->project->postsppage);
+        if ($oChapter->getPage() > $iPageCount) {
+            $this->getRequest()->go404();
+        }
+
+        $this->assign('sChapter',       $sChapter);
+        $this->assign('aPostList',      $aPosts);
+        $this->assign('iPageActive',    $oChapter->getPage());
+        $this->assign('iPagesCount',    $iPageCount);
     }
 }
