@@ -1,14 +1,11 @@
+/* common */
 body {
     font-family: Calibri, sans-serif;
     background: #eee;
 }
-.b-white {
-    color: #fff;
-}
-a.b-white:hover {
-    color: #f90;
-}
 
+
+/* blocks */
 .b-errorbody {
     padding: 100px 0;
 }
@@ -28,9 +25,6 @@ a.b-white:hover {
     padding: .5em 1em 1em 1em;
     margin-top: 2em;
     margin-bottom: 2em;
-}
-.h-shadow {
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 .b-post {
     
@@ -78,4 +72,9 @@ a.b-white:hover {
     position: absolute;
     top: 1.2em;
     left: 1em;
+}
+
+/* helpers */
+.h-shadow {
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }

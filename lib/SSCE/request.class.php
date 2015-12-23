@@ -22,7 +22,7 @@ class SSCE_Request {
                 array_shift($aMatch);
                 if (isset($oVal->params) && sizeof($oVal->params) > 0 && sizeof($aMatch) >= sizeof($oVal->params)){
                     foreach ($oVal->params as $iKey => $sName){
-                        $this->_aParams[$sName]   = $aMatch[$iKey];
+                        $this->_aParams[$sName]   = urldecode($aMatch[$iKey]);
                     }
                 }
                 $this->_sController = $oVal->controller;
