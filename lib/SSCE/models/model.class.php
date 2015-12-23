@@ -1,19 +1,19 @@
 <?php
 class Model {
     
-    private $_oDb;
-    private $_oConfig;
+    protected $_oDb;
+    protected $_oConfig;
  
     public function __construct($oDb, $oConfig){
-        $thiis->_oDb        = $oDb;
-        $thiis->_oConfig    = $oConfig;
+        $this->_oDb        = $oDb;
+        $this->_oConfig    = $oConfig;
     }
     
     public function getDb(){
-        return $thiis->_oDB;
+        return $this->_oDb;
     }
     
     public function getConfig(){
-        return $thiis->_oConfig;
+        return $this->_oConfig;
     }
 }
