@@ -21,6 +21,10 @@ class SSCE_View {
         return $this;
     }
     
+    public function getVar($sName){
+        return isset($this->_aVars[$sName]) ? $this->_aVars[$sName] : null;
+    }
+    
     public function render(){
         ob_end_flush();
         $this->assign($this->_sPathName,    $this->_sTemplatePath);

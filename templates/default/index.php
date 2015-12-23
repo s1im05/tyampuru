@@ -48,9 +48,7 @@
         </nav>
         
         <div class="row">
-            <main class="b-main col-md-9">
-                <?include $template;?>
-            </main>
+            <?include $template;?>
             <aside class="b-main col-md-3">
                 <div class="list-group h-shadow">
                     <a class="list-group-item"><i class="fa fa-rss-square"></i> &nbsp;Cras justo odio</a>
