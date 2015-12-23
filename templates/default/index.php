@@ -9,18 +9,22 @@
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css" />
+    
+    <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
 </head>
 <body>
     <header class="b-header clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <a href="#" class="btn btn-sm btn-default hidden-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
                 </div>
-                <div class="col-sm-6 text-right">
-                    <form class="form-inline" method="get" action="/search">
+                <div class="col-sm-9 text-right">
+                    <form class="form-inline" method="post" action="/search" id="search">
                         <div class="form-group">
-                            <input type="text" class="form-control input-sm" name="q" placeholder="поиск"> 
+                            например: <a href="#">sample search</a>
+                            &nbsp; <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
                         </div>
                         <a href="#" class="btn btn-sm btn-default pull-left visible-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
                         <button type="submit" class="btn btn-default btn-sm">найти</button>
@@ -169,5 +173,20 @@
             </div>
         </footer>
     </div>
+    
+    <script type="text/javascript">
+        $(function(){
+            $('#search').on('submit', function(e){
+                if ($('#search_query').val() === '') {
+                    e.preventDefault();
+                } else if ($('#search_query').val().length < 3) {
+                    e.preventDefault();
+                } else {
+                    $(this).attr('action', '/search/'+$('#search_query').val());
+                }
+            });
+            
+        });
+    </script>
 </body>
 </html>
