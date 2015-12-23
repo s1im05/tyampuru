@@ -18,16 +18,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <a href="#" class="btn btn-sm btn-default hidden-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
+                    <a href="#" class="btn btn-sm btn-primary hidden-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
                 </div>
                 <div class="col-sm-9 text-right">
                     <form class="form-inline" method="post" action="/search" id="search">
                         <div class="form-group">
-                            например: <a href="/search/sample search">sample search</a>
+                            например: <a href="/search/sample search" class="b-header__link">sample search</a>
                             &nbsp; <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
                         </div>
-                        <a href="#" class="btn btn-sm btn-default pull-left visible-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
-                        <button type="submit" class="btn btn-default btn-sm">найти</button>
+                        <a href="#" class="btn btn-sm btn-primary pull-left visible-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
+                        <button type="submit" class="btn btn-primary btn-sm">найти</button>
                     </form>
                 </div>
             </div>
@@ -35,7 +35,10 @@
     </header>
     <div class="container">
         <div class="b-poster h-shadow">
-            <a class="b-title" href="/">Tyampuru</a>
+            <img src="<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg" class="b-poster__image" alt="Tyampuru" />
+            <a class="b-title" href="/">
+                <img class="b-title__img" src="<?=$path?>/img/tyampuru.png" />
+            </a>
         </div>
         
         <nav>
@@ -51,7 +54,7 @@
             <?include $template;?>
             <aside class="b-main col-md-3">
                 <div class="list-group h-shadow">
-                    <a class="list-group-item"><i class="fa fa-rss-square"></i> &nbsp;Cras justo odio</a>
+                    <a href="/rss" class="list-group-item"><i class="fa fa-rss-square"></i> &nbsp;Cras justo odio</a>
                     <a class="list-group-item">Dapibus ac facilisis in</a>
                     <a class="list-group-item">Morbi leo risus</a>
                     <a class="list-group-item">Porta ac consectetur ac</a>
@@ -68,7 +71,18 @@
                 </div>
                 <div class="col-md-3">
                     <h4>Рассказать друзьям</h4>
-                    вава
+
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4dd2496750e0e873"></script>
+                    <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                        <a class="addthis_button_vk"></a>
+                        <a class="addthis_button_odnoklassniki_ru"></a>
+                        <a class="addthis_button_mymailru"></a>
+                        <a class="addthis_button_facebook"></a>
+                        <a class="addthis_button_compact"></a>
+                        <a class="addthis_counter addthis_bubble_style"></a>
+                    </div>
+                    <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+
                 </div>
             </div>
             <div class="row">

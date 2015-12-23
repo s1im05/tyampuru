@@ -55,7 +55,8 @@ class Chapter_Model extends Model {
             $this->_iTotal,
             "SELECT
                     p.*,
-                    c.title AS chapter_title
+                    c.title AS chapter_title,
+                    c.class AS chapter_name
                 FROM 
                     ?_posts p,
                     ?_chapters c

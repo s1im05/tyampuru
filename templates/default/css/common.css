@@ -1,33 +1,58 @@
 /* common */
 body {
     font-family: Calibri, sans-serif;
-    background: #eee;
+    background: url(../img/bg.png);
 }
-
+a {
+    color: #9C5E39;
+}
+a:hover {
+    color: #9C5E39;
+    text-decoration: underline;
+}
 
 /* blocks */
 .b-errorbody {
     padding: 100px 0;
 }
 .b-header {
-    background: #000;
+    background: url(../img/bg_dark.png);
     color: #fff;
     padding: .6em 0;
+}
+.b-header__link, .b-header__link:hover {
+    color: #E1C785;
 }
 .b-poster {
     margin-bottom: 2em;
     background: #fff;
-    min-height: 250px;
     position: relative;
 }
+.b-poster__image {
+    width: 100%;
+}
+.b-title {
+    position: absolute;
+    bottom: 5%;
+    left: 2%;
+    width: 33%;
+    display: block;
+}
+.b-title__img {
+    width: 100%;
+}
 .b-footer {
-    background: #ccc;
+    background: url(../img/bgnoise_lg.png);
     padding: .5em 1em 1em 1em;
     margin-top: 2em;
     margin-bottom: 2em;
 }
+.b-menu {
+    font-size: 1.5em;
+    font-weight: bold;
+}
 .b-post {
-    
+    margin-bottom: 2em;
 }
 .b-post__panel {
     padding: .8em 1em;
@@ -37,10 +62,14 @@ body {
 .b-post__title {
     margin-top: 0;
     font-size: 1.5em;
+    font-weight: bold;
 }
 .b-post__data {
     background: #fff;
     padding: .5em 1em 1em 1em;
+}
+.b-post__data iframe {
+    max-width: 100%;
 }
 .b-post__tags {
     border-top: 1px solid #ccc;
@@ -72,6 +101,49 @@ body {
     position: absolute;
     top: 1.2em;
     left: 1em;
+}
+
+/* old tyampuru */
+.b-post-image_text {
+    display: block;
+    position: relative;
+    margin-bottom: .5em;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: .5em;
+}
+.b-post-image_text:last-child {
+    border-bottom: none;
+}
+.b-post-image_text > img {
+    max-width: 100%;
+    margin: .5em 0;
+}
+
+/* bootstrap overwrite */
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #9C5E39;
+}
+.nav-pills>li>a:hover {
+    color: #fff;
+    background-color: #9C5E39;
+}
+.pagination>li>a, .pagination>li>span, .pagination>li>a:hover, .pagination>li>span:hover  {
+    color: #9C5E39;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    border-color: #9C5E39;
+    background-color: #9C5E39;
+    color: #fff;
+}
+.btn-primary, .btn-primary:focus, .btn-primary:active {
+    background: #9C5E39;
+    color: #fff;
+    border: none;
+}
+.btn-primary:hover {
+    background: #E1C785;
+    color: #fff;
 }
 
 /* helpers */
