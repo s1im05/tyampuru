@@ -3,7 +3,6 @@
         <h1 class="b-post__title"><a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a></h1>
         <div class="clearfix">
             <div class="pull-right">
-                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4dd2496750e0e873"></script>
                 <div class="addthis_toolbox addthis_default_style addthis_16x16_style"
                     addthis:url="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aPost['id']?>"
                     addthis:title="<?=$aPost['title']?>">
@@ -14,9 +13,8 @@
                     <a class="addthis_button_compact"></a>
                     <a class="addthis_counter addthis_bubble_style"></a>
                 </div>
-                <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
             </div>
-            <p class="pull-left text-muted"><a href="/chapter/<?=$aPost['chapter_name']?>">&laquo;<?=$aPost['chapter_title']?>&raquo;</a> / <?=$aPost['cdate']?></p>
+            <p class="pull-left text-muted"><a href="/chapter/<?=$aPost['chapter_name']?>">&laquo;<?=$aPost['chapter_title']?>&raquo;</a> / <?=date2ru($aPost['cdate'], true)?></p>
         </div>
     </div>
     <div class="b-post__data">
@@ -42,7 +40,7 @@
     <div class="b-post__tags">
         <?$aTags    = explode("\n", $aPost['tags']);?>
         <?foreach($aTags as $sTag):?>
-            <a href="/tag/<?=urlencode($sTag)?>" class="btn btn-default"><i class="fa fa-tag"></i> <?=$sTag?></a>
+            <a href="/tag/<?=urlencode($sTag)?>" class="btn btn-default b-tag"><i class="fa fa-tag"></i> <?=$sTag?></a>
         <?endforeach;?>
     </div>
     <?endif;?>

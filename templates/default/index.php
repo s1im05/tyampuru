@@ -54,11 +54,7 @@
             <?include $template;?>
             <aside class="b-main col-md-3">
                 <div class="list-group h-shadow">
-                    <a href="/rss" class="list-group-item"><i class="fa fa-rss-square"></i> &nbsp;Cras justo odio</a>
-                    <a class="list-group-item">Dapibus ac facilisis in</a>
-                    <a class="list-group-item">Morbi leo risus</a>
-                    <a class="list-group-item">Porta ac consectetur ac</a>
-                    <a class="list-group-item">Vestibulum at eros</a>
+                    <a href="/rss" class="list-group-item"><i class="fa fa-fw fa-rss-square"></i> RSS-лента свежих постов</a>
                 </div>
             </aside>
         </div>

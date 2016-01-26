@@ -42,7 +42,7 @@ a:hover {
     width: 100%;
 }
 .b-footer {
-    background: url(../img/bgnoise_lg.png);
+    background: #ccc url(../img/bgnoise_lg.png);
     padding: .5em 1em 1em 1em;
     margin-top: 2em;
     margin-bottom: 2em;
@@ -56,7 +56,7 @@ a:hover {
 }
 .b-post__panel {
     padding: .8em 1em;
-    background: #ccc;
+    background: #ccc url(../img/bgnoise_lg.png);
     height: 100%;
 }
 .b-post__title {
@@ -76,6 +76,11 @@ a:hover {
     background: #fff;
     padding: .5em 1em 1em 1em;
     line-height: 2.5em;
+}
+.b-tag {
+    background-color: #eee;
+    border-color: #ccc;
+    color: #666;
 }
 .b-post__img {
     min-width: 100%;
@@ -120,6 +125,9 @@ a:hover {
 }
 
 /* bootstrap overwrite */
+a.list-group-item, a.list-group-item:hover {
+    color: #9C5E39;
+}
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     color: #fff;
     background-color: #9C5E39;
