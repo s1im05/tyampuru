@@ -43,9 +43,9 @@
         
         <nav>
             <ul class="b-menu nav nav-pills">
-                <li role="presentation" <?=$sChapter=='all'?'class="active"':''?>><a href="/">Все разделы</a></li>
+                <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
                 <? foreach ($aChapters as $aVal) :?>
-                    <li role="presentation" <?=$sChapter==$aVal['class']?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
+                    <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                 <? endforeach;?>
             </ul>
         </nav>
