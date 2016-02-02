@@ -1,9 +1,9 @@
 <article class="b-post h-shadow">
     <div class="b-post__panel">
         <? if ($bPostFull) :?>
-            <h1 class="b-post__title"><?=$aPost['title']?></h1>
+            <h1 class="b-post__title"><?=$aPost['title']?> <i title="Мне нравится!" class="fa fa-heart-o b-like b-like-<?=isset($_SESSION['user'])?'on':'off'?>"></i></h1>
         <? else :?>
-            <h2 class="b-post__title"><a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a></h2>
+            <h2 class="b-post__title"><a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a> <i title="Мне нравится!" class="fa fa-heart-o b-like b-like-<?=isset($_SESSION['user'])?'on':'off'?>"></i></h2>
         <? endif; ?>
         <div class="clearfix">
             <div class="pull-right">

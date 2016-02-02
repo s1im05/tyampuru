@@ -12,21 +12,38 @@
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
 </head>
 <body>
     <header class="b-header clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                    <a href="#" class="btn btn-sm btn-primary hidden-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
+                <div class="col-sm-4">
+                    <? if (isset($_SESSION['user'])) :?>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="/user/<?=$_SESSION['user']['id']?>">
+                                    <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>" alt="<?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?>">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading"><?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?></h4>
+                                <i class="fa fa-sign-out b-header__link"></i>&nbsp;<a class="b-header__link" href="/logout">выйти</a>
+                            </div>
+                        </div>
+                    <? else :?>
+                        <a id="sign_in_btn" href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary hidden-xs loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
+                    <? endif;?>
                 </div>
-                <div class="col-sm-9 text-right">
+                <div class="col-sm-8 text-right">
                     <form class="form-inline" method="post" action="/search" id="search">
                         <div class="form-group">
                             например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a>
                             &nbsp; <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
                         </div>
-                        <a href="#" class="btn btn-sm btn-primary pull-left visible-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
+                        <? if (!isset($_SESSION['user'])) :?>
+                            <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary pull-left visible-xs loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
+                        <? endif;?>
                         <button type="submit" class="btn btn-primary btn-sm">найти</button>
                     </form>
                 </div>
@@ -89,20 +106,6 @@
             </div>
         </footer>
     </div>
-    
-    <script type="text/javascript">
-        $(function(){
-            $('#search').on('submit', function(e){
-                if ($('#search_query').val() === '') {
-                    e.preventDefault();
-                } else if ($('#search_query').val().length < 3) {
-                    e.preventDefault();
-                } else {
-                    $(this).attr('action', '/search/'+$('#search_query').val());
-                }
-            });
-            
-        });
-    </script>
+    <script type="text/javascript" src="<?=$path?>/js/common.js"></script>
 </body>
 </html>

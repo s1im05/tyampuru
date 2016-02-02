@@ -15,6 +15,7 @@ class Post_Controller extends Controller {
         $oPost->chapter_name    = $oChapter->class;
         $oPost->chapter_title   = $oChapter->title;
 
+        $this->setTitle($oPost->chapter_title.' &ndash; '.$oPost->title);
         $this->getView()->assign('sChapter',    $oChapter->class);
         $this->getView()->assign('aPost',       $oPost->data);
     }

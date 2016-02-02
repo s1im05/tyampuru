@@ -107,6 +107,21 @@ a:hover {
     top: 1.2em;
     left: 1em;
 }
+.b-avatar {
+    max-width: 50px;
+    max-height: 50px;
+}
+.b-like {
+    cursor: pointer;
+    color: #c33;
+}
+.b-like:hover {
+    text-shadow: 0px 0px 2px #f90;
+}
+.b-like-off, .b-like-off:hover {
+    color: #555;
+    text-shadow: none;
+}
 
 /* old tyampuru */
 .b-post-image_text {
