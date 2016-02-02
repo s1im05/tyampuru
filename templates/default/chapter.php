@@ -29,8 +29,9 @@
 </div>
 <div class="row">
     <main class="b-main col-md-9">
+        <? $bPostFull   = false;?>
         <?foreach($aPostList as $aPost):?>
-            <?include 'post.php';?>
+            <?include 'article.php';?>
         <?endforeach;?>
 
         <nav>

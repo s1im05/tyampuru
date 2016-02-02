@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><?=$title?></title>
+    <title>Тямпуру &ndash; <?=$title?></title>
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
@@ -23,7 +23,7 @@
                 <div class="col-sm-9 text-right">
                     <form class="form-inline" method="post" action="/search" id="search">
                         <div class="form-group">
-                            например: <a href="/search/sample search" class="b-header__link">sample search</a>
+                            например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a>
                             &nbsp; <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
                         </div>
                         <a href="#" class="btn btn-sm btn-primary pull-left visible-xs"><i class="fa fa-power-off"></i> вход / регистрация</a>
@@ -36,7 +36,7 @@
     <div class="container">
         <div class="b-poster h-shadow">
             <img src="<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg" class="b-poster__image" alt="Tyampuru" />
-            <a class="b-title" href="/">
+            <a class="b-title" title="Тямпуру - главная страница" href="/">
                 <img class="b-title__img" src="<?=$path?>/img/tyampuru.png" />
             </a>
         </div>

@@ -8,6 +8,8 @@ class Chapter_Model extends Model {
     protected $_aOrder      = array('field' => 'id', 'dir' => 'DESC');
     protected $_sChapter    = 'all';
     
+    protected $_sTable      = 'chapters';
+    
     private $_bNeedLoad     = true;
 
     

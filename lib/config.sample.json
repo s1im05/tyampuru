@@ -48,9 +48,19 @@
             "action": "byName",
             "params": ["name","page"]
         },{
+            "path": "\\/post\\/(\\d+)\\/?(.+)?",
+            "controller": "post",
+            "action": "byId",
+            "params": ["id","name"]
+        },{
             "path": "\\/search\\/(.{3,255})",
             "controller": "search",
             "action": "search",
+            "params": ["query"]
+        },{
+            "path": "\\/tag\\/(.{3,255})",
+            "controller": "search",
+            "action": "searchByTag",
             "params": ["query"]
         },{
             "path": "\\/rss",

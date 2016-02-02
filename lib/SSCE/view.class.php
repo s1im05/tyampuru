@@ -34,7 +34,7 @@ class SSCE_View {
             $$sName = $mVal;
         }
         ob_start();
-        error_reporting(E_ALL);
+        error_reporting(0);
         require_once 'helpers/view.helper.php';
         require $this->_sTemplatePath.'/'.$this->getLayout();
         $aData  = ob_get_contents();
