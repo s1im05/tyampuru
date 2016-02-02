@@ -6,7 +6,7 @@ body {
 a {
     color: #9C5E39;
 }
-a:hover {
+a:hover, a:focus {
     color: #9C5E39;
     text-decoration: underline;
 }

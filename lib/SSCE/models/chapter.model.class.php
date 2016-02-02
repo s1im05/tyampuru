@@ -57,20 +57,28 @@ class Chapter_Model extends Model {
             $this->_iTotal,
             "SELECT
                     p.*,
+                    pl.state AS like_state,
                     c.title AS chapter_title,
                     c.class AS chapter_name
                 FROM 
-                    ?_posts p,
                     ?_chapters c
+                JOIN
+                    ?_posts p
+                LEFT JOIN
+                    ?_posts__likes pl
+                ON
+                    (pl.post_id  = p.id AND pl.user_id = ?)
                 WHERE
                     ".($this->_sChapter != 'all' ? "c.class = '".mysql_real_escape_string($this->_sChapter)."' AND" : '' )."
-                    c.id    = p.chapter_id
+                    c.id    = p.chapter_id 
                 ORDER BY 
                     p.".$this->_aOrder['field']." ".$this->_aOrder['dir']."
                 LIMIT ?d, ?d;", 
+                isset($_SESSION['user'])? $_SESSION['user']['id']: 0,
                 ($this->_iPage-1)*$iPPage, 
                 $iPPage
             );
+            //echo mysql_error(); die();
         return $this;
     }
     
