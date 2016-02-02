@@ -1,5 +1,11 @@
 (function(w, $, u){
     $(function(){
+        
+        $('#search_btn').on('click', function(e){
+            e.preventDefault();
+            $('#search').trigger('submit');
+        });
+        
         $('#search').on('submit', function(e){
             if ($('#search_query').val() === '') {
                 e.preventDefault();

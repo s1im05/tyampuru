@@ -23,6 +23,14 @@ a:hover, a:focus {
 .b-header__link, .b-header__link:hover {
     color: #E1C785;
 }
+.b-header__link-white, .b-header__link-white:hover {
+    color: #fff;
+}
+.b-search__btn, .b-search__btn:hover {
+    background: #9C5E39;
+    border-color: #666;
+    color: #fff;
+}
 .b-poster {
     margin-bottom: 2em;
     background: #fff;
@@ -116,7 +124,7 @@ a:hover, a:focus {
     color: #c33;
 }
 .b-like:hover {
-    text-shadow: 0px 0px 2px #f90;
+    color: #f66;
 }
 .b-like-off, .b-like-off:hover {
     color: #555;

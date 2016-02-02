@@ -27,7 +27,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading"><?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?></h4>
+                                <h4 class="media-heading"><a class="b-header__link-white" href="/user/<?=$_SESSION['user']['id']?>"><?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?></a></h4>
                                 <i class="fa fa-sign-out b-header__link"></i>&nbsp;<a class="b-header__link" href="/logout">выйти</a>
                             </div>
                         </div>
@@ -39,12 +39,16 @@
                     <form class="form-inline" method="post" action="/search" id="search">
                         <div class="form-group">
                             например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a>
-                            &nbsp; <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
+                            &nbsp; 
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
+                                <span id="search_btn" class="input-group-addon btn b-search__btn">найти</span>
+                            </div>
                         </div>
                         <? if (!isset($_SESSION['user'])) :?>
                             <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary pull-left visible-xs loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
                         <? endif;?>
-                        <button type="submit" class="btn btn-primary btn-sm">найти</button>
+                        
                     </form>
                 </div>
             </div>
