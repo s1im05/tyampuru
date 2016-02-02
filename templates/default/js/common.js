@@ -39,6 +39,12 @@
                     }
                 }).error(function(){w.location.href = '/404'});
             }
+        }).on('click tap', '.nav.tabs_js > li > a', function(e){
+            e.preventDefault();
+            var jqParent    = $(this).closest('.nav').children('li').removeClass('active').end();
+            $('#'+jqParent.data('target')).children('div').addClass('hide');
+            $(this).parent('li').addClass('active');
+            $($(this).attr('href')).removeClass('hide');
         });
     });    
 })(window, jQuery);

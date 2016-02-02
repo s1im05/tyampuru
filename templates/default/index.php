@@ -22,12 +22,12 @@
                     <? if (isset($_SESSION['user'])) :?>
                         <div class="media">
                             <div class="media-left">
-                                <a href="/user/<?=$_SESSION['user']['id']?>">
+                                <a href="/home">
                                     <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>" alt="<?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?>">
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading"><a class="b-header__link-white" href="/user/<?=$_SESSION['user']['id']?>"><?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?></a></h4>
+                                <h4 class="media-heading"><a class="b-header__link-white" href="/home"><?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?></a></h4>
                                 <i class="fa fa-sign-out b-header__link"></i>&nbsp;<a class="b-header__link" href="/logout">выйти</a>
                             </div>
                         </div>
@@ -62,8 +62,8 @@
             </a>
         </div>
         
-        <nav>
-            <ul class="b-menu nav nav-pills">
+        <nav class="b-menu">
+            <ul class="nav nav-pills">
                 <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
                 <? foreach ($aChapters as $aVal) :?>
                     <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>

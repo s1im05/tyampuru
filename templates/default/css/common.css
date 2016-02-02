@@ -58,6 +58,7 @@ a:hover, a:focus {
 .b-menu {
     font-size: 1.5em;
     font-weight: bold;
+    margin-bottom: 1em;
 }
 .b-post {
     margin-bottom: 2em;
@@ -114,6 +115,9 @@ a:hover, a:focus {
     position: absolute;
     top: 1.2em;
     left: 1em;
+}
+.b-postthumb__small {
+    width: 80px;
 }
 .b-avatar {
     max-width: 50px;
