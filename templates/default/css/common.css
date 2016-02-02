@@ -134,6 +134,15 @@ a:hover, a:focus {
     color: #555;
     text-shadow: none;
 }
+.b-likelist__title {
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.b-likepost {
+    height: 100px;
+}
 
 /* old tyampuru */
 .b-post-image_text {

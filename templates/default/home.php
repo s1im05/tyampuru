@@ -26,19 +26,25 @@
                 </div>
                 <div id="likes" class="hide">
                     <? if ($aPostList) :?>
+                        <div class="row">
                         <? foreach ($aPostList as $aPost) :?>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="/post/<?=$aPost['id']?>">
-                                        <img class="media-object b-postthumb__small" src="<?=$aPost['thumb']?>" alt="<?=$aPost['title']?>">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a></h4>
-                                    <p><span class="text-muted"><?=date2ru($aPost['like_date'], true)?></span></p>
+                            <div class="col-sm-6 b-likepost">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="/post/<?=$aPost['id']?>">
+                                            <img class="media-object b-postthumb__small" src="<?=$aPost['thumb']?>" alt="<?=$aPost['title']?>">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="clearfix">
+                                            <h4 class="media-heading b-likelist__title pull-left"><a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a></h4>
+                                        </div>
+                                        <p><span class="text-muted"><?=date2ru($aPost['like_date'], true)?></span> <a data-id="<?=$aPost['id']?>" class="btn btn-default btn-xs b-likedel"><i class="fa fa-times b-like" title="Убрать из списка"></i> убрать лайк</a></p>
+                                    </div>
                                 </div>
                             </div>
                         <? endforeach;?>
+                        </div>
                     <? else :?>
                         <p>Вы еще не поставили ни одного "лайка"</p>
                     <? endif;?>
