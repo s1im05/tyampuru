@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Тямпуру &ndash; <?=$title?></title>
     
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/emoji.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/<?=$path?>/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/<?=$path?>/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/<?=$path?>/css/emoji.css" />
+    <link rel="stylesheet" type="text/css" href="/<?=$path?>/css/common.css" />
     
-    <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
-    <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+    <link href="/<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
+    <link href="/<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     
-    <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/<?=$path?>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/<?=$path?>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
 </head>
 <body>
@@ -59,9 +59,9 @@
     </header>
     <div class="container">
         <div class="b-poster h-shadow">
-            <img src="<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg" class="b-poster__image" alt="Tyampuru" />
+            <img src="/<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg" class="b-poster__image" alt="Tyampuru" />
             <a class="b-title" title="Тямпуру - главная страница" href="/">
-                <img class="b-title__img" src="<?=$path?>/img/tyampuru.png" />
+                <img class="b-title__img" src="/<?=$path?>/img/tyampuru.png" />
             </a>
         </div>
         
