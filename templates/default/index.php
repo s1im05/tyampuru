@@ -113,6 +113,6 @@
             </div>
         </footer>
     </div>
-    <script type="text/javascript" src="<?=$path?>/js/common.js"></script>
+    <script type="text/javascript" src="/<?=$path?>/js/common.js"></script>
 </body>
 </html>
