@@ -70,7 +70,8 @@ class Chapter_Model extends Model {
                     (pl.post_id  = p.id AND pl.user_id = ?)
                 WHERE
                     ".($this->_sChapter != 'all' ? "c.class = '".mysql_real_escape_string($this->_sChapter)."' AND" : '' )."
-                    c.id    = p.chapter_id 
+                    c.id    = p.chapter_id AND
+                    p.cdate < NOW()
                 ORDER BY 
                     p.".$this->_aOrder['field']." ".$this->_aOrder['dir']."
                 LIMIT ?d, ?d;", 
@@ -78,7 +79,6 @@ class Chapter_Model extends Model {
                 ($this->_iPage-1)*$iPPage, 
                 $iPPage
             );
-            //echo mysql_error(); die();
         return $this;
     }
     
