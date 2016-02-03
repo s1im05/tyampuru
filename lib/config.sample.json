@@ -33,6 +33,10 @@
             "controller": "chapter",
             "action": "all"
         },{
+            "path": "\\/home",
+            "controller": "home",
+            "action": "index"
+        },{
             "path": "\\/page\\/(\\d+)",
             "controller": "chapter",
             "action": "all",
@@ -53,6 +57,18 @@
             "action": "byId",
             "params": ["id","name"]
         },{
+            "path": "\\/like\\/(\\d+)",
+            "controller": "post",
+            "action": "like",
+            "params": ["id"],
+            "header": "Content-type: application/json; charset=UTF-8"
+        },{
+            "path": "\\/dislike\\/(\\d+)",
+            "controller": "post",
+            "action": "dislike",
+            "params": ["id"],
+            "header": "Content-type: application/json; charset=UTF-8"
+        },{
             "path": "\\/search\\/(.{3,255})",
             "controller": "search",
             "action": "search",
@@ -62,6 +78,10 @@
             "controller": "search",
             "action": "searchByTag",
             "params": ["query"]
+        },{
+            "path": "\\/logout",
+            "controller": "chapter",
+            "action": "all"
         },{
             "path": "\\/rss",
             "controller": "rss",
