@@ -4,7 +4,7 @@
             <div class="media">
                 <div class="media-left">
                     <a href="/home">
-                        <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>" alt="<?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?>">
+                        <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>">
                     </a>
                 </div>
                 <div class="media-body">

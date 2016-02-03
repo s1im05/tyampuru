@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/emoji.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css" />
     
+    <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
+    <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+    
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
@@ -24,7 +27,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="/home">
-                                    <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>" alt="<?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?>">
+                                    <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>">
                                 </a>
                             </div>
                             <div class="media-body">

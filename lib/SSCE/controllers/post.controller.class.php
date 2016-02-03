@@ -33,6 +33,7 @@ class Post_Controller extends Controller {
         } else {
             $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = 1, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id']);
         }
+        $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes+1 WHERE id = ?d LIMIT 1;", $iPostId);
 
         $this->setLayout('ajax.php');
         $this->getView()->assign('sRequest', 'like');
@@ -45,6 +46,7 @@ class Post_Controller extends Controller {
         if ($aRow  = $this->getDb()->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id'])){
             $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = 0, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id']);
         }
+        $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes-1 WHERE id = ?d LIMIT 1;", $iPostId);
 
         $this->setLayout('ajax.php');
         $this->getView()->assign('sRequest', 'dislike');
