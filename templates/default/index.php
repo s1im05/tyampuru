@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/emoji.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css" />
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
@@ -19,7 +20,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
-                    <? if (isset($_SESSION['user'])) :?>
+                    <? if ($bIsLogged) :?>
                         <div class="media">
                             <div class="media-left">
                                 <a href="/home">
@@ -45,10 +46,9 @@
                                 <span id="search_btn" class="input-group-addon btn b-search__btn">найти</span>
                             </div>
                         </div>
-                        <? if (!isset($_SESSION['user'])) :?>
+                        <? if (!$bIsLogged) :?>
                             <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary pull-left visible-xs loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
                         <? endif;?>
-                        
                     </form>
                 </div>
             </div>

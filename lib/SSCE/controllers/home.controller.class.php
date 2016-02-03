@@ -8,7 +8,7 @@ class Home_Controller extends Controller {
 
 
     public function indexAction(){
-        if (!isset($_SESSION['user'])){
+        if (!User_Model::isLogged()){
             $this->getRequest()->go('/');
         }
         

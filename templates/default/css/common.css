@@ -119,6 +119,18 @@ a:hover, a:focus {
 .b-postthumb__small {
     width: 80px;
 }
+.b-commentform {
+    padding-top: .5em;
+}
+    .b-commentform, .b-commentform .media-body {
+        overflow: visible;
+    }
+.b-commentform__group {
+    position: relative;
+}
+.b-commentform__div {
+    margin-bottom: .4em;
+}
 .b-avatar {
     max-width: 50px;
     max-height: 50px;
@@ -142,6 +154,9 @@ a:hover, a:focus {
 }
 .b-likepost {
     height: 100px;
+}
+.h-inline {
+    display: inline;
 }
 
 /* old tyampuru */

@@ -15,16 +15,13 @@
         </div>
         <div class="b-post__data">
             <ul class="nav nav-pills tabs_js" data-target="tabs_home">
-                <li role="presentation" class="active"><a href="#settings"><i class="fa fa-cog"></i>&nbsp; Настройки</a></li>
-                <li role="presentation"><a href="#likes"><i class="fa fa-heart"></i>&nbsp; Мои лайки</a></li>
+                <li role="presentation" class="active"><a href="#likes"><i class="fa fa-heart"></i>&nbsp; Мои лайки</a></li>
                 <li role="presentation"><a href="#comments"><i class="fa fa-cog"></i>&nbsp; Мои коментарии</a></li>
+                <li role="presentation"><a href="#settings"><i class="fa fa-cog"></i>&nbsp; Настройки</a></li>
             </ul>
             <p>&nbsp;</p>
             <div id="tabs_home">
-                <div id="settings">
-                    
-                </div>
-                <div id="likes" class="hide">
+                <div id="likes">
                     <? if ($aPostList) :?>
                         <div class="row">
                         <? foreach ($aPostList as $aPost) :?>
@@ -51,6 +48,9 @@
                 </div>
                 <div id="comments" class="hide">
                     <p>Вы еще не написали ни одного комментария</p>
+                </div>
+                <div id="settings" class="hide">
+                    
                 </div>
             </div>
         </div>
