@@ -118,7 +118,8 @@ a:hover, a:focus {
     left: 1em;
 }
 .b-postthumb__small {
-    width: 80px;
+    width: 148px;
+    border: 1px solid #eee;
 }
 .b-comment {
     padding-top: 15px;
