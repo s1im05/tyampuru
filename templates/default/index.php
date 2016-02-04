@@ -21,7 +21,7 @@
     <header class="b-header clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-xs-6">
                     <? if ($bIsLogged) :?>
                         <div class="media">
                             <div class="media-left">
@@ -35,22 +35,32 @@
                             </div>
                         </div>
                     <? else :?>
-                        <a id="sign_in_btn" href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary hidden-xs loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
+                        <a id="sign_in_btn" href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
                     <? endif;?>
+                    <p class="visible-xs"></p>
                 </div>
-                <div class="col-sm-8 text-right">
+                <div class="col-xs-6 visible-xs">
+                    <div class="pull-right dropdown">
+                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
+                        <ul class="dropdown-menu">
+                            <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
+                            <? foreach ($aChapters as $aVal) :?>
+                                <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
+                            <? endforeach;?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-xs-12 text-right">
                     <form class="form-inline" method="post" action="/search" id="search">
                         <div class="form-group">
-                            например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a>
-                            &nbsp; 
+                            <span class="hidden-xs">
+                                например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a> &nbsp; 
+                            </span>
                             <div class="input-group">
                                 <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
                                 <span id="search_btn" class="input-group-addon btn b-search__btn">найти</span>
                             </div>
                         </div>
-                        <? if (!$bIsLogged) :?>
-                            <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary pull-left visible-xs loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
-                        <? endif;?>
                     </form>
                 </div>
             </div>
@@ -64,7 +74,7 @@
             </a>
         </div>
         
-        <nav class="b-menu">
+        <nav class="b-menu hidden-xs">
             <ul class="nav nav-pills">
                 <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
                 <? foreach ($aChapters as $aVal) :?>

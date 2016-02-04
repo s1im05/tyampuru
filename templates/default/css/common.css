@@ -174,9 +174,6 @@ a:hover, a:focus {
 .b-likepost {
     height: 100px;
 }
-.h-inline {
-    display: inline;
-}
 
 /* old tyampuru */
 .b-post-image_text {
@@ -223,8 +220,22 @@ a.list-group-item, a.list-group-item:hover {
     background: #E1C785;
     color: #fff;
 }
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    background-color: #9C5E39;
+    border-color: #9C5E39;
+    color: #fff;
+}
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+    background-color: #9C5E39;
+    color: #fff;
+    outline: 0 none;
+    text-decoration: none;
+}
 
 /* helpers */
 .h-shadow {
     box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.h-inline {
+    display: inline;
 }

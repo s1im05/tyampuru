@@ -33,7 +33,7 @@
                                 <div class="media-body">
                                     <h4 class="media-heading">
                                         <a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a>,
-                                        <span class="text-muted"><?=date2ru($aPost['like_date'], true)?></span>
+                                        <small class="text-muted"><?=date2ru($aPost['like_date'], true)?></small>
                                     </h4>
                                     <p><a data-id="<?=$aPost['id']?>" class="btn btn-default btn-sm b-likedel"><i class="fa fa-times b-like" title="Убрать из списка"></i> убрать лайк</a></p>
                                 </div>
@@ -53,7 +53,7 @@
                                 <div class="media-body">
                                     <h4 class="media-heading">
                                         <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$aComment['title']?></a>,
-                                        <span class="text-muted"><?=date2ru($aComment['cdate'], true)?></span>
+                                        <small class="text-muted"><?=date2ru($aComment['cdate'], true)?></small>
                                     </h4>
                                     <div class="b-comment__text">
                                         <?=nl2br(htmlspecialchars($aComment['text']));?>
