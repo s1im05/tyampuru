@@ -25,7 +25,7 @@
         <? endif;?>
     </div>
     <?if ($aPost['tags']):?>
-    <div class="b-post__tags">
+    <div class="b-post__footer">
         <? if ($bIsLogged) :?>
             <div class="media b-commentform">
                 <div class="media-left">

@@ -68,7 +68,7 @@
         </div>
     <?endif;?>
     <?if ($aPost['tags']):?>
-        <div class="b-post__tags">
+        <div class="b-post__tags b-post__footer">
             <?$aTags    = explode("\n", $aPost['tags']);?>
             <?foreach($aTags as $sTag):?>
                 <a href="/tag/<?=urlencode($sTag)?>" class="btn btn-default b-tag"><i class="fa fa-tag"></i> <?=$sTag?></a>
