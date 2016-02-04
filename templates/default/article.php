@@ -18,7 +18,7 @@
             </h2>
         <? endif; ?>
         <div class="clearfix">
-            <div class="pull-right">
+            <div class="pull-right hidden-xs">
                 <div class="addthis_toolbox addthis_default_style addthis_16x16_style"
                     addthis:url="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aPost['id']?>"
                     addthis:title="<?=$aPost['title']?>">
