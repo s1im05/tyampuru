@@ -1,5 +1,4 @@
     <div class="col-xs-12">
-        <h1><?=$title;?></h1>
         <nav>
             <ul class="pagination">
                 <? if ($iPageActive > 4) :?>
