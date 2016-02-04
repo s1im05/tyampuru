@@ -35,7 +35,7 @@ a:hover, a:focus {
     margin-bottom: 2em;
     background: #fff;
     position: relative;
-    min-height: 200px;
+    min-height: 55px;
 }
 .b-poster__image {
     width: 100%;
@@ -120,6 +120,14 @@ a:hover, a:focus {
 .b-postthumb__small {
     width: 80px;
 }
+.b-comment {
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+    .b-comment:first-child{
+        padding-top: 0;
+        border-top: none;
+    }
 .b-commentform {
     padding-top: .5em;
 }
@@ -133,7 +141,7 @@ a:hover, a:focus {
     margin-bottom: .4em;
 }
 .b-avatar {
-    max-width: 50px;
+    width: 50px;
     max-height: 50px;
 }
 .b-like {

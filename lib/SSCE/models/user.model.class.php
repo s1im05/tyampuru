@@ -5,6 +5,14 @@ class User_Model extends Model {
         return isset($_SESSION['user']);
     }
     
+    public function __get($sKey){
+        if (isset($_SESSION['user'][$sKey])){
+            return $_SESSION['user'][$sKey];
+        } else {
+            return null;
+        }
+    }
+    
     public static function logout(){
         unset($_SESSION['user']);
         header("Location: {$_SERVER['HTTP_REFERER']}");

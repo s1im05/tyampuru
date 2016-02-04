@@ -8,7 +8,8 @@ class Home_Controller extends Controller {
 
 
     public function indexAction(){
-        if (!User_Model::isLogged()){
+        $oUser   = new User_Model($this->getDb(), $this->getConfig());
+        if (!$oUser->isLogged()){
             $this->getRequest()->go('/');
         }
         
@@ -25,10 +26,27 @@ class Home_Controller extends Controller {
                                             ORDER BY
                                                 pl.cdate DESC
                                             LIMIT ?d",
-                                            $_SESSION['user']['id'],
+                                            $oUser->id,
                                             $this->_iLimit);
+                                            
+        $aComments  = $this->getDb()->select("SELECT
+                                                    c.*,
+                                                    p.title,
+                                                    p.thumb
+                                                FROM
+                                                    ?_comments c,
+                                                    ?_posts p
+                                                WHERE
+                                                    p.id        = c.post_id AND
+                                                    c.user_id   = ?d
+                                                ORDER BY
+                                                    c.cdate DESC
+                                                LIMIT ?d",
+                                                $oUser->id,
+                                                $this->_iLimit);
         
         $this->setTitle('Домашняя страница');
-        $this->getView()->assign('aPostList',   $aLikes);
+        $this->getView()->assign('aPostList',       $aLikes);
+        $this->getView()->assign('aCommentList',    $aComments);
     }
 }

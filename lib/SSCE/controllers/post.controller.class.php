@@ -6,6 +6,10 @@ class Post_Controller extends Controller {
 
 
     public function byIdAction($iPostId, $sName = ''){
+        
+        $oUser   = new User_Model($this->getDb(), $this->getConfig());
+        $this->_getComments($iPostId, $oUser);
+        
         $oPost      = new Post_Model($this->getDb(), $this->getConfig());
         $oPost->id  = $iPostId;
         
@@ -15,8 +19,9 @@ class Post_Controller extends Controller {
         $oPost->chapter_name    = $oChapter->class;
         $oPost->chapter_title   = $oChapter->title;
         
-        if (isset($_SESSION['user'])){ // check if post liked
-            $oPost->like_state    = $this->getDb()->selectCell("SELECT state FROM ?_posts__likes WHERE state = 1 AND post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id']);
+        
+        if ($oUser->isLogged()){ // check if post liked
+            $oPost->like_state    = $this->getDb()->selectCell("SELECT state FROM ?_posts__likes WHERE state = 1 AND post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id);
         }
 
         $this->setTitle($oPost->chapter_title.' &ndash; '.$oPost->title);
@@ -24,31 +29,61 @@ class Post_Controller extends Controller {
         $this->getView()->assign('aPost',       $oPost->data);
     }
     
+    private function _getComments($iPostId, $oUser){
+        if ($oUser->isLogged() && isset($_POST['comment']) && trim($_POST['comment'])){
+            $iId    = $this->getDb()->query("INSERT INTO 
+                                                    ?_comments 
+                                                SET
+                                                    post_id     = ?d,
+                                                    user_id     = ?d,
+                                                    text        = ?",
+                                                $iPostId,
+                                                $oUser->id,
+                                                trim($_POST['comment']) );
+            $this->getView()->assign('bCommentAdded',   true);
+        }
+        $aCommentList   = $this->getDb()->select("SELECT 
+                                                        c.*,
+                                                        u.nickname,
+                                                        u.gender,
+                                                        u.photo
+                                                    FROM 
+                                                        ?_comments c,
+                                                        ?_users u
+                                                    WHERE
+                                                        c.post_id   = ?d AND
+                                                        c.user_id   = u.id
+                                                    ORDER BY
+                                                        c.id;",
+                                                    $iPostId);
+        $this->getView()->assign('aCommentList', $aCommentList);
+    }
+    
+    
+    
     public function likeAction($iPostId){
-        if (!isset($_SESSION['user'])){
-            $this->getRequest()->go404();
-        }
-        if (!$aRow  = $this->getDb()->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id'])){
-            $this->getDb()->query("INSERT INTO ?_posts__likes SET state = 1, cdate = NOW(), post_id = ?d, user_id = ?d;", $iPostId, $_SESSION['user']['id']);
-        } else {
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = 1, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id']);
-        }
-        $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes+1 WHERE id = ?d LIMIT 1;", $iPostId);
-
-        $this->setLayout('ajax.php');
-        $this->getView()->assign('sRequest', 'like');
+        $this->_statusChange($iPostId, true);
     }
     
     public function dislikeAction($iPostId){
-        if (!isset($_SESSION['user'])){
+        $this->_statusChange($iPostId, false);
+    }
+    
+    private function _statusChange($iPostId, $bLike){
+        $oUser   = new User_Model($this->getDb(), $this->getConfig());
+        if (!$oUser->isLogged()){
             $this->getRequest()->go404();
         }
-        if ($aRow  = $this->getDb()->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id'])){
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = 0, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $_SESSION['user']['id']);
+        
+        if ($aRow  = $this->getDb()->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id)){
+            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = ?d, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $bLike ? 1 : 0, $iPostId, $oUser->id);
+            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + ?d WHERE id = ?d LIMIT 1;", $bLike ? 1 : -1, $iPostId);
+        } elseif ($bLike) {
+            $this->getDb()->query("INSERT INTO ?_posts__likes SET state = 1, cdate = NOW(), post_id = ?d, user_id = ?d;", $iPostId, $oUser->id);
+            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + 1 WHERE id = ?d LIMIT 1;", $iPostId);
         }
-        $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes-1 WHERE id = ?d LIMIT 1;", $iPostId);
 
         $this->setLayout('ajax.php');
-        $this->getView()->assign('sRequest', 'dislike');
+        $this->getView()->assign('sRequest', 'success');
     }
 }
