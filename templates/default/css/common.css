@@ -35,7 +35,7 @@ a:hover, a:focus {
     margin-bottom: 2em;
     background: #fff;
     position: relative;
-    min-height: 300px;
+    min-height: 200px;
 }
 .b-poster__image {
     width: 100%;

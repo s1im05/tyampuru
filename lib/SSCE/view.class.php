@@ -36,7 +36,7 @@ class SSCE_View {
         ob_start();
         error_reporting(0);
         require_once 'helpers/view.helper.php';
-        require $this->_sTemplatePath.'/'.$this->getLayout();
+        require $_SERVER['DOCUMENT_ROOT'].$this->_sTemplatePath.'/'.$this->getLayout();
         $aData  = ob_get_contents();
         ob_clean();
         error_reporting(E_ALL ^ E_DEPRECATED);
