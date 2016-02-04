@@ -80,6 +80,7 @@ a:hover, a:focus {
 }
 .b-post__lastcomment {
     border-top: 1px solid #eee;
+    padding-top: 15px;
 }
 .b-post__data iframe {
     max-width: 100%;
