@@ -57,9 +57,15 @@ class Chapter_Model extends Model {
             $this->_iTotal,
             "SELECT
                     p.*,
-                    pl.state AS like_state,
-                    c.title AS chapter_title,
-                    c.class AS chapter_name
+                    pl.state    AS like_state,
+                    c.title     AS chapter_title,
+                    c.class     AS chapter_name,
+                    cm.id       AS last_comment_id,
+                    cm.text     AS last_comment_text,
+                    cm.cdate    AS last_comment_cdate,
+                    u.nickname  AS last_comment_nickname,
+                    u.gender    AS last_comment_gender,
+                    u.photo     AS last_comment_photo
                 FROM 
                     ?_chapters c
                 JOIN
@@ -68,10 +74,20 @@ class Chapter_Model extends Model {
                     ?_posts__likes pl
                 ON
                     (pl.post_id  = p.id AND pl.user_id = ?)
+                LEFT JOIN
+                    ?_comments cm
+                ON
+                    cm.id = (SELECT id FROM ?_comments WHERE post_id = p.id ORDER BY id DESC LIMIT 1)
+                LEFT JOIN
+                    ?_users u
+                ON
+                    u.id    = cm.user_id
                 WHERE
                     ".($this->_sChapter != 'all' ? "c.class = '".mysql_real_escape_string($this->_sChapter)."' AND" : '' )."
                     c.id    = p.chapter_id AND
                     p.cdate < NOW()
+                GROUP BY
+                    p.id
                 ORDER BY 
                     p.".$this->_aOrder['field']." ".$this->_aOrder['dir']."
                 LIMIT ?d, ?d;", 

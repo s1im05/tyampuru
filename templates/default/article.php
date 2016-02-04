@@ -3,7 +3,7 @@
         <? if ($bPostFull) :?>
             <h1 class="b-post__title">
                 <?=$aPost['title']?>
-                <i title="Мне нравится!" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=isset($_SESSION['user'])?'on':'off'?>"></i>
+                <i title="Мне нравится!" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
                 <? if ($aPost['likes'] > 0) :?>
                     <sup class="b-likes__count"><?=$aPost['likes']?></sup>
                 <? endif; ?>
@@ -11,7 +11,7 @@
         <? else :?>
             <h2 class="b-post__title">
                 <a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a> 
-                <i title="Мне нравится!" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=isset($_SESSION['user'])?'on':'off'?>"></i>
+                <i title="Мне нравится!" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
                 <? if ($aPost['likes'] > 0) :?>
                     <sup class="b-likes__count"><?=$aPost['likes']?></sup>
                 <? endif; ?>
@@ -48,12 +48,31 @@
         </div>
         */?>
     </div>
+    <?if ($aPost['last_comment_text']):?>
+        <div class="b-post__data b-post__lastcomment">
+            <div class="media b-comment" id="comment_<?=$aPost['last_comment_id']?>">
+                <div class="media-left">
+                    <img class="media-object b-avatar" src="<?=$aPost['last_comment_photo']?>">
+                </div>
+                <div class="media-body">
+                    <p class="media-heading"><strong><?=$aPost['last_comment_nickname']?></strong>, 
+                        <span class="text-muted"><?=date2ru($aPost['last_comment_cdate'])?> 
+                        написал<?=($aPost['last_comment_gender']=='U')?'(а)':($aPost['last_comment_gender']=='F'?'а':'')?>:</span>
+                    </p>
+                    <div class="b-comment__text">
+                        <?=nl2br(htmlspecialchars($aPost['last_comment_text']));?>
+                        <br /><a class="" href="/post/<?=$aPost['id']?>#form_comment">ответить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?endif;?>
     <?if ($aPost['tags']):?>
-    <div class="b-post__tags">
-        <?$aTags    = explode("\n", $aPost['tags']);?>
-        <?foreach($aTags as $sTag):?>
-            <a href="/tag/<?=urlencode($sTag)?>" class="btn btn-default b-tag"><i class="fa fa-tag"></i> <?=$sTag?></a>
-        <?endforeach;?>
-    </div>
+        <div class="b-post__tags">
+            <?$aTags    = explode("\n", $aPost['tags']);?>
+            <?foreach($aTags as $sTag):?>
+                <a href="/tag/<?=urlencode($sTag)?>" class="btn btn-default b-tag"><i class="fa fa-tag"></i> <?=$sTag?></a>
+            <?endforeach;?>
+        </div>
     <?endif;?>
 </article>

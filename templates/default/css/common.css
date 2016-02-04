@@ -78,6 +78,9 @@ a:hover, a:focus {
     background: #fff;
     padding: .5em 1em 1em 1em;
 }
+.b-post__lastcomment {
+    border-top: 1px solid #eee;
+}
 .b-post__data iframe {
     max-width: 100%;
 }
@@ -85,7 +88,7 @@ a:hover, a:focus {
     border-top: 1px solid #ccc;
     background: #fff;
     padding: .5em 1em 1em 1em;
-    line-height: 2.5em;
+    line-height: 3em;
 }
 .b-tag {
     background-color: #eee;
