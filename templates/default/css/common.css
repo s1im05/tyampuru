@@ -129,6 +129,15 @@ a:hover, a:focus {
         padding-top: 0;
         border-top: none;
     }
+.b-likes__count {
+    font-family: Calibri;
+    font-size: 14px;
+    opacity: .5;
+}
+    .b-likes__count:hover {
+        opacity: 1;
+        cursor: default;
+    }
 .b-commentform {
     padding-top: .5em;
 }

@@ -82,8 +82,9 @@ class Post_Controller extends Controller {
             $this->getDb()->query("INSERT INTO ?_posts__likes SET state = 1, cdate = NOW(), post_id = ?d, user_id = ?d;", $iPostId, $oUser->id);
             $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + 1 WHERE id = ?d LIMIT 1;", $iPostId);
         }
+        $iCnt   = $this->getDb()->selectCell("SELECT likes FROM ?_posts WHERE id = ?d LIMIT 1;", $iPostId);
 
         $this->setLayout('ajax.php');
-        $this->getView()->assign('sRequest', 'success');
+        $this->getView()->assign('sRequest', $iCnt);
     }
 }
