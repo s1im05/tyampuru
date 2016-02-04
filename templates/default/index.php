@@ -21,7 +21,7 @@
     <header class="b-header clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4 col-xs-6">
+                <div class="col-sm-4 col-xs-9">
                     <? if ($bIsLogged) :?>
                         <div class="media">
                             <div class="media-left">
@@ -39,7 +39,7 @@
                     <? endif;?>
                     <p class="visible-xs"></p>
                 </div>
-                <div class="col-xs-6 visible-xs">
+                <div class="col-xs-3 visible-xs">
                     <div class="pull-right dropdown">
                         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
                         <ul class="dropdown-menu">
