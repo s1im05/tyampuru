@@ -132,10 +132,17 @@ a:hover, a:focus {
         padding-top: 0;
         border-top: none;
     }
+.b-comment__text {
+    max-height: 400px;
+    overflow: auto;
+}
 .b-likes__count {
+    background: #fff;
+    border-radius: 7px;
     font-family: Calibri;
-    font-size: 14px;
-    opacity: .5;
+    font-size: 11px;
+    opacity: 0.7;
+    padding: 0 6px;
 }
     .b-likes__count:hover {
         opacity: 1;
