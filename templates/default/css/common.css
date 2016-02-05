@@ -187,6 +187,13 @@ a:hover, a:focus {
 .b-likepost {
     height: 100px;
 }
+.b-vk {
+    background: #fff;
+    padding: 5px;
+}
+.b-vk__widget, .b-vk__widget > iframe {
+    width: 100% !important;
+}
 
 /* old tyampuru */
 .b-post-image_text {

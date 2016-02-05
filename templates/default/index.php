@@ -15,7 +15,10 @@
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
+    <script type="text/javascript" src="<?=$path?>/js/common.js?v=2"></script>
+    
+    <script type="text/javascript" src="//loginza.ru/js/widget.js"></script>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?115"></script>
 </head>
 <body>
     <header class="b-header clearfix">
@@ -89,6 +92,14 @@
                 <div class="list-group h-shadow">
                     <a href="/rss" class="list-group-item"><i class="fa fa-fw fa-rss-square"></i> RSS-лента свежих постов</a>
                 </div>
+                
+                <!-- VK Widget -->
+                <div class="h-shadow b-vk">
+                    <div id="vk_groups" class="b-vk__widget"></div>
+                </div>
+                <script type="text/javascript">
+                    VK.Widgets.Group("vk_groups", {mode: 0, width:"200px", height: "300", color1: 'F3EAD3', color2: '9C5E39', color3: '9C5E39'}, 34237015);
+                </script>
             </aside>
         </div>
 
@@ -122,7 +133,6 @@
             </div>
         </footer>
     </div>
-    <script type="text/javascript" src="<?=$path?>/js/common.js?v=2"></script>
     <script type="text/javascript">
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

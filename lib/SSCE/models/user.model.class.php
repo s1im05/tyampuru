@@ -23,12 +23,22 @@ class User_Model extends Model {
         die();
     }
     
+    public function getLoginzaUrl($sToken){
+        $sUrl   = $this->getConfig()->loginza->url."?token={$sToken}";
+        
+        if ($this->getConfig()->loginza->id && $this->getConfig()->loginza->sec){
+            $sUrl   .= "&id=".$this->getConfig()->loginza->id."&sig=".md5($sToken.$this->getConfig()->loginza->sec);
+        }
+        
+        return $sUrl;
+    }
+    
     public function loginLoginza($sToken){
         if (!$sToken){
             return $this;
         }
-        $sUrl   = "http://loginza.ru/api/authinfo?token={$sToken}";
-        if (($oData   = json_decode(file_get_contents($sUrl))) && !isset($oData->error_type)){
+
+        if (($oData   = json_decode(file_get_contents($this->getLoginzaUrl($sToken)))) && !isset($oData->error_type)){
             if (!($_SESSION['user']    = $this->getDb()->selectRow("SELECT * FROM ?_users WHERE identity = ? LIMIT 1;", $oData->identity))){
                 if ($this->getDb()->query("INSERT INTO
                                                 ?_users
@@ -57,8 +67,8 @@ class User_Model extends Model {
 
             $sSec   = md5(mt_rand());
             $sKey   = md5($_SESSION['user']['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$sSec);
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET sec = ? WHERE id = ?d LIMIT 1;", $sSec, $_SESSION['user']['id']);
-            setcookie(User_Model::$cookieName, $_SESSION['user']['id'].'_'.$sKey, strtotime('+30 days') , '/', '', false, true);
+            $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET sec = ?, ldate = NOW() WHERE id = ?d LIMIT 1;", $sSec, $_SESSION['user']['id']);
+            setcookie(User_Model::$cookieName, $_SESSION['user']['id'].'_'.$sKey.'_'.$sToken, strtotime('+30 days') , '/', '', false, true);
         }
         return $this;
     }
@@ -68,10 +78,11 @@ class User_Model extends Model {
             return;
         }
         $aValue = explode('_', $_COOKIE[User_Model::$cookieName]);
-        if (sizeof($aValue) === 2){
+        if (sizeof($aValue) >= 2){
             $aUser  = $this->getDb()->selectRow("SELECT * FROM ?_users WHERE id = ?d LIMIT 1;", $aValue[0]);
             if ($aValue[1] ===  md5($aUser['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$aUser['sec'])){
                 $_SESSION['user']   = $aUser;
+                $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET ldate = NOW() WHERE id = ?d LIMIT 1;", $_SESSION['user']['id']);
             } else {
                 setcookie(User_Model::$cookieName, '');
                 unset($_COOKIE[User_Model::$cookieName]);

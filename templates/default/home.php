@@ -66,10 +66,16 @@
                     <? endif;?>
                 </div>
                 <div id="settings" class="hide">
-                    
+                    <form method="post" action="/home">
+                    </form>
                 </div>
             </div>
             <p>&nbsp;</p>
         </div>
     </article>
 </main>
+<script type="text/javascript">
+    $(function(){
+       $('.tabs_js').find('a[href='+sessionStorage.getItem('lastTab')+']').click();
+    });
+</script>

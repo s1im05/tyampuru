@@ -22,6 +22,11 @@
     "templates": {
         "path": "/templates/default"
     },
+    "loginza": {
+        "id":   0,
+        "sec":  "",
+        "url":  "http://loginza.ru/api/authinfo"
+    },
     "routes": [
         {
             "path": "\\/404",

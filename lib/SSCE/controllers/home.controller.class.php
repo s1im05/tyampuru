@@ -13,6 +13,10 @@ class Home_Controller extends Controller {
             $this->getRequest()->go('/');
         }
         
+        if (isset($_POST['refresh_data'])){
+            $this->_refresh();
+        }
+        
         $aLikes = $this->getDb()->select("SELECT
                                                 p.*,
                                                 pl.cdate AS like_date
@@ -48,5 +52,9 @@ class Home_Controller extends Controller {
         $this->setTitle('Домашняя страница');
         $this->getView()->assign('aPostList',       $aLikes);
         $this->getView()->assign('aCommentList',    $aComments);
+    }
+    
+    private function _refresh(){
+
     }
 }
