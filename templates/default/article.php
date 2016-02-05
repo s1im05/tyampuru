@@ -52,7 +52,7 @@
         <div class="b-post__data b-post__lastcomment">
             <div class="media b-comment" id="comment_<?=$aPost['last_comment_id']?>">
                 <div class="media-left">
-                    <img class="media-object b-avatar" src="<?=$aPost['last_comment_photo']?>">
+                    <img class="media-object b-avatar" src="<?=$aPost['last_comment_photo']?$aPost['last_comment_photo']:$path.'/img/user.jpg'?>">
                 </div>
                 <div class="media-body">
                     <p class="media-heading"><strong><?=$aPost['last_comment_nickname']?></strong>, 

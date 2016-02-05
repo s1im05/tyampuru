@@ -7,7 +7,7 @@
             <? foreach ($aCommentList as $aComment) :?>
                 <div class="media b-comment" id="comment_<?=$aComment['id']?>">
                     <div class="media-left">
-                        <img class="media-object b-avatar" src="<?=$aComment['photo']?>">
+                        <img class="media-object b-avatar" src="<?=$aComment['photo']?$aComment['photo']:$path.'/img/user.jpg'?>">
                     </div>
                     <div class="media-body">
                         <p class="media-heading"><strong><?=$aComment['nickname']?></strong>, 
@@ -30,7 +30,7 @@
             <div class="media b-commentform">
                 <div class="media-left">
                     <a href="/home">
-                        <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>">
+                        <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>">
                     </a>
                 </div>
                 <div class="media-body">

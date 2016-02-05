@@ -63,11 +63,13 @@ class User_Model extends Model {
                                                 isset($oData->photo)?$oData->photo:'')){
                     $_SESSION['user']   = $this->getDb()->selectRow("SELECT * FROM ?_users WHERE identity = ? LIMIT 1;", $oData->identity);
                 }
+            } else {
+                $_SESSION['user']['photo']  = isset($oData->photo)?$oData->photo:'';
             }
 
             $sSec   = md5(mt_rand());
             $sKey   = md5($_SESSION['user']['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$sSec);
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET sec = ?, ldate = NOW(), photo = ? WHERE id = ?d LIMIT 1;", $sSec, isset($oData->photo)?$oData->photo:'', $_SESSION['user']['id']);
+            $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET sec = ?, ldate = NOW(), photo = ? WHERE id = ?d LIMIT 1;", $sSec, $_SESSION['user']['photo'], $_SESSION['user']['id']);
             setcookie(User_Model::$cookieName, $_SESSION['user']['id'].'_'.$sKey.'_'.$sToken, strtotime('+30 days') , '/', '', false, true);
         }
         return $this;

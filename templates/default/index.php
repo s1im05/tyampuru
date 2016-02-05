@@ -29,7 +29,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="/home">
-                                    <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?>">
+                                    <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>">
                                 </a>
                             </div>
                             <div class="media-body">
