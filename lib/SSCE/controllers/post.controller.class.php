@@ -19,6 +19,7 @@ class Post_Controller extends Controller {
         $oPost->chapter_name    = $oChapter->class;
         $oPost->chapter_title   = $oChapter->title;
         
+        $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET views = views+1 WHERE id = ?d LIMIT 1;", $iPostId);
         
         if ($oUser->isLogged()){ // check if post liked
             $oPost->like_state    = $this->getDb()->selectCell("SELECT state FROM ?_posts__likes WHERE state = 1 AND post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id);
@@ -40,6 +41,7 @@ class Post_Controller extends Controller {
                                                 $iPostId,
                                                 $oUser->id,
                                                 trim($_POST['comment']) );
+            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET comments = comments+1 WHERE id = ?d LIMIT 1;", $iPostId);                                    
             $this->getView()->assign('bCommentAdded',   true);
         }
         $aCommentList   = $this->getDb()->select("SELECT 
