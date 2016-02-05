@@ -8,7 +8,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading"><?=$_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name']?> (<?=$_SESSION['user']['nickname']?>)</h4>
+                    <h4 class="media-heading"><?=htmlspecialchars($_SESSION['user']['first_name'].' '.$_SESSION['user']['last_name'])?> (<?=htmlspecialchars($_SESSION['user']['nickname'])?>)</h4>
                     <a class="btn btn-primary btn-xs" href="/logout"><i class="fa fa-sign-out"></i>&nbsp; выйти</a>
                 </div>
             </div>
@@ -66,7 +66,39 @@
                     <? endif;?>
                 </div>
                 <div id="settings" class="hide">
-                    <form method="post" action="/home">
+                    <form method="post" action="/home" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="home_form_name" class="col-sm-3 control-label">Никнейм:</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="nickname" value="<?=htmlspecialchars($_SESSION['user']['nickname'])?>" class="form-control" id="home_form_name" placeholder="Никнейм">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="home_form_gender" class="col-sm-3 control-label">Пол:</label>
+                            <div class="col-sm-9">
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="M" <?=$_SESSION['user']['gender'] == 'M'?'checked="checked"':''?>> мужской
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="F" <?=$_SESSION['user']['gender'] == 'F'?'checked="checked"':''?>> женский
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="U" <?=$_SESSION['user']['gender'] == 'U'?'checked="checked"':''?>> не определился
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" name="save" class="btn btn-primary">Сохранить</button>
+                                &nbsp;
+                                <? if ($sSuccess) :?>
+                                    <span class="text-success"><?=$sSuccess?></span>
+                                <? endif;?>
+                                <? if ($sError) :?>
+                                    <span class="text-danger"><?=$sError?></span>
+                                <? endif;?>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -55,7 +55,7 @@
                     <img class="media-object b-avatar" src="<?=$aPost['last_comment_photo']?$aPost['last_comment_photo']:$path.'/img/user.jpg'?>">
                 </div>
                 <div class="media-body">
-                    <p class="media-heading"><strong><?=$aPost['last_comment_nickname']?></strong>, 
+                    <p class="media-heading"><strong><?=htmlspecialchars($aPost['last_comment_nickname'])?></strong>, 
                         <span class="text-muted"><?=date2ru($aPost['last_comment_cdate'])?> 
                         написал<?=($aPost['last_comment_gender']=='U')?'(а)':($aPost['last_comment_gender']=='F'?'а':'')?>:</span>
                     </p>

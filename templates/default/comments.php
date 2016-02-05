@@ -10,7 +10,7 @@
                         <img class="media-object b-avatar" src="<?=$aComment['photo']?$aComment['photo']:$path.'/img/user.jpg'?>">
                     </div>
                     <div class="media-body">
-                        <p class="media-heading"><strong><?=$aComment['nickname']?></strong>, 
+                        <p class="media-heading"><strong><?=htmlspecialchars($aComment['nickname'])?></strong>, 
                             <span class="text-muted"><?=date2ru($aComment['cdate'])?> 
                             написал<?=($aComment['gender']=='U')?'(а)':($aComment['gender']=='F'?'а':'')?>:</span>
                         </p>

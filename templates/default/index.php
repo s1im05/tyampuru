@@ -33,7 +33,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading"><a class="b-header__link-white" href="/home"><?=$_SESSION['user']['nickname']?></a></h4>
+                                <h4 class="media-heading"><a class="b-header__link-white" href="/home"><?=htmlspecialchars($_SESSION['user']['nickname'])?></a></h4>
                                 <i class="fa fa-sign-out b-header__link"></i>&nbsp;<a class="b-header__link" href="/logout">выйти</a>
                             </div>
                         </div>
