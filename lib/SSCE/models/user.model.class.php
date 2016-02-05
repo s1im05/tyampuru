@@ -17,6 +17,8 @@ class User_Model extends Model {
     
     public static function logout(){
         unset($_SESSION['user']);
+        setcookie($this->_sCookieName, '');
+        unset($_COOKIE[$this->_sCookieName]);
         header("Location: {$_SERVER['HTTP_REFERER']}");
         die();
     }
