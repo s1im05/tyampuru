@@ -67,7 +67,7 @@ class User_Model extends Model {
 
             $sSec   = md5(mt_rand());
             $sKey   = md5($_SESSION['user']['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$sSec);
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET sec = ?, ldate = NOW() WHERE id = ?d LIMIT 1;", $sSec, $_SESSION['user']['id']);
+            $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET sec = ?, ldate = NOW(), photo = ? WHERE id = ?d LIMIT 1;", $sSec, isset($oData->photo)?$oData->photo:'', $_SESSION['user']['id']);
             setcookie(User_Model::$cookieName, $_SESSION['user']['id'].'_'.$sKey.'_'.$sToken, strtotime('+30 days') , '/', '', false, true);
         }
         return $this;
