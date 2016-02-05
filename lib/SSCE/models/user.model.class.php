@@ -1,7 +1,7 @@
 <?php
 class User_Model extends Model {
     
-    private $_sCookieName   = 'u_h';
+    public static $cookieName   = 'u_h';
     
     public static function isLogged(){
         return isset($_SESSION['user']);
@@ -17,8 +17,8 @@ class User_Model extends Model {
     
     public static function logout(){
         unset($_SESSION['user']);
-        setcookie($this->_sCookieName, '');
-        unset($_COOKIE[$this->_sCookieName]);
+        unset($_COOKIE[User_Model::$cookieName]);
+        setcookie(User_Model::$cookieName, '', time(), '/');
         header("Location: {$_SERVER['HTTP_REFERER']}");
         die();
     }
@@ -58,23 +58,23 @@ class User_Model extends Model {
             $sSec   = md5(mt_rand());
             $sKey   = md5($_SESSION['user']['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$sSec);
             $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET sec = ? WHERE id = ?d LIMIT 1;", $sSec, $_SESSION['user']['id']);
-            setcookie($this->_sCookieName, $_SESSION['user']['id'].'_'.$sKey, strtotime('+30 days') , '/', '', false, true);
+            setcookie(User_Model::$cookieName, $_SESSION['user']['id'].'_'.$sKey, strtotime('+30 days') , '/', '', false, true);
         }
         return $this;
     }
     
     public function loginCookie(){
-        if (!isset($_COOKIE[$this->_sCookieName])){
+        if (!isset($_COOKIE[User_Model::$cookieName])){
             return;
         }
-        $aValue = explode('_', $_COOKIE[$this->_sCookieName]);
+        $aValue = explode('_', $_COOKIE[User_Model::$cookieName]);
         if (sizeof($aValue) === 2){
             $aUser  = $this->getDb()->selectRow("SELECT * FROM ?_users WHERE id = ?d LIMIT 1;", $aValue[0]);
             if ($aValue[1] ===  md5($aUser['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$aUser['sec'])){
                 $_SESSION['user']   = $aUser;
             } else {
-                setcookie($this->_sCookieName, '');
-                unset($_COOKIE[$this->_sCookieName]);
+                setcookie(User_Model::$cookieName, '');
+                unset($_COOKIE[User_Model::$cookieName]);
             }
         }
     }
