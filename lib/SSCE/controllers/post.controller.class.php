@@ -7,11 +7,15 @@ class Post_Controller extends Controller {
 
     public function byIdAction($iPostId, $sName = ''){
         
-        $oUser   = new User_Model($this->getDb(), $this->getConfig());
-        $this->_getComments($iPostId, $oUser);
-        
         $oPost      = new Post_Model($this->getDb(), $this->getConfig());
         $oPost->id  = $iPostId;
+
+        if (sizeof($oPost->data) === 0){
+            $this->getRequest()->go404();
+        }
+        
+        $oUser   = new User_Model($this->getDb(), $this->getConfig());
+        $this->_getComments($iPostId, $oUser);
         
         $oChapter       = new Chapter_Model($this->getDb(), $this->getConfig());
         $oChapter->id   = $oPost->chapter_id;
@@ -77,6 +81,13 @@ class Post_Controller extends Controller {
             $this->getRequest()->go404();
         }
         
+        $oPost      = new Post_Model($this->getDb(), $this->getConfig());
+        $oPost->id  = $iPostId;
+
+        if (sizeof($oPost->data) === 0){
+            $this->getRequest()->go404();
+        }
+        
         if ($aRow  = $this->getDb()->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id)){
             $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = ?d, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $bLike ? 1 : 0, $iPostId, $oUser->id);
             $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + ?d WHERE id = ?d LIMIT 1;", $bLike ? 1 : -1, $iPostId);
@@ -84,7 +95,7 @@ class Post_Controller extends Controller {
             $this->getDb()->query("INSERT INTO ?_posts__likes SET state = 1, cdate = NOW(), post_id = ?d, user_id = ?d;", $iPostId, $oUser->id);
             $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + 1 WHERE id = ?d LIMIT 1;", $iPostId);
         }
-        $iCnt   = $this->getDb()->selectCell("SELECT likes FROM ?_posts WHERE id = ?d LIMIT 1;", $iPostId);
+        $iCnt   = $bLike ? $oPost->likes+1 : $oPost->likes-1;
 
         $this->setLayout('ajax.php');
         $this->getView()->assign('sRequest', $iCnt);
