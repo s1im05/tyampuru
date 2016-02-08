@@ -68,6 +68,9 @@
         }).on('click tap', '.b-comment__logout', function(e){ //  show login text
             e.preventDefault();
             $(this).next('p').removeClass('hidden').end().remove();
+        }).on('click tap', '.b-comment__login', function(e){ //  show comment form
+            e.preventDefault();
+            $(this).next('.b-commentform').removeClass('hidden').end().remove();
         }).on('click tap', '.b-btn__ajaxpage', function(e){ // load page via ajax
             var iPage       = $(this).data('page'),
                 sUrl        = $(this).data('url'),
