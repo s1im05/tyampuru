@@ -9,7 +9,7 @@
                     <div class="media-left">
                         <img class="media-object b-avatar" src="<?=$aComment['photo']?$aComment['photo']:$path.'/img/user.jpg'?>">
                     </div>
-                    <div class="media-body">
+                    <div class="media-body <?=$aComment['id']==$iLastAdded?'bg-success':''?>">
                         <p class="media-heading"><strong><?=htmlspecialchars($aComment['nickname'])?></strong>, 
                             <span class="text-muted"><?=date2ru($aComment['cdate'])?> 
                             написал<?=($aComment['gender']=='U')?'(а)':($aComment['gender']=='F'?'а':'')?>:</span>
@@ -41,6 +41,11 @@
                             &nbsp;
                             <? if ($bCommentAdded) :?>
                                 <p class="h-inline text-success">Ваш комментарий успешно добавлен</p>
+                                <script type="text/javascript">
+                                    $(function(){
+                                        window.location.hash    = '#comment_'+<?=(int)$iLastAdded?>;
+                                    });
+                                </script>
                             <? endif;?>
                         </div>
                     </form>

@@ -46,7 +46,8 @@ class Post_Controller extends Controller {
                                                 $oUser->id,
                                                 trim($_POST['comment']) );
             $this->db->query("UPDATE LOW_PRIORITY ?_posts SET comments = comments+1 WHERE id = ?d LIMIT 1;", $iPostId);                                    
-            $this->view->assign('bCommentAdded',   true);
+            $this->view->assign('bCommentAdded',    true);
+            $this->view->assign('iLastAdded',       $iId);
         }
         $aCommentList   = $this->db->select("SELECT 
                                                         c.*,
