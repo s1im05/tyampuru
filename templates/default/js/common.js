@@ -69,13 +69,18 @@
             e.preventDefault();
             $(this).next('p').removeClass('hidden').end().remove();
         }).on('click tap', '.b-btn__ajaxpage', function(e){ // load page via ajax
-                var iPage       = $(this).data('page'),
-                    sUrl        = $(this).data('url'),
-                    jqMessage   = $('<p class="text-muted"><i class="fa fa-spinner fa-spin" />&nbsp; Загружается, подождите...</p>');
-                $(this).replaceWith(jqMessage);
-                $.post(sUrl+'/'+iPage, {}, function(data){
-                    jqMessage.replaceWith(data);
-                });
-            });;
+            var iPage       = $(this).data('page'),
+                sUrl        = $(this).data('url'),
+                jqMessage   = $('<p class="text-muted"><i class="fa fa-spinner fa-spin" />&nbsp; Загружается, подождите...</p>');
+            $(this).replaceWith(jqMessage);
+            $.post(sUrl+'/'+iPage, {}, function(data){
+                jqMessage.replaceWith(data);
+            });
+        }).on('click tap', '.btn-radio > .btn', function(e){ // btn group => radio btns
+            var jqParent    = $(this).parent('.btn-radio');
+            $(jqParent.data('target')).val($(this).data('value'));
+            jqParent.find('.btn.btn-primary').toggleClass('btn-primary btn-default');
+            $(this).toggleClass('btn-primary btn-default');
+        });
     });    
 })(window, jQuery);

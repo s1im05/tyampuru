@@ -240,7 +240,7 @@ a.list-group-item, a.list-group-item:hover {
 .btn-primary, .btn-primary:focus, .btn-primary:active {
     background: #9C5E39;
     color: #fff;
-    border: none;
+    border-color: #9C5E39;
 }
 .btn-primary:hover {
     background: #E1C785;

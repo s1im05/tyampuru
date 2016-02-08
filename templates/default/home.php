@@ -38,15 +38,12 @@
                         <div class="form-group">
                             <label for="home_form_gender" class="col-sm-3 control-label">Пол:</label>
                             <div class="col-sm-9">
-                                <label class="radio-inline">
-                                    <input type="radio" name="gender" value="M" <?=$_SESSION['user']['gender'] == 'M'?'checked="checked"':''?>> мужской
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="gender" value="F" <?=$_SESSION['user']['gender'] == 'F'?'checked="checked"':''?>> женский
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="gender" value="U" <?=$_SESSION['user']['gender'] == 'U'?'checked="checked"':''?>> не определился
-                                </label>
+                                <div class="btn-group btn-radio" role="group" data-target="#inp_gender">
+                                    <button type="button" data-value="M" class="btn btn-<?=$_SESSION['user']['gender'] == 'M'?'primary':'default'?>">мужской</button>
+                                    <button type="button" data-value="F" class="btn btn-<?=$_SESSION['user']['gender'] == 'F'?'primary':'default'?>">женский</button>
+                                    <button type="button" data-value="U" class="btn btn-<?=$_SESSION['user']['gender'] == 'U'?'primary':'default'?>">не определился</button>
+                                </div>
+                                <input id="inp_gender" type="hidden" name="gender" value="<?=$_SESSION['user']['gender']?>" />
                             </div>
                         </div>
                         <div class="form-group">
