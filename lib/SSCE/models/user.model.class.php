@@ -8,6 +8,10 @@ class User_Model extends Model {
     }
     
     public function __get($sKey){
+        $mGet   = parent::__get($sKey);
+        if ($mGet !== null) {
+            return $mGet;
+        }
         if (isset($_SESSION['user'][$sKey])){
             return $_SESSION['user'][$sKey];
         } else {
