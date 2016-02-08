@@ -68,28 +68,30 @@
         </div>
     <?endif;?>
     
-    <div class="b-post__data b-post__lastcomment">
-        <?if ($bIsLogged) :?>
-            <div class="media b-commentform">
-                <div class="media-left">
-                    <a href="/home">
-                        <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>">
-                    </a>
+    <? if (!$bPostFull) :?>
+        <div class="b-post__data b-post__lastcomment">
+            <?if ($bIsLogged) :?>
+                <div class="media b-commentform">
+                    <div class="media-left">
+                        <a href="/home">
+                            <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <form action="/post/<?=$aPost['id']?>" method="post">
+                            <div class="form-group b-commentform__group">
+                                <textarea class="form-control b-commentform__div" name="comment" rows="5" placeholder="Текст коментария"></textarea>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <form action="/post/<?=$aPost['id']?>" method="post">
-                        <div class="form-group b-commentform__group">
-                            <textarea class="form-control b-commentform__div" name="comment" rows="5" placeholder="Текст коментария"></textarea>
-                            <button type="submit" class="btn btn-primary">Отправить</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        <?else:?>
-            <button class="btn btn-default b-comment__logout"><?=$aPost['last_comment_text']?'Ответить':'Комментировать'?></button>
-            <p class="hidden">Необходимо <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'#post_'.$aPost['id'])?>&lang=ru" class="loginza">авторизоваться</a>, чтобы оставить свой комментарий</p>
-        <?endif;?>
-    </div>
+            <?else:?>
+                <button class="btn btn-default b-comment__logout"><?=$aPost['last_comment_text']?'Ответить':'Комментировать'?></button>
+                <p class="hidden">Необходимо <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'#post_'.$aPost['id'])?>&lang=ru" class="loginza">авторизоваться</a>, чтобы оставить свой комментарий</p>
+            <?endif;?>
+        </div>
+    <?endif;?>
     
     
     <?if ($aPost['tags']):?>
