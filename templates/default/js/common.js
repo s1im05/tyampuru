@@ -65,6 +65,9 @@
                 }
                 $.get('/dislike/'+$(this).data('id'), {}, function(data){});
             }
+        }).on('click tap', '.b-comment__logout', function(e){ //  show login text
+            e.preventDefault();
+            $(this).next('p').removeClass('hidden').end().remove();
         });
     });    
 })(window, jQuery);

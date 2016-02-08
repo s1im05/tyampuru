@@ -1,4 +1,4 @@
-<article class="b-post h-shadow">
+<article class="b-post h-shadow" id="post_<?=$aPost['id']?>">
     <div class="b-post__panel">
         <? if ($bPostFull) :?>
             <h1 class="b-post__title">
@@ -48,6 +48,7 @@
         </div>
         */?>
     </div>
+    
     <?if ($aPost['last_comment_text']):?>
         <div class="b-post__data b-post__lastcomment">
             <div class="media b-comment" id="comment_<?=$aPost['last_comment_id']?>">
@@ -61,12 +62,36 @@
                     </p>
                     <div class="b-comment__text">
                         <?=nl2br(htmlspecialchars($aPost['last_comment_text']));?>
-                        <br /><a class="" href="/post/<?=$aPost['id']?>#form_comment">ответить</a>
                     </div>
                 </div>
             </div>
         </div>
     <?endif;?>
+    
+    <div class="b-post__data b-post__lastcomment">
+        <?if ($bIsLogged) :?>
+            <div class="media b-commentform">
+                <div class="media-left">
+                    <a href="/home">
+                        <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <form action="/post/<?=$aPost['id']?>" method="post">
+                        <div class="form-group b-commentform__group">
+                            <textarea class="form-control b-commentform__div" name="comment" rows="5" placeholder="Текст коментария"></textarea>
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?else:?>
+            <button class="btn btn-default b-comment__logout"><?=$aPost['last_comment_text']?'Ответить':'Комментировать'?></button>
+            <p class="hidden">Необходимо <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'#post_'.$aPost['id'])?>&lang=ru" class="loginza">авторизоваться</a>, чтобы оставить свой комментарий</p>
+        <?endif;?>
+    </div>
+    
+    
     <?if ($aPost['tags']):?>
         <div class="b-post__tags b-post__footer">
             <?$aTags    = explode("\n", $aPost['tags']);?>
