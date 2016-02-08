@@ -81,7 +81,7 @@
                     <div class="media-body">
                         <form action="/post/<?=$aPost['id']?>" method="post">
                             <div class="form-group b-commentform__group">
-                                <textarea class="form-control b-commentform__div" name="comment" rows="5" placeholder="Текст коментария"></textarea>
+                                <textarea class="form-control b-commentform__div" name="comment" rows="5" placeholder="Текст комментария"></textarea>
                                 <button type="submit" class="btn btn-primary">Отправить</button>
                             </div>
                         </form>
