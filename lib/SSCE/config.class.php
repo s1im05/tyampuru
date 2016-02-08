@@ -10,6 +10,12 @@ class SSCE_Config {
             throw new Exception('Unable to load config file');
         }
     }
+
+    public function __get($sKey){
+        if (isset($this->_aData->$sKey)){
+            return $this->_aData->$sKey;
+        }
+    }
     
     public function getData() {
         return $this->_aData;

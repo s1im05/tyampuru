@@ -94,9 +94,9 @@
                 </div>
                 
                 <div class="row">
-                    <div class="col-xs-10 col-sm-5 col-md-12 col-xs-offset-1 col-sm-offset-0">
+                    <div class="col-xs-12 col-sm-5 col-md-12">
                         <!-- VK Widget -->
-                        <div class="b-post h-shadow">
+                        <div class="b-post h-shadow b-vk">
                             <div class="b-post__panel">
                                 <p class="b-post__title b-post__title-small">Подпишись на новости в группе</p>
                             </div>

@@ -49,7 +49,9 @@ class SSCE_Application {
         $this->getDb()->setIdentPrefix($this->getConfig()->db->table_prefix);
         $this->getDb()->query("SET NAMES utf8");
 
-        $this->_oRequest    = new SSCE_Request($this->getConfig()->routes);
+        $oRoutesConfig  = new SSCE_Config($_SERVER['DOCUMENT_ROOT'].$this->getConfig()->router->path);
+        
+        $this->_oRequest    = new SSCE_Request($oRoutesConfig->routes);
         $this->_oDirector   = new SSCE_Director(array(
             'db'        => $this->getDb(),
             'config'    => $this->getConfig(),

@@ -197,6 +197,9 @@ a:hover, a:focus {
     .b-comment__last:last-child {
         margin-bottom: 0em;
     }
+.b-vk {
+    overflow: hidden;
+}
 
 /* old tyampuru */
 .b-post-image_text {

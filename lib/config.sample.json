@@ -27,71 +27,7 @@
         "sec":  "",
         "url":  "http://loginza.ru/api/authinfo"
     },
-    "routes": [
-        {
-            "path": "\\/404",
-            "controller": "error",
-            "action": "error404",
-            "header": "HTTP/1.0 404 Not Found"
-        },{
-            "path": "\\/",
-            "controller": "chapter",
-            "action": "all"
-        },{
-            "path": "\\/home",
-            "controller": "home",
-            "action": "index"
-        },{
-            "path": "\\/page\\/(\\d+)",
-            "controller": "chapter",
-            "action": "all",
-            "params": ["page"]
-        },{
-            "path": "\\/chapter\\/([A-Za-z_-]{2,})",
-            "controller": "chapter",
-            "action": "byName",
-            "params": ["name"]
-        },{
-            "path": "\\/chapter\\/([A-Za-z_-]{2,})\\/page\\/(\\d+)",
-            "controller": "chapter",
-            "action": "byName",
-            "params": ["name","page"]
-        },{
-            "path": "\\/post\\/(\\d+)\\/?(.+)?",
-            "controller": "post",
-            "action": "byId",
-            "params": ["id","name"]
-        },{
-            "path": "\\/like\\/(\\d+)",
-            "controller": "post",
-            "action": "like",
-            "params": ["id"],
-            "header": "Content-type: application/json; charset=UTF-8"
-        },{
-            "path": "\\/dislike\\/(\\d+)",
-            "controller": "post",
-            "action": "dislike",
-            "params": ["id"],
-            "header": "Content-type: application/json; charset=UTF-8"
-        },{
-            "path": "\\/search\\/(.{3,255})",
-            "controller": "search",
-            "action": "search",
-            "params": ["query"]
-        },{
-            "path": "\\/tag\\/(.{3,255})",
-            "controller": "search",
-            "action": "searchByTag",
-            "params": ["query"]
-        },{
-            "path": "\\/logout",
-            "controller": "chapter",
-            "action": "all"
-        },{
-            "path": "\\/rss",
-            "controller": "rss",
-            "action": "rss",
-            "header": "Content-type: application/xhtml+xml; charset=UTF-8"
-        }
-    ]
+    "router": {
+        "path": "/lib/routes.json"
+    }
 }

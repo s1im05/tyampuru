@@ -68,6 +68,14 @@
         }).on('click tap', '.b-comment__logout', function(e){ //  show login text
             e.preventDefault();
             $(this).next('p').removeClass('hidden').end().remove();
-        });
+        }).on('click tap', '.b-btn__ajaxpage', function(e){ // load page via ajax
+                var iPage       = $(this).data('page'),
+                    sUrl        = $(this).data('url'),
+                    jqMessage   = $('<p class="text-muted"><i class="fa fa-spinner fa-spin" />&nbsp; Загружается, подождите...</p>');
+                $(this).replaceWith(jqMessage);
+                $.post(sUrl+'/'+iPage, {}, function(data){
+                    jqMessage.replaceWith(data);
+                });
+            });;
     });    
 })(window, jQuery);
