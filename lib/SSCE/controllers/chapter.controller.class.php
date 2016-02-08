@@ -11,7 +11,7 @@ class Chapter_Controller extends Controller {
     }
     
     public function byNameAction($sChapter, $iPage = 1){
-        if ($aChapters  = $this->getView()->getVar('aChapters')){
+        if ($aChapters  = $this->view->getVar('aChapters')){
             foreach ($aChapters as $aVal){
                 if ($aVal['class'] === $sChapter){
                 $this->setTitle("Прикольные картинки и гифки из раздела &laquo;{$aVal['title']}&raquo;");
@@ -24,18 +24,18 @@ class Chapter_Controller extends Controller {
     
     
     private function _process($sChapter, $iPage){
-        $oChapter   = new Chapter_Model($this->getDb(), $this->getConfig());
+        $oChapter   = new Chapter_Model($this->options);
         $oChapter->setChapter($sChapter)->setPage($iPage);
         
         $aPosts     = $oChapter->getPosts();
-        $iPageCount = (int)ceil($oChapter->getPostsCount()/$this->getConfig()->project->postsppage);
+        $iPageCount = (int)ceil($oChapter->getPostsCount()/$this->config->project->postsppage);
         if ($oChapter->getPage() > $iPageCount) {
-            $this->getRequest()->go404();
+            $this->request->go404();
         }
 
-        $this->assign('sChapter',       $sChapter);
-        $this->assign('aPostList',      $aPosts);
-        $this->assign('iPageActive',    $oChapter->getPage());
-        $this->assign('iPagesCount',    $iPageCount);
+        $this->view->assign('sChapter',       $sChapter);
+        $this->view->assign('aPostList',      $aPosts);
+        $this->view->assign('iPageActive',    $oChapter->getPage());
+        $this->view->assign('iPagesCount',    $iPageCount);
     }
 }

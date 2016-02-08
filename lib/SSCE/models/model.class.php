@@ -1,30 +1,15 @@
 <?php
-class Model {
+class Model extends Base {
     
-    protected $_oDb;
-    protected $_oConfig;
     protected $_sTable;
     protected $_sIdField    = 'id';
     
     private $_aData = array();
  
-    public function __construct($oDb, $oConfig){
-        $this->_oDb        = $oDb;
-        $this->_oConfig    = $oConfig;
-    }
-    
-    public function getDb(){
-        return $this->_oDb;
-    }
-    
-    public function getConfig(){
-        return $this->_oConfig;
-    }
-    
     public function __set($sAttr, $mValue){
         switch ($sAttr) {
             case $this->_sIdField: 
-                $this->_aData  = $this->getDb()->selectRow("SELECT * FROM ?_".$this->_sTable." WHERE `".$this->_sIdField."`  = ?d LIMIT 1;", $mValue);
+                $this->_aData  = $this->db->selectRow("SELECT * FROM ?_".$this->_sTable." WHERE `".$this->_sIdField."`  = ?d LIMIT 1;", $mValue);
             break;
             default:
                 $this->_aData[$sAttr]   = $mValue;
@@ -32,6 +17,10 @@ class Model {
     }
     
     public function __get($sAttr){
+        $mGet   = parent::__get($sAttr);
+        if ($mGet !== null) {
+            return $mGet;
+        }
         switch ($sAttr) {
             case 'data':
                 return $this->_aData;

@@ -11,16 +11,16 @@ class Search_Controller extends Controller {
         $sQuery = trim($sQuery);
         $this->setTitle('Поиск по запросу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
         
-        $this->getView()->assign('sChapter',    'all');
-        $this->getView()->assign('aPostList',   $this->_doSearch($sQuery));
+        $this->view->assign('sChapter',    'all');
+        $this->view->assign('aPostList',   $this->_doSearch($sQuery));
     }
     
     public function searchByTagAction($sQuery){
         $sQuery = trim($sQuery);
         $this->setTitle('Поиск по тэгу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
         
-        $this->getView()->assign('sChapter',    'all');
-        $this->getView()->assign('aPostList',   $this->_doSearch($sQuery, true));
+        $this->view->assign('sChapter',    'all');
+        $this->view->assign('aPostList',   $this->_doSearch($sQuery, true));
     }
     
     private function _doSearch($sQuery, $bByTagOnly = false){
@@ -38,7 +38,7 @@ class Search_Controller extends Controller {
                 $aWords[]   = $sText;
             }
             if (!empty($aWords)){
-                if ($aData  = $this->getDB()->select("SELECT
+                if ($aData  = $this->db->select("SELECT
                                                             p.*,
                                                             c.class AS chapter_name,
                                                             c.title AS chapter_title

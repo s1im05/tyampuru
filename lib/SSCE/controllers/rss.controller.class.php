@@ -8,7 +8,7 @@ class Rss_Controller extends Controller {
         $aRss   = array(
             'title'         => 'Тямпуру! Все только самое отборное и интересное!',
             'description'   => '',
-            'items'         => $this->getDb()->select("SELECT
+            'items'         => $this->db->select("SELECT
                                                             p.id,
                                                             p.title,
                                                             p.announce AS description,
@@ -27,7 +27,7 @@ class Rss_Controller extends Controller {
                 $aRss['items'][$iKey]['tags']           = prepareTags($aVal['tags']);
             }
         }
-        $this->getView()->assign('aRss', $aRss);
+        $this->view->assign('aRss', $aRss);
     }
 
 }

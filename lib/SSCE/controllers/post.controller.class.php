@@ -7,13 +7,13 @@ class Post_Controller extends Controller {
 
     public function byIdAction($iPostId, $sName = ''){
         
-        $oUser   = new User_Model($this->getDb(), $this->getConfig());
+        $oUser   = new User_Model($this->options);
         $this->_getComments($iPostId, $oUser);
         
-        $oPost      = new Post_Model($this->getDb(), $this->getConfig());
+        $oPost      = new Post_Model($this->options);
         $oPost->id  = $iPostId;
         
-        $oChapter       = new Chapter_Model($this->getDb(), $this->getConfig());
+        $oChapter       = new Chapter_Model($this->options);
         $oChapter->id   = $oPost->chapter_id;
 
         $oPost->chapter_name    = $oChapter->class;
@@ -21,17 +21,17 @@ class Post_Controller extends Controller {
         
         
         if ($oUser->isLogged()){ // check if post liked
-            $oPost->like_state    = $this->getDb()->selectCell("SELECT state FROM ?_posts__likes WHERE state = 1 AND post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id);
+            $oPost->like_state    = $this->db->selectCell("SELECT state FROM ?_posts__likes WHERE state = 1 AND post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id);
         }
 
         $this->setTitle($oPost->chapter_title.' &ndash; '.$oPost->title);
-        $this->getView()->assign('sChapter',    $oChapter->class);
-        $this->getView()->assign('aPost',       $oPost->data);
+        $this->view->assign('sChapter',    $oChapter->class);
+        $this->view->assign('aPost',       $oPost->data);
     }
     
     private function _getComments($iPostId, $oUser){
         if ($oUser->isLogged() && isset($_POST['comment']) && trim($_POST['comment'])){
-            $iId    = $this->getDb()->query("INSERT INTO 
+            $iId    = $this->db->query("INSERT INTO 
                                                     ?_comments 
                                                 SET
                                                     post_id     = ?d,
@@ -40,9 +40,9 @@ class Post_Controller extends Controller {
                                                 $iPostId,
                                                 $oUser->id,
                                                 trim($_POST['comment']) );
-            $this->getView()->assign('bCommentAdded',   true);
+            $this->view->assign('bCommentAdded',   true);
         }
-        $aCommentList   = $this->getDb()->select("SELECT 
+        $aCommentList   = $this->db->select("SELECT 
                                                         c.*,
                                                         u.nickname,
                                                         u.gender,
@@ -56,7 +56,7 @@ class Post_Controller extends Controller {
                                                     ORDER BY
                                                         c.id;",
                                                     $iPostId);
-        $this->getView()->assign('aCommentList', $aCommentList);
+        $this->view->assign('aCommentList', $aCommentList);
     }
     
     
@@ -70,21 +70,21 @@ class Post_Controller extends Controller {
     }
     
     private function _statusChange($iPostId, $bLike){
-        $oUser   = new User_Model($this->getDb(), $this->getConfig());
+        $oUser   = new User_Model($this->options);
         if (!$oUser->isLogged()){
-            $this->getRequest()->go404();
+            $this->request->go404();
         }
         
-        if ($aRow  = $this->getDb()->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id)){
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = ?d, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $bLike ? 1 : 0, $iPostId, $oUser->id);
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + ?d WHERE id = ?d LIMIT 1;", $bLike ? 1 : -1, $iPostId);
+        if ($aRow  = $this->db->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id)){
+            $this->db->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = ?d, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $bLike ? 1 : 0, $iPostId, $oUser->id);
+            $this->db->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + ?d WHERE id = ?d LIMIT 1;", $bLike ? 1 : -1, $iPostId);
         } elseif ($bLike) {
-            $this->getDb()->query("INSERT INTO ?_posts__likes SET state = 1, cdate = NOW(), post_id = ?d, user_id = ?d;", $iPostId, $oUser->id);
-            $this->getDb()->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + 1 WHERE id = ?d LIMIT 1;", $iPostId);
+            $this->db->query("INSERT INTO ?_posts__likes SET state = 1, cdate = NOW(), post_id = ?d, user_id = ?d;", $iPostId, $oUser->id);
+            $this->db->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + 1 WHERE id = ?d LIMIT 1;", $iPostId);
         }
-        $iCnt   = $this->getDb()->selectCell("SELECT likes FROM ?_posts WHERE id = ?d LIMIT 1;", $iPostId);
+        $iCnt   = $this->db->selectCell("SELECT likes FROM ?_posts WHERE id = ?d LIMIT 1;", $iPostId);
 
         $this->setLayout('ajax.php');
-        $this->getView()->assign('sRequest', $iCnt);
+        $this->view->assign('sRequest', $iCnt);
     }
 }

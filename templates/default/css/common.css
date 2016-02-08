@@ -74,6 +74,10 @@ a:hover, a:focus {
     font-size: 1.5em;
     font-weight: bold;
 }
+    .b-post__title-small {
+        font-size: 1.15em;
+        margin-bottom: 0
+    }
 .b-post__data {
     background: #fff;
     padding: .5em 1em 1em 1em;
@@ -187,13 +191,12 @@ a:hover, a:focus {
 .b-likepost {
     height: 100px;
 }
-.b-vk {
-    background: #fff;
-    padding: 5px;
+.b-comment__last {
+    margin-bottom: 2em;
 }
-.b-vk__widget, .b-vk__widget > iframe {
-    width: 100% !important;
-}
+    .b-comment__last:last-child {
+        margin-bottom: 0em;
+    }
 
 /* old tyampuru */
 .b-post-image_text {

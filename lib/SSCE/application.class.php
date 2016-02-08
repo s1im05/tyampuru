@@ -37,6 +37,8 @@ class SSCE_Application {
             }
         }
         
+        require_once 'base.class.php';
+        
         $this->_oConfig = new SSCE_Config($this->_sConfigFile);
         setlocale(LC_ALL , $this->getConfig()->project->locale);
         $this->_oView   = new SSCE_View($this->getConfig()->templates->path);

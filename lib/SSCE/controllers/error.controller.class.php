@@ -2,7 +2,7 @@
 class Error_Controller extends Controller {
     
     public function indexAction(){
-        $aPath = $this->getRequest()->getPath();
+        $aPath = $this->request->getPath();
         switch ($aPath[0]) {
             case '403':
                 $this->error403Action();

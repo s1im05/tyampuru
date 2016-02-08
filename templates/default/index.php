@@ -93,13 +93,42 @@
                     <a href="/rss" class="list-group-item"><i class="fa fa-fw fa-rss-square"></i> RSS-лента свежих постов</a>
                 </div>
                 
-                <!-- VK Widget -->
-                <div class="h-shadow b-vk">
-                    <div id="vk_groups" class="b-vk__widget"></div>
+                <div class="row">
+                    <div class="col-xs-10 col-sm-5 col-md-12 col-xs-offset-1 col-sm-offset-0">
+                        <!-- VK Widget -->
+                        <div class="b-post h-shadow">
+                            <div class="b-post__panel">
+                                <p class="b-post__title b-post__title-small">Подпишись на новости в группе</p>
+                            </div>
+                            <div class="b-post__data">
+                                <div id="vk_groups" class="center-block b-vk__widget"></div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            VK.Widgets.Group("vk_groups", {mode: 0, width:"200px", height: "300", color1: 'F3EAD3', color2: '9C5E39', color3: '9C5E39'}, 34237015);
+                        </script>
+                    </div>
+                    <? if ($aCommentsLast) :?>
+                    <div class="col-sm-7 col-xs-12 col-md-12">
+                        <div class="b-post h-shadow">
+                            <div class="b-post__panel">
+                                <p class="b-post__title b-post__title-small">Последние сообщения пользователей</p>
+                            </div>
+                            <div class="b-post__data">
+                                <? foreach ($aCommentsLast as $aComment) :?>
+                                    <p class="b-comment__last">
+                                        <span class="text-muted"><?=date2ru($aComment['cdate'], true)?></span><br />
+                                        <strong><?=htmlspecialchars($aComment['nickname'])?></strong> &rarr;
+                                        <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$aComment['title']?></a><br />
+                                        <?=htmlspecialchars(trim($aComment['text']))?><br />
+                                        
+                                    </p>
+                                <? endforeach;?>
+                            </div>
+                        </div>
+                    </div>
+                    <? endif;?>
                 </div>
-                <script type="text/javascript">
-                    VK.Widgets.Group("vk_groups", {mode: 0, width:"200px", height: "300", color1: 'F3EAD3', color2: '9C5E39', color3: '9C5E39'}, 34237015);
-                </script>
             </aside>
         </div>
 

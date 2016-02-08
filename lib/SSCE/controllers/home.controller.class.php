@@ -8,16 +8,16 @@ class Home_Controller extends Controller {
 
 
     public function indexAction(){
-        $oUser   = new User_Model($this->getDb(), $this->getConfig());
+        $oUser   = new User_Model($this->options);
         if (!$oUser->isLogged()){
-            $this->getRequest()->go('/');
+            $this->request->go('/');
         }
         
         if (isset($_POST['save'])){
             $this->_save();
         }
         
-        $aLikes = $this->getDb()->select("SELECT
+        $aLikes = $this->db->select("SELECT
                                                 p.*,
                                                 pl.cdate AS like_date
                                             FROM
@@ -33,7 +33,7 @@ class Home_Controller extends Controller {
                                             $oUser->id,
                                             $this->_iLimit);
                                             
-        $aComments  = $this->getDb()->select("SELECT
+        $aComments  = $this->db->select("SELECT
                                                     c.*,
                                                     p.title,
                                                     p.thumb
@@ -50,8 +50,8 @@ class Home_Controller extends Controller {
                                                 $this->_iLimit);
         
         $this->setTitle('Домашняя страница');
-        $this->getView()->assign('aPostList',       $aLikes);
-        $this->getView()->assign('aCommentList',    $aComments);
+        $this->view->assign('aPostList',       $aLikes);
+        $this->view->assign('aCommentList',    $aComments);
     }
     
     private function _save(){
@@ -59,7 +59,7 @@ class Home_Controller extends Controller {
         if ($sNickname){
             $_SESSION['user']['nickname'] = $sNickname;
         } else {
-            $this->getView()->assign('sError', 'Ошибка сохранения поля "Никнейм"');
+            $this->view->assign('sError', 'Ошибка сохранения поля "Никнейм"');
             return;
         }
         
@@ -67,11 +67,11 @@ class Home_Controller extends Controller {
         if (in_array($_POST['gender'], array('M','F','U'))){
             $_SESSION['user']['gender'] = $cGender;
         } else {
-            $this->getView()->assign('sError', 'Ошибка сохранения поля "Пол"');
+            $this->view->assign('sError', 'Ошибка сохранения поля "Пол"');
             return;
         }
         
-        $this->getDb()->query("UPDATE LOW_PRIORITY ?_users SET nickname = ?, gender = ? WHERE id = ?d LIMIT 1;", $sNickname, $cGender, $_SESSION['user']['id']);
-        $this->getView()->assign('sSuccess', 'Успешно сохранено');
+        $this->db->query("UPDATE LOW_PRIORITY ?_users SET nickname = ?, gender = ? WHERE id = ?d LIMIT 1;", $sNickname, $cGender, $_SESSION['user']['id']);
+        $this->view->assign('sSuccess', 'Успешно сохранено');
     }
 }
