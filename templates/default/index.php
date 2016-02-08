@@ -8,14 +8,14 @@
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?v=2" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?v=3" />
     
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?=$path?>/js/common.js?v=2"></script>
+    <script type="text/javascript" src="<?=$path?>/js/common.js?v=3"></script>
     
     <script type="text/javascript" src="//loginza.ru/js/widget.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?115"></script>
