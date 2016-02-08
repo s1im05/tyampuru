@@ -46,6 +46,13 @@
                     }
                     $('#tmp_spinner').replaceWith('<i data-id="'+id+'" class="fa fa-heart-o b-like b-like-on" />');
                 }).error(function(){w.location.href = '/404'});
+                
+                if ($('#likes > .b-btn__ajaxpage').length){ // for home page
+                    $('#likes > .b-btn__ajaxpage').html('<i class="fa fa-refresh"></i>&nbsp; Обновить список').on('tap click', function(e){
+                        e.stopPropagation();
+                        w.location.href = '/home';
+                    });
+                }
             }
         }).on('click tap', '.nav.tabs_js > li > a', function(e){ //  tabs click
             e.preventDefault();
@@ -59,11 +66,17 @@
             e.preventDefault();
             var id      = $(this).data('id');
             if (id!== u){
-                $(this).closest('.media').remove();
-                if ($('#likes .media').length == 0){
-                    $('#likes').html('<p>Вы еще не поставили ни одного "лайка"</p>');
-                }
                 $.get('/dislike/'+$(this).data('id'), {}, function(data){});
+                
+                $(this).closest('.b-post__data').remove();
+                if ($('#likes > .b-btn__ajaxpage').length){
+                    $('#likes > .b-btn__ajaxpage').html('<i class="fa fa-refresh"></i>&nbsp; Обновить список').on('tap click', function(e){
+                        e.stopPropagation();
+                        w.location.href = '/home';
+                    });
+                } else if ( $('#likes > .b-post__data').length === 0){
+                    $('#likes').append('<p class="panel panel-body h-shadow">Вы еще не поставили ни одного лайка</p>');
+                }
             }
         }).on('click tap', '.b-comment__logout', function(e){ //  show login text
             e.preventDefault();
@@ -74,10 +87,10 @@
         }).on('click tap', '.b-btn__ajaxpage', function(e){ // load page via ajax
             var iPage       = $(this).data('page'),
                 sUrl        = $(this).data('url'),
-                jqMessage   = $('<p class="text-muted"><i class="fa fa-spinner fa-spin" />&nbsp; Загружается, подождите...</p>');
-            $(this).replaceWith(jqMessage);
+                jqThis      = $(this).prop('disabled', true).find('.fa').addClass('fa-spin').end();
+
             $.post(sUrl+'/'+iPage, {}, function(data){
-                jqMessage.replaceWith(data);
+                jqThis.replaceWith(data);
             });
         }).on('click tap', '.btn-radio > .btn', function(e){ // btn group => radio btns
             var jqParent    = $(this).parent('.btn-radio');

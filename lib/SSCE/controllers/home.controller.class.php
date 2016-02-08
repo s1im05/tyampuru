@@ -17,12 +17,18 @@ class Home_Controller extends Controller {
             $this->_save();
         }
         
+        if (isset($_POST['view_type'])){
+            $sType  = $_POST['view_type'] == 'list' ? 'list':'thumb';
+            setcookie('vt', $sType, strtotime('+30 days'), '/', '', false, true);
+            $this->view->assign('sViewType', $sType);
+        } else {
+            $this->view->assign('sViewType', isset($_COOKIE['vt'])?($_COOKIE['vt']=='list' ? 'list':'thumb'):'thumb');
+        }
+        
         $this->setTitle('Домашняя страница');
     }
     
     public function getCommentAction($iPage){
-        $this->setLayout('ajax_template.php');
-        $this->setTemplate('home_list_comments.php');
         
         $oUser   = new User_Model($this->options);
         if (!$oUser->isLogged()){
@@ -45,6 +51,9 @@ class Home_Controller extends Controller {
                                                 $oUser->id,
                                                 $iPage*$this->_iLimit,
                                                 $this->_iLimit);
+                                                
+        $this->setLayout('ajax_template.php');
+        $this->setTemplate('home_list_comments.php');
         
         $this->view->assign('aCommentList',     $aComments);
         $this->view->assign('iPage',            $iPage);
@@ -52,8 +61,6 @@ class Home_Controller extends Controller {
     }
     
     public function getLikeAction($iPage){
-        $this->setLayout('ajax_template.php');
-        $this->setTemplate('home_list_likes.php');
         
         $oUser   = new User_Model($this->options);
         if (!$oUser->isLogged()){
@@ -62,12 +69,17 @@ class Home_Controller extends Controller {
         
         $aLikes = $this->db->selectPage($iCnt,"SELECT
                                                     p.*,
-                                                    pl.cdate AS like_date
+                                                    c.title AS chapter_title,
+                                                    c.class AS chapter_name,
+                                                    pl.cdate AS like_date,
+                                                    true AS like_state
                                                 FROM
                                                     ?_posts p,
+                                                    ?_chapters c,
                                                     ?_posts__likes pl
                                                 WHERE
                                                     p.id        = pl.post_id AND
+                                                    c.id        = p.chapter_id AND
                                                     pl.user_id  = ?d AND
                                                     pl.state    = 1
                                                 ORDER BY
@@ -76,9 +88,14 @@ class Home_Controller extends Controller {
                                                 $oUser->id,
                                                 $iPage*$this->_iLimit,
                                                 $this->_iLimit);
+                                                
+        $this->setLayout('ajax_template.php');
+        $this->setTemplate('home_list_likes.php');
+                                                
         $this->view->assign('aPostList',    $aLikes);
         $this->view->assign('iPage',        $iPage);
         $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $iCnt);
+        $this->view->assign('sViewType', isset($_COOKIE['vt'])?($_COOKIE['vt']=='list' ? 'list':'thumb'):'thumb');
     }
     
     private function _save(){
