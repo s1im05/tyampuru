@@ -8,14 +8,14 @@
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?v=7" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?v=8" />
     
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?=$path?>/js/common.js?v=7"></script>
+    <script type="text/javascript" src="<?=$path?>/js/common.js?v=8"></script>
     
     <script type="text/javascript" src="//loginza.ru/js/widget.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?115"></script>
@@ -24,45 +24,54 @@
     <header class="b-header clearfix">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4 col-xs-9">
+                <div class="col-sm-4 hidden-xs">
                     <? if ($bIsLogged) :?>
                         <div class="media">
                             <div class="media-left">
-                                <a href="/home">
-                                    <img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>">
-                                </a>
+                                <a href="/home"><img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>"></a>
                             </div>
-                            <div class="media-body">
+                            <div class="media-body hidden-xs">
                                 <h4 class="media-heading"><a class="b-header__link-white" href="/home"><?=htmlspecialchars($_SESSION['user']['nickname'])?></a></h4>
                                 <i class="fa fa-sign-out b-header__link"></i>&nbsp;<a class="b-header__link" href="/logout">выйти</a>
                             </div>
                         </div>
                     <? else :?>
-                        <a id="sign_in_btn" href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
+                        <div class="b-headerform">
+                            <a id="sign_in_btn" href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
+                        </div>
                     <? endif;?>
                     <p class="visible-xs"></p>
                 </div>
-                <div class="col-xs-3 visible-xs">
-                    <div class="pull-right dropdown">
-                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
+                <div class="col-sm-8 col-xs-12 text-right">
+                    <? if ($bIsLogged) :?>
+                    <div class="pull-left dropdown visible-xs">
+                        <a href="/home"><img class="media-object b-avatar" src="<?=$_SESSION['user']['photo']?$_SESSION['user']['photo']:$path.'/img/user.jpg'?>"></a>
+                    </div>
+                    <? endif;?>
+                    <div class="pull-right dropdown visible-xs b-headerform">
+                        &nbsp;
+                        <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
                         <ul class="dropdown-menu">
                             <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
                             <? foreach ($aChapters as $aVal) :?>
                                 <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                             <? endforeach;?>
+                            <li role="separator" class="divider"></li>
+                            <? if ($bIsLogged) :?>
+                                <li role="presentation"><a href="/home">Личный кабинет</a></li>
+                                <li role="presentation"><a href="/logout">Выйти</a></li>
+                            <? else :?>
+                                <li role="presentation"><a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="loginza">Вход / регистрация</a></li>
+                            <? endif;?>
                         </ul>
                     </div>
-                </div>
-                <div class="col-sm-8 col-xs-12 text-right">
-                    <form class="form-inline" method="post" action="/search" id="search">
-                        <div class="form-group">
-                            <span class="hidden-xs">
-                                например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a> &nbsp; 
-                            </span>
-                            <div class="input-group">
-                                <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
-                                <span id="search_btn" class="input-group-addon btn b-search__btn">найти</span>
-                            </div>
+                    <form class="form-inline b-headerform" method="post" action="/search" id="search">
+                        <span class="hidden-xs">
+                            например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a> &nbsp; 
+                        </span>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
+                            <span id="search_btn" class="input-group-addon btn b-search__btn">найти</span>
                         </div>
                     </form>
                 </div>
@@ -157,7 +166,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <p>&nbsp;</p>
-                    <p><strong>2012–<?=date('Y')?> &copy;</strong> Смешные комиксы, фотографии красивых девушек, веселые гифки, отборные коубы, приколы, игры и много чего еще самого интересного из сети</p>
+                    <p><strong>2014–<?=date('Y')?> &copy;</strong> Смешные комиксы, фотографии красивых девушек, веселые гифки, отборные коубы, приколы, игры и много чего еще самого интересного из сети</p>
                 </div>
             </div>
         </footer>

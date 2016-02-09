@@ -18,7 +18,6 @@ a:hover, a:focus {
 .b-header {
     background: url(../img/bg_dark.png);
     color: #fff;
-    padding: .6em 0;
 }
 .b-header__link, .b-header__link:hover {
     color: #E1C785;
@@ -170,6 +169,7 @@ a:hover, a:focus {
 .b-avatar {
     width: 50px;
     max-height: 50px;
+    margin-right: .5em;
 }
 .b-like {
     cursor: pointer;
@@ -199,6 +199,12 @@ a:hover, a:focus {
     }
 .b-vk {
     overflow: hidden;
+}
+.b-btn__ajaxpage {
+    margin-bottom: 4em;
+}
+.b-headerform {
+    padding: .65em 0;
 }
 
 /* old tyampuru */
