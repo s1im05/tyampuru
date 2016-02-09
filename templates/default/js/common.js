@@ -97,6 +97,17 @@
             $(jqParent.data('target')).val($(this).data('value'));
             jqParent.find('.btn.btn-primary').toggleClass('btn-primary btn-default');
             $(this).toggleClass('btn-primary btn-default');
+        }).on('keypress', 'form', function(e){ // submit all forms on ctrl+enter
+            if (e.ctrlKey && e.keyCode === 13){
+                $(this).submit();
+            }
+        }).on('keypress', function(e){
+            if (e.ctrlKey && e.keyCode === 37){ // larr
+                $('.pagination:first > .active').prev('li').find('a')[0].click();
+            }
+            if (e.ctrlKey && e.keyCode === 39){ // rarr
+                $('.pagination:first > .active').next('li').find('a')[0].click();
+            }
         });
     });    
 })(window, jQuery);
