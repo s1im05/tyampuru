@@ -1,5 +1,4 @@
 (function(w, $, u){
-    
     $(function(){
         $('#search_btn').on('click', function(e){
             e.preventDefault();
@@ -101,7 +100,7 @@
             if (e.ctrlKey && e.keyCode === 13){
                 $(this).submit();
             }
-        }).on('keypress', function(e){
+        }).on('keydown', 'body', function(e){
             if (e.ctrlKey && e.keyCode === 37){ // larr
                 $('.pagination:first > .active').prev('li').find('a')[0].click();
             }
