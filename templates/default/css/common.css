@@ -200,11 +200,11 @@ a:hover, a:focus {
 .b-vk {
     overflow: hidden;
 }
-.b-btn__ajaxpage {
-    margin-bottom: 4em;
-}
 .b-headerform {
     padding: .65em 0;
+}
+.b-main {
+    margin-bottom: 4em;
 }
 
 /* old tyampuru */

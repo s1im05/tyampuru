@@ -77,7 +77,6 @@
             </div>
         </div>
     </div>
-    <p>&nbsp;</p>
 </main>
 <script type="text/javascript">
     (function(w,$,u){
