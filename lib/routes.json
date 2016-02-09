@@ -61,6 +61,16 @@
             "action": "search",
             "params": ["query"]
         },{
+            "path": "\\/search_ajax\\/(.{3,255})\\/(\\d+)",
+            "controller": "search",
+            "action": "searchAjax",
+            "params": ["query","page"]
+        },{
+            "path": "\\/search_tag_ajax\\/(.{3,255})\\/(\\d+)",
+            "controller": "search",
+            "action": "searchByTagAjax",
+            "params": ["query","page"]
+        },{
             "path": "\\/tag\\/(.{3,255})",
             "controller": "search",
             "action": "searchByTag",

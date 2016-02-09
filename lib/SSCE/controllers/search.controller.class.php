@@ -11,19 +11,37 @@ class Search_Controller extends Controller {
         $sQuery = trim($sQuery);
         $this->setTitle('Поиск по запросу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
         
-        $this->view->assign('sChapter',    'all');
-        $this->view->assign('aPostList',   $this->_doSearch($sQuery));
+        $this->view->assign('sChapter', 'all');
+        $this->view->assign('sQuery',   $sQuery);
+        $this->view->assign('bByTag',   false);
     }
+    
+    public function searchAjaxAction($sQuery, $iPage, $bByTag = false){
+        
+        $aFound = $this->_doSearch($sQuery, $iPage, $bByTag);
+
+        $this->view->assign('iPage',        $iPage);
+        $this->view->assign('aPostList',    $aFound['data']);
+        $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $aFound['total']);
+        $this->view->assign('sQuery',       $sQuery);
+        
+        $this->setTemplate('search_list.php');
+        $this->setLayout('ajax_template.php');
+    }
+    
+    public function searchByTagAjaxAction($sQuery, $iPage){
+        $this->searchAjaxAction($sQuery, $iPage, true);
+    }
+    
     
     public function searchByTagAction($sQuery){
-        $sQuery = trim($sQuery);
+        $this->searchAction($sQuery);
         $this->setTitle('Поиск по тэгу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
-        
-        $this->view->assign('sChapter',    'all');
-        $this->view->assign('aPostList',   $this->_doSearch($sQuery, true));
+        $this->view->assign('bByTag',   true);
     }
     
-    private function _doSearch($sQuery, $bByTagOnly = false){
+    
+    private function _doSearch($sQuery, $iPage = 0, $bByTagOnly = false){
         if (isset($sQuery)){
             $sText  = substr(trim($sQuery), 0, 50);
             $aWords = array();
@@ -38,27 +56,36 @@ class Search_Controller extends Controller {
                 $aWords[]   = $sText;
             }
             if (!empty($aWords)){
-                if ($aData  = $this->db->select("SELECT
-                                                            p.*,
-                                                            c.class AS chapter_name,
-                                                            c.title AS chapter_title
-                                                        FROM
-                                                            ?_posts p,
-                                                            ?_chapters c
-                                                        WHERE
-                                                            c.id    = p.chapter_id AND
-                                                            (
-                                                                p.tags LIKE '%".implode("%' OR tags LIKE '%", $aWords)."%'
-                                                                ".(!$bByTagOnly ? "OR p.title LIKE '%".implode("%' OR title LIKE '%", $aWords)."%'" : '' )."
-                                                            ) AND
-                                                            p.cdate < NOW()
-                                                        ORDER BY
-                                                            RAND()
-                                                        LIMIT ?d;", $this->_iLimit)){
-                    return $aData;
+                if ($aData  = $this->db->selectPage($iCnt, 
+                                                    "SELECT
+                                                        p.*,
+                                                        c.class AS chapter_name,
+                                                        c.title AS chapter_title
+                                                    FROM
+                                                        ?_posts p,
+                                                        ?_chapters c
+                                                    WHERE
+                                                        c.id    = p.chapter_id AND
+                                                        (
+                                                            p.tags LIKE '%".implode("%' OR tags LIKE '%", $aWords)."%'
+                                                            ".(!$bByTagOnly ? "OR p.title LIKE '%".implode("%' OR title LIKE '%", $aWords)."%'" : '' )."
+                                                        ) AND
+                                                        p.cdate < NOW()
+                                                    ORDER BY
+                                                        id DESC
+                                                    LIMIT ?d, ?d;", 
+                                                    $this->_iLimit*$iPage, 
+                                                    $this->_iLimit)){
+                    return array(
+                        'total' => $iCnt, 
+                        'data'  => $aData
+                    );
                 }
             }
-            return null;
+            return array(
+                'total' => 0, 
+                'data'  => array()
+            );
         }
     }
 }
