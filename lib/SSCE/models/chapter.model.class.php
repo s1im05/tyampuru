@@ -73,7 +73,7 @@ class Chapter_Model extends Model {
                 LEFT JOIN
                     ?_posts__likes pl
                 ON
-                    (pl.post_id  = p.id AND pl.user_id = ?)
+                    (pl.post_id  = p.id AND pl.user_id = ?d)
                 LEFT JOIN
                     ?_comments cm
                 ON

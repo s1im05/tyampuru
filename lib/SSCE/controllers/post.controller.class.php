@@ -88,15 +88,20 @@ class Post_Controller extends Controller {
         
         if ($aRow  = $this->db->selectRow("SELECT * FROM ?_posts__likes WHERE post_id = ?d AND user_id = ?d AND state != ?d LIMIT 1;", $iPostId, $oUser->id, $bLike ? 1 : 0)){
             $this->db->query("UPDATE LOW_PRIORITY ?_posts__likes SET state = ?d, cdate = NOW() WHERE post_id = ?d AND user_id = ?d LIMIT 1;", $bLike ? 1 : 0, $iPostId, $oUser->id);
-            $this->db->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + ?d WHERE id = ?d LIMIT 1;", $bLike ? 1 : -1, $iPostId);
-            $aPost['likes'] += $bLike ? 1 : -1;
         } elseif ($bLike) {
             $this->db->query("INSERT INTO ?_posts__likes SET state = 1, cdate = NOW(), post_id = ?d, user_id = ?d;", $iPostId, $oUser->id);
-            $this->db->query("UPDATE LOW_PRIORITY ?_posts SET likes = likes + 1 WHERE id = ?d LIMIT 1;", $iPostId);
-            $aPost['likes'] += 1;
         }
+        
+        $iLikes = (int)$this->db->selectCell("SELECT SUM(state) FROM ?_posts__likes WHERE post_id = ?d GROUP BY post_id", $iPostId);
+        $this->db->query("UPDATE LOW_PRIORITY 
+                                ?_posts 
+                            SET 
+                                likes = ?d
+                            WHERE 
+                                id = ?d 
+                            LIMIT 1;", $iLikes, $iPostId);
 
         $this->setLayout('ajax.php');
-        $this->view->assign('sRequest', $aPost['likes']);
+        $this->view->assign('sRequest', $iLikes);
     }
 }

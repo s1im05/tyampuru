@@ -67,11 +67,17 @@ class Search_Controller extends Controller {
                 if ($aData  = $this->db->selectPage($iCnt, 
                                                     "SELECT
                                                         p.*,
-                                                        c.class AS chapter_name,
-                                                        c.title AS chapter_title
-                                                    FROM
-                                                        ?_posts p,
+                                                        pl.state    AS like_state,
+                                                        c.class     AS chapter_name,
+                                                        c.title     AS chapter_title
+                                                    FROM 
                                                         ?_chapters c
+                                                    JOIN
+                                                        ?_posts p
+                                                    LEFT JOIN
+                                                        ?_posts__likes pl
+                                                    ON
+                                                        (pl.post_id  = p.id AND pl.user_id = ?d)
                                                     WHERE
                                                         c.id    = p.chapter_id AND
                                                         (
@@ -80,8 +86,9 @@ class Search_Controller extends Controller {
                                                         ) AND
                                                         p.cdate < NOW()
                                                     ORDER BY
-                                                        id DESC
-                                                    LIMIT ?d, ?d;", 
+                                                        p.id DESC
+                                                    LIMIT ?d, ?d;",
+                                                    isset($_SESSION['user'])? $_SESSION['user']['id']: 0,
                                                     $this->_iLimit*$iPage, 
                                                     $this->_iLimit)){
                     return array(
