@@ -1,5 +1,5 @@
 <? $bPostFull   = false;?>
-<?foreach($aPostList as $aPost):?>
+<?foreach($aFound['data'] as $aPost):?>
     <?include 'article.php';?>
 <?endforeach;?>
 

@@ -4,26 +4,34 @@ class Search_Controller extends Controller {
     protected $_sTemplate   = 'search.php';
     protected $_sLayout     = 'index.php';
     
-    private $_iLimit    = 50;
+    private $_iLimit    = 25;
 
 
-    public function searchAction($sQuery){
+    public function searchAction($sQuery, $bByTag = false){
         $sQuery = trim($sQuery);
-        $this->setTitle('Поиск по запросу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
+        $iPage  = 0;
         
-        $this->view->assign('sChapter', 'all');
-        $this->view->assign('sQuery',   $sQuery);
-        $this->view->assign('bByTag',   false);
+        $aFound = $this->_getFound($sQuery, 0, $bByTag);
+        
+        $this->view->assign('sChapter',     'all');
+        $this->view->assign('iPage',        $iPage);
+        $this->view->assign('aFound',       $aFound);
+        $this->view->assign('sQuery',       $sQuery);
+        $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $aFound['total']);
+        $this->view->assign('bByTag',       false);
+        
+        $this->setTitle('Поиск по запросу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
     }
     
     public function searchAjaxAction($sQuery, $iPage, $bByTag = false){
         
-        $aFound = $this->_doSearch($sQuery, $iPage, $bByTag);
+        $aFound = $this->_getFound($sQuery, $iPage, $bByTag);
 
         $this->view->assign('iPage',        $iPage);
-        $this->view->assign('aPostList',    $aFound['data']);
-        $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $aFound['total']);
+        $this->view->assign('aFound',       $aFound);
         $this->view->assign('sQuery',       $sQuery);
+        $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $aFound['total']);
+        $this->view->assign('bByTag',       $bByTag);
         
         $this->setTemplate('search_list.php');
         $this->setLayout('ajax_template.php');
@@ -35,13 +43,13 @@ class Search_Controller extends Controller {
     
     
     public function searchByTagAction($sQuery){
-        $this->searchAction($sQuery);
+        $this->searchAction($sQuery, true);
         $this->setTitle('Поиск по тэгу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
-        $this->view->assign('bByTag',   true);
+        $this->view->assign('bByTag', true);
     }
     
     
-    private function _doSearch($sQuery, $iPage = 0, $bByTagOnly = false){
+    private function _getFound($sQuery, $iPage = 0, $bByTagOnly = false){
         if (isset($sQuery)){
             $sText  = substr(trim($sQuery), 0, 50);
             $aWords = array();

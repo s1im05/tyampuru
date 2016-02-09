@@ -99,7 +99,7 @@
         <div class="b-post__tags b-post__footer">
             <?$aTags    = explode("\n", $aPost['tags']);?>
             <?foreach($aTags as $sTag):?>
-                <a href="/tag/<?=urlencode($sTag)?>" class="btn btn-default b-tag"><i class="fa fa-tag"></i> <?=$sTag?></a>
+                <a href="/tag/<?=urlencode(trim($sTag))?>" class="btn btn-default b-tag"><i class="fa fa-tag"></i> <?=$sTag?></a>
             <?endforeach;?>
         </div>
     <?endif;?>
