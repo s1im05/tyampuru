@@ -4,8 +4,6 @@ class Home_Controller extends Controller {
     protected $_sTemplate   = 'home.php';
     protected $_sLayout     = 'index.php';
     
-    private $_iLimit    = 50;
-
 
     public function indexAction(){
         $oUser   = new User_Model($this->options);
@@ -35,6 +33,8 @@ class Home_Controller extends Controller {
             return;
         }
         
+        $iLimit = (int)$this->config->project->postsppage;
+        
         $aComments  = $this->db->selectPage($iCnt,"SELECT
                                                     c.*,
                                                     p.title,
@@ -49,15 +49,15 @@ class Home_Controller extends Controller {
                                                     c.cdate DESC
                                                 LIMIT ?d, ?d",
                                                 $oUser->id,
-                                                $iPage*$this->_iLimit,
-                                                $this->_iLimit);
+                                                $iPage*$iLimit,
+                                                $iLimit);
                                                 
         $this->setLayout('ajax_template.php');
         $this->setTemplate('home_list_comments.php');
         
         $this->view->assign('aCommentList',     $aComments);
         $this->view->assign('iPage',            $iPage);
-        $this->view->assign('bAllLoaded',       ($iPage+1)*$this->_iLimit >= $iCnt);
+        $this->view->assign('bAllLoaded',       ($iPage+1)*$iLimit >= $iCnt);
     }
     
     public function getLikeAction($iPage){
@@ -66,6 +66,8 @@ class Home_Controller extends Controller {
         if (!$oUser->isLogged()){
             return;
         }
+        
+        $iLimit = (int)$this->config->project->postsppage;
         
         $aLikes = $this->db->selectPage($iCnt,"SELECT
                                                     p.*,
@@ -86,15 +88,15 @@ class Home_Controller extends Controller {
                                                     pl.cdate DESC
                                                 LIMIT ?d, ?d",
                                                 $oUser->id,
-                                                $iPage*$this->_iLimit,
-                                                $this->_iLimit);
+                                                $iPage*$iLimit,
+                                                $iLimit);
                                                 
         $this->setLayout('ajax_template.php');
         $this->setTemplate('home_list_likes.php');
                                                 
         $this->view->assign('aPostList',    $aLikes);
         $this->view->assign('iPage',        $iPage);
-        $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $iCnt);
+        $this->view->assign('bAllLoaded',   ($iPage+1)*$iLimit >= $iCnt);
         $this->view->assign('sViewType', isset($_COOKIE['vt'])?($_COOKIE['vt']=='list' ? 'list':'thumb'):'thumb');
     }
     

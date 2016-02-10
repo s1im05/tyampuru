@@ -3,21 +3,20 @@ class Search_Controller extends Controller {
     
     protected $_sTemplate   = 'search.php';
     protected $_sLayout     = 'index.php';
+
     
-    private $_iLimit    = 25;
-
-
     public function searchAction($sQuery, $bByTag = false){
         $sQuery = trim($sQuery);
         $iPage  = 0;
         
         $aFound = $this->_getFound($sQuery, 0, $bByTag);
+        $iLimit = (int)$this->config->project->postsppage;
         
         $this->view->assign('sChapter',     'all');
         $this->view->assign('iPage',        $iPage);
         $this->view->assign('aFound',       $aFound);
         $this->view->assign('sQuery',       $sQuery);
-        $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $aFound['total']);
+        $this->view->assign('bAllLoaded',   ($iPage+1)*$iLimit >= $aFound['total']);
         $this->view->assign('bByTag',       false);
         
         $this->setTitle('Поиск по запросу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
@@ -26,11 +25,12 @@ class Search_Controller extends Controller {
     public function searchAjaxAction($sQuery, $iPage, $bByTag = false){
         
         $aFound = $this->_getFound($sQuery, $iPage, $bByTag);
+        $iLimit = (int)$this->config->project->postsppage;
 
         $this->view->assign('iPage',        $iPage);
         $this->view->assign('aFound',       $aFound);
         $this->view->assign('sQuery',       $sQuery);
-        $this->view->assign('bAllLoaded',   ($iPage+1)*$this->_iLimit >= $aFound['total']);
+        $this->view->assign('bAllLoaded',   ($iPage+1)*$iLimit >= $aFound['total']);
         $this->view->assign('bByTag',       $bByTag);
         
         $this->setTemplate('search_list.php');
@@ -64,6 +64,7 @@ class Search_Controller extends Controller {
                 $aWords[]   = $sText;
             }
             if (!empty($aWords)){
+                $iLimit = (int)$this->config->project->postsppage;
                 if ($aData  = $this->db->selectPage($iCnt, 
                                                     "SELECT
                                                         p.*,
@@ -89,8 +90,8 @@ class Search_Controller extends Controller {
                                                         p.id DESC
                                                     LIMIT ?d, ?d;",
                                                     isset($_SESSION['user'])? $_SESSION['user']['id']: 0,
-                                                    $this->_iLimit*$iPage, 
-                                                    $this->_iLimit)){
+                                                    $iLimit*$iPage, 
+                                                    $iLimit)){
                     return array(
                         'total' => $iCnt, 
                         'data'  => $aData
