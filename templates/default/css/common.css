@@ -176,6 +176,10 @@ a:hover, a:focus {
     color: #c33;
     padding-left: .6em;
 }
+.b-like-spinner {
+    cursor: wait;
+    margin-left: .6em;
+}
 .b-like:hover {
     color: #f66;
 }

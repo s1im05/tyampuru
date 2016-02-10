@@ -21,7 +21,7 @@
         }).on('click tap', '.fa-heart-o.b-like-on', function(e){ // like
             var id      = $(this).data('id');
             if (id!== u){
-                $(this).replaceWith('<i id="tmp_spinner" class="fa fa-spinner fa-spin" />');
+                $(this).replaceWith('<i id="tmp_spinner" class="fa fa-spinner fa-spin b-like-spinner" />');
                 $.get('/like/'+$(this).data('id'), {}, function(data){
                     var jqSup = $('#tmp_spinner').next('.b-likes__count');
                     if (jqSup.length) {
@@ -36,7 +36,7 @@
             var id      = $(this).data('id');
 
             if (id!== u){
-                $(this).replaceWith('<i id="tmp_spinner" class="fa fa-spinner fa-spin" />');
+                $(this).replaceWith('<i id="tmp_spinner" class="fa fa-spinner fa-spin b-like-spinner" />');
                 $.get('/dislike/'+$(this).data('id'), {}, function(data){
                     if (data > 0) {
                         $('#tmp_spinner').next('.b-likes__count').text(data);
