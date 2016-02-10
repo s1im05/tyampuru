@@ -10,7 +10,7 @@
             </h1>
         <? else :?>
             <h2 class="b-post__title">
-                <a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a> 
+                <a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a>
                 <i title="Мне нравится!" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
                 <? if ($aPost['likes'] > 0) :?>
                     <sup class="b-likes__count"><?=$aPost['likes']?></sup>
