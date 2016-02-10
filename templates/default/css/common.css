@@ -206,6 +206,13 @@ a:hover, a:focus {
 .b-main {
     margin-bottom: 4em;
 }
+.b-gotop {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    font-size: 1.5em;
+    opacity: .5;
+}
 
 /* old tyampuru */
 .b-post-image_text {

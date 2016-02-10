@@ -108,5 +108,21 @@
                 $('.pagination:first > .active').next('li').find('a')[0].click();
             }
         });
+        
+        // scrollTop
+        $(w).on('scroll', function(e){
+            w.scrollY > 300 ? $('#gotop').removeClass('hidden') : $('#gotop').addClass('hidden');
+        }).trigger('scroll');
+        
+        $('#gotop').on('click tap', function(e){
+            e.preventDefault();
+            var iPart   = w.scrollY/30,
+                rScrl   = w.setInterval(function(){
+                    w.scrollTo(0,w.scrollY-iPart);
+                    if (w.scrollY <= 10){
+                        w.clearInterval(rScrl);
+                    }
+                }, 10);
+        });
     });    
 })(window, jQuery);

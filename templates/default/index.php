@@ -8,20 +8,20 @@
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?v=10" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?v=11" />
     
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?=$path?>/js/common.js?v=10"></script>
+    <script type="text/javascript" src="<?=$path?>/js/common.js?v=11"></script>
     
     <script type="text/javascript" src="//loginza.ru/js/widget.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?115"></script>
 </head>
 <body>
-    <header class="b-header clearfix">
+    <header class="b-header clearfix" id="top">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 hidden-xs">
@@ -177,6 +177,9 @@
             </div>
         </footer>
     </div>
+    <a href="#top" id="gotop" class="btn btn-primary b-gotop hidden">
+        <i class="fa fa-arrow-up"></i>
+    </a>
     <script type="text/javascript">
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
