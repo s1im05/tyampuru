@@ -116,13 +116,15 @@
         
         $('#gotop').on('click tap', function(e){
             e.preventDefault();
-            var iPart   = w.scrollY/30,
+            var iSize   = 200,
                 rScrl   = w.setInterval(function(){
-                    w.scrollTo(0,w.scrollY-iPart);
-                    if (w.scrollY <= 10){
+                    if (w.scrollY <= iSize){
+                        w.scrollTo(0, 0);
                         w.clearInterval(rScrl);
+                    } else {
+                        w.scrollTo(0, w.scrollY-iSize);
                     }
-                }, 10);
+                }, 15);
         });
     });    
 })(window, jQuery);
