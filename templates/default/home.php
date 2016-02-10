@@ -46,23 +46,23 @@
                 <form method="post" action="/home" class="form-horizontal">
                     <div class="form-group">
                         <label for="home_form_name" class="col-sm-3 control-label">Никнейм:</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="nickname" value="<?=htmlspecialchars($_SESSION['user']['nickname'])?>" class="form-control" id="home_form_name" placeholder="Никнейм">
+                        <div class="col-sm-5 col-md-4">
+                            <input type="text" name="nickname" maxlength="30" value="<?=htmlspecialchars($_SESSION['user']['nickname'])?>" class="form-control" id="home_form_name" placeholder="Никнейм">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="home_form_gender" class="col-sm-3 control-label">Пол:</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-5 col-md-4">
                             <div class="btn-group btn-radio" role="group" data-target="#inp_gender">
-                                <button type="button" data-value="M" class="btn btn-<?=$_SESSION['user']['gender'] == 'M'?'primary':'default'?>"><i class="fa fa-mars"></i>&nbsp; мужской</button>
-                                <button type="button" data-value="F" class="btn btn-<?=$_SESSION['user']['gender'] == 'F'?'primary':'default'?>"><i class="fa fa-venus"></i>&nbsp; женский</button>
-                                <button type="button" data-value="U" class="btn btn-<?=$_SESSION['user']['gender'] == 'U'?'primary':'default'?>"><i class="fa fa-intersex"></i>&nbsp; не определился</button>
+                                <button type="button" title="мужской" data-value="M" class="btn btn-<?=$_SESSION['user']['gender'] == 'M'?'primary':'default'?>"><i class="fa fa-fw fa-male"></i></button>
+                                <button type="button" title="женский" data-value="F" class="btn btn-<?=$_SESSION['user']['gender'] == 'F'?'primary':'default'?>"><i class="fa fa-fw fa-female"></i></button>
+                                <button type="button" title="не выбрано" data-value="U" class="btn btn-<?=$_SESSION['user']['gender'] == 'U'?'primary':'default'?>"><i class="fa fa-fw fa-question"></i></button>
                             </div>
                             <input id="inp_gender" type="hidden" name="gender" value="<?=$_SESSION['user']['gender']?>" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
+                        <div class="col-sm-offset-3 col-sm-5 col-md-4">
                             <button type="submit" name="save" class="btn btn-primary">Сохранить</button>
                             &nbsp;
                             <? if ($sSuccess) :?>
