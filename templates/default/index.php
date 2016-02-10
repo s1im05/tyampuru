@@ -52,16 +52,22 @@
                         &nbsp;
                         <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
                         <ul class="dropdown-menu">
-                            <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
+                            <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/"><i class="fa fa-fw fa-asterisk"></i> Все разделы</a></li>
                             <? foreach ($aChapters as $aVal) :?>
-                                <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
+                                <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>>
+                                    <a href="/chapter/<?=$aVal['class']?>"><i class="fa fa-fw <?=$aVal['icon']?>"></i>&nbsp; <?=$aVal['title']?></a>
+                                </li>
                             <? endforeach;?>
                             <li role="separator" class="divider"></li>
                             <? if ($bIsLogged) :?>
-                                <li role="presentation"><a href="/home">Личный кабинет</a></li>
-                                <li role="presentation"><a href="/logout">Выйти</a></li>
+                                <li role="presentation">
+                                    <a href="/home"><i class="fa fa-fw fa-home"></i>&nbsp; Личный кабинет</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="/logout"><i class="fa fa-fw fa-sign-out"></i>&nbsp; Выйти</a>
+                                </li>
                             <? else :?>
-                                <li role="presentation"><a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="loginza">Вход / регистрация</a></li>
+                                <li role="presentation"><a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="loginza"><i class="fa fa-fw fa-sign-in"></i>&nbsp; Вход / регистрация</a></li>
                             <? endif;?>
                         </ul>
                     </div>
