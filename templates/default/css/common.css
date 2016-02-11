@@ -27,7 +27,7 @@ a:hover, a:focus {
 }
 .b-search__btn, .b-search__btn:hover {
     background: #9C5E39;
-    border-color: #666;
+    border-color: #9C5E39;
     color: #fff;
 }
 .b-poster {

@@ -8,14 +8,14 @@
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?v=14" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?15" />
     
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?=$path?>/js/common.js?v=14"></script>
+    <script type="text/javascript" src="<?=$path?>/js/common.js?15"></script>
     
     <script type="text/javascript" src="//loginza.ru/js/widget.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?115"></script>
@@ -52,22 +52,18 @@
                         &nbsp;
                         <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
                         <ul class="dropdown-menu">
-                            <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/"><i class="fa fa-fw fa-asterisk"></i> Все разделы</a></li>
+                            <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
                             <? foreach ($aChapters as $aVal) :?>
-                                <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>>
-                                    <a href="/chapter/<?=$aVal['class']?>"><i class="fa fa-fw <?=$aVal['icon']?>"></i>&nbsp; <?=$aVal['title']?></a>
-                                </li>
+                                <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                             <? endforeach;?>
                             <li role="separator" class="divider"></li>
                             <? if ($bIsLogged) :?>
-                                <li role="presentation">
-                                    <a href="/home"><i class="fa fa-fw fa-home"></i>&nbsp; Личный кабинет</a>
+                                <li role="presentation"><a href="/home">Личный кабинет</a>
                                 </li>
-                                <li role="presentation">
-                                    <a href="/logout"><i class="fa fa-fw fa-sign-out"></i>&nbsp; Выйти</a>
+                                <li role="presentation"><a href="/logout">Выйти</a>
                                 </li>
                             <? else :?>
-                                <li role="presentation"><a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="loginza"><i class="fa fa-fw fa-sign-in"></i>&nbsp; Вход / регистрация</a></li>
+                                <li role="presentation"><a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="loginza">Вход / регистрация</a></li>
                             <? endif;?>
                         </ul>
                     </div>
