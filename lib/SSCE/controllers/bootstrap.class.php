@@ -1,11 +1,12 @@
 <?php
-class Bootstrap_Controller extends Controller {
+namespace SSCE\Controllers;
+
+class Bootstrap extends Base {
     
     private $_iLastCommentCount = 5;
 
     public function run(){
-
-        $oUser      = new User_Model($this->options);
+        $oUser      = new \SSCE\Models\User($this->options);
         if (isset($_POST['token'])){
             $oUser->loginLoginza($_POST['token']);
         } elseif (!$oUser->isLogged()){
@@ -16,8 +17,8 @@ class Bootstrap_Controller extends Controller {
             $oUser->logout();
         }
 
-        $oChapters  = new ChapterList_Model($this->options);
-        $oTag       = new Tag_Model($this->options);
+        $oChapters  = new \SSCE\Models\ChapterList($this->options);
+        $oTag       = new \SSCE\Models\Tag($this->options);
         
         $aCommentsLast  = $this->db->select("SELECT 
                                                     c.*,

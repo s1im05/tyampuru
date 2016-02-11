@@ -1,8 +1,9 @@
 <?php
-class Rss_Controller extends Controller {
+namespace SSCE\Controllers;
+
+class Rss extends Base {
     
     protected $_sLayout     = 'rss.php';
-
 
     public function rssAction(){
         $aRss   = array(
@@ -24,7 +25,7 @@ class Rss_Controller extends Controller {
         if ( !empty( $aRss['items'] ) ) {
             foreach ( $aRss['items'] as $iKey => $aVal ) {
                 $aRss['items'][$iKey]['description']    = str_replace( '<img','<img style="max-width: 570px;"', $aVal['description']);
-                $aRss['items'][$iKey]['tags']           = prepareTags($aVal['tags']);
+                $aRss['items'][$iKey]['tags']           = Helpers\prepareTags($aVal['tags']);
             }
         }
         $this->view->assign('aRss', $aRss);

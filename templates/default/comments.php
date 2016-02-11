@@ -11,7 +11,7 @@
                     </div>
                     <div class="media-body <?=$aComment['id']==$iLastAdded?'bg-success':''?>">
                         <p class="media-heading"><strong><?=htmlspecialchars($aComment['nickname'])?></strong>, 
-                            <span class="text-muted"><?=date2ru($aComment['cdate'])?> 
+                            <span class="text-muted"><?=SSCE\H\date2ru($aComment['cdate'])?> 
                             написал<?=($aComment['gender']=='U')?'(а)':($aComment['gender']=='F'?'а':'')?>:</span>
                         </p>
                         <div class="b-comment__text">

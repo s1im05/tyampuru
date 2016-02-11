@@ -1,5 +1,7 @@
 <?php
-class Model extends Base {
+namespace SSCE\Models;
+
+class Base extends \SSCE\Base {
     
     protected $_sTable;
     protected $_sIdField    = 'id';

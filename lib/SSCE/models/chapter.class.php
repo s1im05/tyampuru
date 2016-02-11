@@ -1,5 +1,7 @@
 <?php
-class Chapter_Model extends Model {
+namespace SSCE\Models;
+
+class Chapter extends Base {
     
     protected $_aChapters   = array();
     protected $_aPosts      = array();
@@ -51,9 +53,9 @@ class Chapter_Model extends Model {
     
     private function _load(){
         $this->_bNeedLoad   = false;
-        $iPPage = $this->getConfig()->project->postsppage;
+        $iPPage = $this->config->project->postsppage;
         
-        $this->_aPosts  = $this->getDb()->selectPage(
+        $this->_aPosts  = $this->db->selectPage(
             $this->_iTotal,
             "SELECT
                     p.*,

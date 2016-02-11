@@ -4,8 +4,8 @@
     </div>
 </div>
 <div class="row">
-    <? if ($aFound['total'] > 0) :?>
-        <main class="b-main col-md-9">
+    <main class="b-main col-md-9">
+        <? if ($aFound['total'] > 0) :?>
             <? include 'search_list.php';?>
-        </main>
-    <? endif;?>
+        <? endif;?>
+    </main>

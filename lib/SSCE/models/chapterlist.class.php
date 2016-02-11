@@ -1,5 +1,7 @@
 <?php
-class ChapterList_Model extends Model {
+namespace SSCE\Models;
+
+class ChapterList extends Base {
     
     protected $_aChapters   = array();
 

@@ -1,5 +1,7 @@
 <?php
-class Search_Controller extends Controller {
+namespace SSCE\Controllers;
+
+class Search extends Base {
     
     protected $_sTemplate   = 'search.php';
     protected $_sLayout     = 'index.php';

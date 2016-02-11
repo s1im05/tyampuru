@@ -1,12 +1,14 @@
 <?php
-class Home_Controller extends Controller {
+namespace SSCE\Controllers;
+
+class Home extends Base {
     
     protected $_sTemplate   = 'home.php';
     protected $_sLayout     = 'index.php';
     
 
     public function indexAction(){
-        $oUser   = new User_Model($this->options);
+        $oUser   = new \SSCE\Models\User($this->options);
         if (!$oUser->isLogged()){
             $this->request->go('/');
         }
@@ -28,7 +30,7 @@ class Home_Controller extends Controller {
     
     public function getCommentAction($iPage){
         
-        $oUser   = new User_Model($this->options);
+        $oUser   = new \SSCE\Models\User($this->options);
         if (!$oUser->isLogged()){
             return;
         }
@@ -62,7 +64,7 @@ class Home_Controller extends Controller {
     
     public function getLikeAction($iPage){
         
-        $oUser   = new User_Model($this->options);
+        $oUser   = new \SSCE\Models\User($this->options);
         if (!$oUser->isLogged()){
             return;
         }

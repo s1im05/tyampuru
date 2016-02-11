@@ -1,5 +1,7 @@
 <?php
-abstract class Controller extends Base {
+namespace SSCE\Controllers;
+
+abstract class Base extends \SSCE\Base {
     
     private $_sActionSuffix = 'Action';
 

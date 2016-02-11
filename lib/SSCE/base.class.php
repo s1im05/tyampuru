@@ -1,53 +1,61 @@
 <?php
-abstract class Base {
+namespace {
     
-    protected $_oDb;
-    protected $_oConfig;
-    protected $_oRequest;
-    protected $_oView;
-    
-    public function __construct($aObjects) {
-        $this->_oDb         = $aObjects['db'];
-        $this->_oConfig     = $aObjects['config'];
-        $this->_oRequest    = $aObjects['request'];
-        $this->_oView       = $aObjects['view'];
-    }
-    
-    public function __get($sKey){
-        switch ($sKey){
-            case 'db': 
-                return $this->getDb();
-            case 'config': 
-                return $this->getConfig();
-            case 'request': 
-                return $this->getRequest();
-            case 'view': 
-                return $this->getView();
-            case 'options': 
-                return array(
-                    'db'        => $this->getDb(),
-                    'config'    => $this->getConfig(),
-                    'request'   => $this->getRequest(),
-                    'view'      => $this->getView()
-                );
-            default: 
-                return null;
+    function __autoload($sClassName){
+        $sIncludePath   = '';
+        
+        $aExploded  = explode('\\', $sClassName);
+        if ($aExploded[0] === 'SSCE'){
+            array_shift($aExploded);
+            $sIncludePath   = __DIR__.'/'.strtolower(implode('/', $aExploded)).'.class.php';
+        }
+
+        if ($sIncludePath === '') {
+            throw new Exception("Autoloader Exception: can't match {$sClassName}");
+        } elseif (!file_exists($sIncludePath)) {
+            throw new Exception("Autoloader Exception: file {$sIncludePath} not exists");
+        } else {
+            require_once $sIncludePath;
         }
     }
-    
-    public function getDb(){
-        return $this->_oDb;
-    }
-    
-    public function getConfig(){
-        return $this->_oConfig;
-    }
-    
-    public function getRequest(){
-        return $this->_oRequest;
-    }
-    
-    public function getView(){
-        return $this->_oView;
+}
+
+namespace SSCE {
+
+    abstract class Base {
+        
+        protected $_oDb;
+        protected $_oConfig;
+        protected $_oRequest;
+        protected $_oView;
+        
+        public function __construct($aObjects) {
+            $this->_oDb         = $aObjects['db'];
+            $this->_oConfig     = $aObjects['config'];
+            $this->_oRequest    = $aObjects['request'];
+            $this->_oView       = $aObjects['view'];
+        }
+        
+        public function __get($sKey){
+            switch ($sKey){
+                case 'db': 
+                    return $this->_oDb;
+                case 'config': 
+                    return $this->_oConfig;
+                case 'request': 
+                    return $this->_oRequest;
+                case 'view': 
+                    return $this->_oView;
+                case 'options': 
+                    return array(
+                        'db'        => $this->_oDb,
+                        'config'    => $this->_oConfig,
+                        'request'   => $this->_oRequest,
+                        'view'      => $this->_oView,
+                    );
+                default: 
+                    return null;
+            }
+        }
     }
 }

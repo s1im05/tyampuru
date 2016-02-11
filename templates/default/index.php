@@ -8,14 +8,14 @@
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?15" />
+    <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?016" />
     
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     
     <script type="text/javascript" src="<?=$path?>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?=$path?>/js/common.js?15"></script>
+    <script type="text/javascript" src="<?=$path?>/js/common.js?016"></script>
     
     <script type="text/javascript" src="//loginza.ru/js/widget.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?115"></script>
@@ -128,7 +128,7 @@
                             <div class="b-post__data">
                                 <? foreach ($aCommentsLast as $aComment) :?>
                                     <p class="b-comment__last">
-                                        <span class="text-muted"><?=date2ru($aComment['cdate'], true)?></span><br />
+                                        <span class="text-muted"><?=SSCE\H\date2ru($aComment['cdate'], true)?></span><br />
                                         <strong><?=htmlspecialchars($aComment['nickname'])?></strong> &rarr;
                                         <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$aComment['title']?></a><br />
                                         <?=htmlspecialchars(trim($aComment['text']))?><br />

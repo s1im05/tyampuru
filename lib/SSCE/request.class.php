@@ -1,5 +1,7 @@
 <?php
-class SSCE_Request {
+namespace SSCE;
+
+class Request {
     
     private $_sPath         = '';
     private $_aParams       = array();

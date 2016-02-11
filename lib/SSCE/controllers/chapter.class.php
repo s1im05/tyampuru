@@ -1,5 +1,7 @@
 <?php
-class Chapter_Controller extends Controller {
+namespace SSCE\Controllers;
+
+class Chapter extends Base {
     
     protected $_sTemplate   = 'chapter.php';
     protected $_sLayout     = 'index.php';
@@ -24,7 +26,7 @@ class Chapter_Controller extends Controller {
     
     
     private function _process($sChapter, $iPage){
-        $oChapter   = new Chapter_Model($this->options);
+        $oChapter   = new \SSCE\Models\Chapter($this->options);
         $oChapter->setChapter($sChapter)->setPage($iPage);
         
         $aPosts     = $oChapter->getPosts();

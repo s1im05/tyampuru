@@ -1,4 +1,6 @@
 <?php
+namespace SSCE\H;
+
 function date2ru($string, $bTime = false){
     $aMonths    = array(1 => 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
     $iTime      = strtotime($string);

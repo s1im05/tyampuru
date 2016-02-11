@@ -1,4 +1,6 @@
 <?php
+namespace SSCE\Controllers\Helpers;
+
 function prepareTags($sTags) {
     if ($aTags  = explode("\n", $sTags)) {
         foreach ($aTags as $iKey    => $sVal) {

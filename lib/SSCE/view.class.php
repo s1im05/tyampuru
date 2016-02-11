@@ -1,5 +1,7 @@
 <?php
-class SSCE_View {
+namespace SSCE;
+
+class View {
     
     protected $_sTemplate;
     protected $_sLayout;

@@ -1,5 +1,7 @@
 <?php
-class User_Model extends Model {
+namespace SSCE\Models;
+
+class User extends Base {
     
     public static $cookieName   = 'u_h';
     
@@ -21,8 +23,8 @@ class User_Model extends Model {
     
     public static function logout(){
         unset($_SESSION['user']);
-        unset($_COOKIE[User_Model::$cookieName]);
-        setcookie(User_Model::$cookieName, '', time(), '/');
+        unset($_COOKIE[User::$cookieName]);
+        setcookie(User::$cookieName, '', time(), '/');
         header("Location: {$_SERVER['HTTP_REFERER']}");
         die();
     }
@@ -74,24 +76,24 @@ class User_Model extends Model {
             $sSec   = md5(mt_rand());
             $sKey   = md5($_SESSION['user']['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$sSec);
             $this->db->query("UPDATE LOW_PRIORITY ?_users SET sec = ?, ldate = NOW(), photo = ? WHERE id = ?d LIMIT 1;", $sSec, $_SESSION['user']['photo'], $_SESSION['user']['id']);
-            setcookie(User_Model::$cookieName, $_SESSION['user']['id'].'_'.$sKey.'_'.$sToken, strtotime('+30 days') , '/', '', false, true);
+            setcookie(User::$cookieName, $_SESSION['user']['id'].'_'.$sKey.'_'.$sToken, strtotime('+30 days') , '/', '', false, true);
         }
         return $this;
     }
     
     public function loginCookie(){
-        if (!isset($_COOKIE[User_Model::$cookieName])){
+        if (!isset($_COOKIE[User::$cookieName])){
             return;
         }
-        $aValue = explode('_', $_COOKIE[User_Model::$cookieName]);
+        $aValue = explode('_', $_COOKIE[User::$cookieName]);
         if (sizeof($aValue) >= 2){
             $aUser  = $this->db->selectRow("SELECT * FROM ?_users WHERE id = ?d LIMIT 1;", $aValue[0]);
             if ($aValue[1] ===  md5($aUser['identity'].'__'.$_SERVER['REMOTE_ADDR'].'__'.$aUser['sec'])){
                 $_SESSION['user']   = $aUser;
                 $this->db->query("UPDATE LOW_PRIORITY ?_users SET ldate = NOW() WHERE id = ?d LIMIT 1;", $_SESSION['user']['id']);
             } else {
-                setcookie(User_Model::$cookieName, '');
-                unset($_COOKIE[User_Model::$cookieName]);
+                setcookie(User::$cookieName, '');
+                unset($_COOKIE[User::$cookieName]);
             }
         }
     }
