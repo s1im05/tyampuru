@@ -20,7 +20,7 @@ class Rss extends Base {
                                                         WHERE
                                                             p.cdate < NOW()
                                                         ORDER BY
-                                                            p.id DESC
+                                                            p.cdate DESC
                                                         LIMIT 50;"));
         if ( !empty( $aRss['items'] ) ) {
             foreach ( $aRss['items'] as $iKey => $aVal ) {

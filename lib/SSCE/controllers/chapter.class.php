@@ -27,7 +27,7 @@ class Chapter extends Base {
     
     private function _process($sChapter, $iPage){
         $oChapter   = new \SSCE\Models\Chapter($this->options);
-        $oChapter->setChapter($sChapter)->setPage($iPage);
+        $oChapter->setChapter($sChapter)->setPage($iPage)->setOrder('cdate', 'DESC');
         
         $aPosts     = $oChapter->getPosts();
         $iPageCount = (int)ceil($oChapter->getPostsCount()/$this->config->project->postsppage);
