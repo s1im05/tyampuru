@@ -56,7 +56,6 @@
                             <? foreach ($aChapters as $aVal) :?>
                                 <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                             <? endforeach;?>
-                            <li role="presentation"><a href="http://ssxy.ru/" style="color: #a00;" onclick="return confirm('Контент только 18+! Подтвердите переход на другой сайт');">Для взрослых</a></li>
                             <li role="separator" class="divider"></li>
                             <? if ($bIsLogged) :?>
                                 <li role="presentation"><a href="/home">Личный кабинет</a>
@@ -95,7 +94,6 @@
                 <? foreach ($aChapters as $aVal) :?>
                     <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                 <? endforeach;?>
-                <li role="presentation"><a href="http://ssxy.ru/" style="color: #a00;" onclick="return confirm('Контент только 18+! Подтвердите переход на другой сайт');">Для взрослых</a></li>
             </ul>
         </nav>
         
