@@ -68,7 +68,19 @@ class Post extends Base {
         $this->view->assign('aCommentList', $aCommentList);
     }
     
-    
+    public function apiGetPostAction($iId){
+        $oPost      = new \SSCE\Models\Post($this->options);
+        $oPost->id  = $iId;
+        
+        $aData  = $oPost->data;
+        $aData['tags']  = '#'.implode(' #', explode("\n", $aData['tags']));
+        if (preg_match('/src\s*=\s*"(.+?)"/', $aData['announce'], $aMatches)){
+            $aData['image']  = $aMatches[1];
+        }
+        
+        $this->setLayout('ajax.php');
+        $this->view->assign('sRequest', $aData);
+    }
     
     public function likeAction($iPostId){
         $this->_statusChange($iPostId, true);
