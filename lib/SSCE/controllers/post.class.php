@@ -78,7 +78,7 @@ class Post extends Base {
             $aData['image']  = $aMatches[1];
         }
         
-        $this->setLayout('ajax.php');
+        $this->setLayout('ajax_jsonp.php');
         $this->view->assign('sRequest', $aData);
     }
     
