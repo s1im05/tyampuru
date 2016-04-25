@@ -38,15 +38,6 @@
     </div>
     <div class="b-post__data">
         <?=$bPostFull ? $aPost['text'] : $aPost['announce']?>
-        <?/*
-        <div class="b-post__imgdiv">
-            <div class="b-post__imgbtns">
-                <span class="label label-default">1</span>
-                <a class="btn btn-default btn-xs"><i class="fa fa-flag"></i> пожаловаться на изображение</a>
-            </div>
-            <a href="#" class="b-post__imglink"><img src="" class="b-post__img" /></a>
-        </div>
-        */?>
     </div>
     
     <?if ($aPost['last_comment_text']):?>
@@ -70,6 +61,11 @@
     
     <? if (!$bPostFull) :?>
         <div class="b-post__data b-post__lastcomment">
+            <? $iImgCnt = \SSCE\H\getImageCount($aPost['title'])?>
+            <?if ($iImgCnt) :?>
+                <a href="/post/<?=$aPost['id']?>" class="btn btn-primary">Изображений в записи: <?=$iImgCnt?></a>
+            <?endif;?>
+        
             <?if ($bIsLogged) :?>
                 <button class="btn btn-default b-comment__login"><i class="fa fa-comment-o"></i>&nbsp; <?=$aPost['last_comment_text']?'Ответить':'Комментировать'?></button>
                 <div class="media b-commentform hidden">

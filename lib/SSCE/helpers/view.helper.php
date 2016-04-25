@@ -6,3 +6,8 @@ function date2ru($string, $bTime = false){
     $iTime      = strtotime($string);
     return ($bTime?date('H:i', $iTime).', ':'').date('j ', $iTime).$aMonths[ (int)date('n', $iTime) ].' '.(int)date('Y', $iTime).'г.';
 }
+
+function getImageCount($sTitle){
+    $iCnt = preg_match('/\((\d+)\)$/', $sTitle, $aMatches);
+    return $iCnt ? $aMatches[1] : 0;
+}
