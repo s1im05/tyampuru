@@ -69,10 +69,9 @@ class Post extends Base {
     }
     
     public function apiGetPostAction($iId){
-        $oPost      = new \SSCE\Models\Post($this->options);
-        $oPost->id  = $iId;
         
-        $aData  = $oPost->data;
+        $aData  = $this->db->selectRow("SELECT * FROM ?_posts WHERE id >= ?d ORDER BY id ASC LIMIT 1;", $iId);
+        
         $aData['tags']  = '#'.implode(' #', explode("\n", $aData['tags']));
         if (preg_match('/src\s*=\s*"(.+?)"/', $aData['announce'], $aMatches)){
             $aData['image']  = $aMatches[1];
