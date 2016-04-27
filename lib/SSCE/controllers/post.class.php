@@ -71,8 +71,11 @@ class Post extends Base {
     public function apiGetPostAction($iId){
         
         $aData  = $this->db->selectRow("SELECT * FROM ?_posts WHERE id >= ?d ORDER BY id ASC LIMIT 1;", $iId);
-        
-        $aData['tags']  = '#'.implode(' #', explode("\n", $aData['tags']));
+        $aTags  = Helpers\prepareTags($aData['tags']);
+        $aData['tags']  = '';
+        foreach ($aTags as $aVal){
+            $aData['tags'] .= '#'.$aVal[1].' ';
+        }
         if (preg_match('/src\s*=\s*"(.+?)"/', $aData['announce'], $aMatches)){
             $aData['image']  = $aMatches[1];
         }
