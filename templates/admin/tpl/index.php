@@ -17,7 +17,39 @@
     <script type="text/javascript" src="<?=$path?>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=$path?>/js/common.js?016"></script>
 </head>
-<body>
-    <? include $template?>
+<body class="b-adminbody">
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                    <i class="fa fa-fw fa-bars"></i>
+                </button>
+                <a href="/adm_pnl_x" class="navbar-brand">Панель управления</a>
+            </div>
+            <div class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                <ul class="nav navbar-nav">
+                    <?/*
+                    <li <?=$sMenuActive == 'beer' ? 'class="active"':''?>><a href="/adm_pnl_x/beer">Пиво</a></li>
+                    <li <?=$sMenuActive == 'address' ? 'class="active"':''?>><a href="/adm_pnl_x/address">Адреса</a></li>
+                    */?>
+                    <li class="visible-xs"><a href="/adm_pnl_x/logout">Выйти</a></li>
+                </ul>
+                <a class="btn btn-md b-btnpadded btn-default pull-right hidden-xs" href="/adm_pnl_x/logout"><i class="fa fa-fw fa-sign-out"></i></a>
+            </div>
+        </nav>
+        
+        <? if ($sSuccess) :?>
+            <div class="alert alert-success" role="alert"><?=$sSuccess?></div>
+        <? endif;?>
+        <? if ($sError) :?>
+            <div class="alert alert-danger" role="alert"><?=$sError?></div>
+        <? endif;?>
+        
+        <div class="panel">
+            <div class="panel-body">
+                <? include $template;?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

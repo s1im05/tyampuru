@@ -6,7 +6,12 @@
             "action": "error404",
             "header": "HTTP/1.0 404 Not Found"
         },{
-            "path": "\\/admin",
+            "path": "\\/403",
+            "controller": "error",
+            "action": "error403",
+            "header": "HTTP/1.0 403 Forbidden"
+        },{
+            "path": "\\/adm_pnl_x",
             "controller": "admin",
             "action": "main"
         }

@@ -3,14 +3,38 @@ body {
     font-family: Calibri, sans-serif;
     background: #fff;
 }
-a {
-    color: #9C5E39;
+.b-loginbody {
+    background: #eee;
+    margin-top: 100px;
 }
-a:hover, a:focus {
-    color: #9C5E39;
-    text-decoration: underline;
+.b-adminbody {
+    padding-top: 10px;
+    background: #eee;
 }
-
+.b-loginform {
+    padding: .5em 1em;
+}
+.b-btnpadded {
+    margin-top: 8px;
+}
+.colorpicker-icon {
+    display: block;
+    width: 1em;
+    height: 1em;
+    background: #000;
+}
+.bg {
+    padding: 10px;
+    width: 120px;
+    height: 120px;
+}
+.bg-img {
+    max-width: 100px;
+    max-height: 100px;
+}
+.sortable > .panel-heading {
+    cursor: move;
+}
 
 /* helpers */
 .h-inline {
