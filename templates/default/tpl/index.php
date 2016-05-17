@@ -100,8 +100,8 @@
         <div class="row">
             <?include $template;?>
             <aside class="b-main col-md-3">
-                <div class="list-group h-shadow">
-                    <a href="/rss" class="list-group-item"><i class="fa fa-fw fa-rss-square"></i> RSS-лента свежих постов</a>
+                <div class="b-llist list-group h-shadow">
+                    <a href="/rss" class="list-group-item"><i class="fa fa-fw fa-rss-square"></i> RSS-лента</a>
                 </div>
                 
                 <div class="row">

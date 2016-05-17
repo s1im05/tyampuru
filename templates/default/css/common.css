@@ -218,6 +218,10 @@ a:hover, a:focus {
     font-size: 1.5em;
     opacity: .5;
 }
+.b-llist {
+    font-size: 1.25em;
+    font-weight: 700;
+}
 
 /* old tyampuru */
 .b-post-image_text {

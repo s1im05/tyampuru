@@ -31,7 +31,8 @@
                 </div>
             </div>
             <p class="pull-left text-muted">
-                <a href="/chapter/<?=$aPost['chapter_name']?>">&laquo;<?=$aPost['chapter_title']?>&raquo;</a> / 
+                <a href="/chapter/<?=$aPost['chapter_name']?>">&laquo;<?=$aPost['chapter_title']?>&raquo;</a> /
+                смотрели: <?=$aPost['views']?> /
                 <?=SSCE\H\date2ru($aPost['cdate'], true)?>
             </p>
         </div>
