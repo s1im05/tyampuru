@@ -42,4 +42,7 @@ class Bootstrap extends Base {
         $this->view->assign('sRandomTag', $oTag->getRandomTag());
         $this->view->assign('aCommentsLast', $aCommentsLast);
     }
+    
+    public function run_admin(){
+    }
 }

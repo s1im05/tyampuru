@@ -34,6 +34,15 @@ class Application extends Base {
         
         $this->_oRequest    = new Request($oRoutesConfig->routes);
         $this->_oDirector   = new Director($this->options);
-        $this->_oDirector->bootstrap()->runCurrent();
+    }
+    
+    public function bootstrap($sMethod){
+        $this->_oDirector->getBootstrap()->$sMethod();
+        return $this;
+    }
+    
+    public function action(){
+        $this->_oDirector->runCurrent();
+        return $this;
     }
 }

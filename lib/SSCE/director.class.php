@@ -12,10 +12,8 @@ class Director extends Base {
         require_once 'helpers/controller.helper.php';
     }
     
-    public function bootstrap() {
-        $oBootstrap = new Controllers\Bootstrap($this->options);
-        $oBootstrap->run();
-        return $this;
+    public function getBootstrap(){
+        return new Controllers\Bootstrap($this->options);
     }
     
     public function runCurrent(){
@@ -32,7 +30,7 @@ class Director extends Base {
         } catch (Exception $e) {
             $this->request->go404();
         }
-        
+
         echo $this->view
             ->setTemplate($oController->getTemplate())
             ->setLayout($oController->getLayout())
