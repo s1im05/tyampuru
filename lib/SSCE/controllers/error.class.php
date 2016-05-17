@@ -18,7 +18,7 @@ class Error extends Base {
     }
     
     public function error403Action(){
-        echo '403 Forbidden';
+        $this->setLayout('error403.php');
     }
     
     public function error404Action(){

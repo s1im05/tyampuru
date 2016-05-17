@@ -45,7 +45,7 @@ class View {
         
         require_once 'helpers/view.helper.php';
         chdir($_SERVER['DOCUMENT_ROOT'].$this->_sTemplatePath.$this->_sTplPath);
-        
+
         require $this->getLayout();
         $aData  = ob_get_contents();
         ob_clean();

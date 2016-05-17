@@ -10,6 +10,10 @@ class Request {
     private $_sHeader       = '';
     
     public function __construct($aRoutes){
+        if ($_SERVER['REDIRECT_STATUS'] === "403") {
+            $this->go('/403');
+        }
+
         if (in_array(strtolower( ini_get('magic_quotes_gpc')), array('1', 'on'))) {
             $_POST      = array_map('stripslashes', $_POST );
             $_GET       = array_map('stripslashes', $_GET );
