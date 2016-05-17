@@ -18,6 +18,6 @@
     <script type="text/javascript" src="<?=$path?>/js/common.js?016"></script>
 </head>
 <body>
-    test
+    <? include $template?>
 </body>
 </html>

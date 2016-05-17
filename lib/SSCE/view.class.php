@@ -12,6 +12,7 @@ class View {
     private $_sTemplateName = 'template';
     private $_sPathName     = 'path';
     private $_sTitleName    = 'title';
+    private $_sTplPath      = '/tpl';
     
     
     public function __construct($sTemplatePath){
@@ -29,21 +30,29 @@ class View {
     
     public function render(){
         ob_end_flush();
-        $this->assign($this->_sPathName,    $this->_sTemplatePath);
-        $this->assign($this->_sTitleName,   $this->getTitle());
-        $this->assign($this->_sTemplateName, '.'.$this->_sTemplatePath.'/'.$this->getTemplate());
+        $this->assign($this->_sPathName,        $this->_sTemplatePath);
+        $this->assign($this->_sTitleName,       $this->getTitle());
+        $this->assign($this->_sTemplateName,    $this->getTemplate());
         foreach($this->_aVars as $sName => $mVal){
             $$sName = $mVal;
         }
 
         ob_start();
+        $sCwd   = getcwd();
+        
         $iLevel = error_reporting();
         error_reporting(0);
+        
         require_once 'helpers/view.helper.php';
-        require $_SERVER['DOCUMENT_ROOT'].$this->_sTemplatePath.'/'.$this->getLayout();
+        chdir($_SERVER['DOCUMENT_ROOT'].$this->_sTemplatePath.$this->_sTplPath);
+        
+        require $this->getLayout();
         $aData  = ob_get_contents();
         ob_clean();
+        
         error_reporting($iLevel);
+        chdir($sCwd);
+        
         return $aData;
     }
     
