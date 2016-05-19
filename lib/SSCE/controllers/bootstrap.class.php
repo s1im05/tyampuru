@@ -6,17 +6,12 @@ class Bootstrap extends Base {
     private $_iLastCommentCount = 5;
 
     public function run(){
-        $oUser      = new \SSCE\Models\User($this->options);
-        if (isset($_POST['token'])){
-            $oUser->loginLoginza($_POST['token']);
-        } elseif (!$oUser->isLogged()){
-            $oUser->loginCookie();
-        }
+        $this->doLogin();
         
         if ($this->request->getPath() === '/logout'){
             $oUser->logout();
         }
-
+        
         $oChapters  = new \SSCE\Models\ChapterList($this->options);
         $oTag       = new \SSCE\Models\Tag($this->options);
         
@@ -44,5 +39,16 @@ class Bootstrap extends Base {
     }
     
     public function run_admin(){
+        $this->doLogin();
+    }
+    
+    private function doLogin(){
+        $oUser      = new \SSCE\Models\User($this->options);
+
+        if (isset($_POST['token'])){
+            $oUser->loginLoginza($_POST['token']);
+        } elseif (!$oUser->isLogged()){
+            $oUser->loginCookie();
+        }
     }
 }

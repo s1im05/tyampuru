@@ -1,6 +1,6 @@
 /* common */
 body {
-    font-family: Calibri, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background: #fff;
 }
 .b-loginbody {
@@ -11,8 +11,18 @@ body {
     padding-top: 10px;
     background: #eee;
 }
-.b-loginform {
-    padding: .5em 1em;
+.loginza_panel {
+    background: #fff;
+    margin: 5em auto;
+    width: 390px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 6px rgba(0,0,0,.3);
+}
+.loginza_frame {
+    height: 185px;
+    margin: auto;
+    width: 350px;
 }
 .b-btnpadded {
     margin-top: 8px;

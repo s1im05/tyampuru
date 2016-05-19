@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/common.css?016" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic">
     
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="icon" />
     <link href="<?=$path?>/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
