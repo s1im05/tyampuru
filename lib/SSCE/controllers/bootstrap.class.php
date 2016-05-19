@@ -6,11 +6,7 @@ class Bootstrap extends Base {
     private $_iLastCommentCount = 5;
 
     public function run(){
-        $this->doLogin();
-        
-        if ($this->request->getPath() === '/logout'){
-            $oUser->logout();
-        }
+        $oUser  = $this->doLogin();
         
         $oChapters  = new \SSCE\Models\ChapterList($this->options);
         $oTag       = new \SSCE\Models\Tag($this->options);
@@ -39,7 +35,7 @@ class Bootstrap extends Base {
     }
     
     public function run_admin(){
-        $this->doLogin();
+        $oUser = $this->doLogin();
     }
     
     private function doLogin(){
@@ -50,5 +46,11 @@ class Bootstrap extends Base {
         } elseif (!$oUser->isLogged()){
             $oUser->loginCookie();
         }
+        
+        if ($this->request->getPath() === '/logout'){
+            $oUser->logout();
+        }
+        
+        return $oUser;
     }
 }

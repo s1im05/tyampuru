@@ -10,7 +10,7 @@ class Request {
     private $_sHeader       = '';
     
     public function __construct($aRoutes){
-        if ($_SERVER['REDIRECT_STATUS'] === "403") {
+        if (isset($_SERVER['REDIRECT_STATUS']) && $_SERVER['REDIRECT_STATUS'] === "403") {
             $this->go('/403');
         }
 

@@ -33,9 +33,9 @@
                     <li <?=$sMenuActive == 'beer' ? 'class="active"':''?>><a href="/adm_pnl_x/beer">Пиво</a></li>
                     <li <?=$sMenuActive == 'address' ? 'class="active"':''?>><a href="/adm_pnl_x/address">Адреса</a></li>
                     */?>
-                    <li class="visible-xs"><a href="/adm_pnl_x/logout">Выйти</a></li>
+                    <li class="visible-xs"><a href="/logout">Выйти</a></li>
                 </ul>
-                <a class="btn btn-md b-btnpadded btn-default pull-right hidden-xs" href="/adm_pnl_x/logout"><i class="fa fa-fw fa-sign-out"></i></a>
+                <a class="btn btn-md b-btnpadded btn-default pull-right hidden-xs" href="/logout"><i class="fa fa-fw fa-sign-out"></i></a>
             </div>
         </nav>
         
