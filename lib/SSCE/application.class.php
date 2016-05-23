@@ -22,7 +22,6 @@ class Application extends Base {
         
         $this->_oConfig = new Config($this->_sConfigFile);
         setlocale(LC_ALL , $this->config->project->locale);
-        $this->_oView   = new View($this->config->templates->path);
         
         require_once $_SERVER['DOCUMENT_ROOT'].$this->config->db->lib_path.'/Generic.php';
         require_once $_SERVER['DOCUMENT_ROOT'].$this->config->db->lib_path.'/Mysql.php';
@@ -33,6 +32,7 @@ class Application extends Base {
         $oRoutesConfig  = new Config($_SERVER['DOCUMENT_ROOT'].$this->config->router->path);
         
         $this->_oRequest    = new Request($oRoutesConfig->routes);
+        $this->_oView       = new View($this->config->templates->path, $this->_oRequest->lang);
         $this->_oDirector   = new Director($this->options);
     }
     

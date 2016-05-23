@@ -8,6 +8,7 @@ class Request {
     private $_sController   = '';
     private $_sAction       = '';
     private $_sHeader       = '';
+
     
     public function __construct($aRoutes){
         if (isset($_SERVER['REDIRECT_STATUS']) && $_SERVER['REDIRECT_STATUS'] === "403") {
@@ -39,8 +40,16 @@ class Request {
                 break;
             }
         }
-        
-        
+    }
+    
+    public function __get($sKey){
+        switch ($sKey) {
+            case 'lang':
+                return $this->getLang();
+            break;
+            default:
+                return null;
+        }
     }
     
     public function getPath() {
@@ -57,6 +66,10 @@ class Request {
 
     public function getAction() {
         return $this->_sAction;
+    }
+    
+    public function getLang(){
+        return substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     }
     
     public function go404() {

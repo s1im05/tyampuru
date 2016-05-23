@@ -3,7 +3,7 @@
         <? if ($bPostFull) :?>
             <h1 class="b-post__title">
                 <?=$aPost['title']?>
-                <i title="Мне нравится!" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
+                <i title="<?=$this->lang(array('en' => 'I like it!'),'Мне нравится!')?>" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
                 <? if ($aPost['likes'] > 0) :?>
                     <sup class="b-likes__count"><?=$aPost['likes']?></sup>
                 <? endif; ?>
@@ -11,7 +11,7 @@
         <? else :?>
             <h2 class="b-post__title">
                 <a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a>
-                <i title="Мне нравится!" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
+                <i title="<?=$this->lang(array('en' => 'I like it!'),'Мне нравится!')?>" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
                 <? if ($aPost['likes'] > 0) :?>
                     <sup class="b-likes__count"><?=$aPost['likes']?></sup>
                 <? endif; ?>
@@ -32,7 +32,7 @@
             </div>
             <p class="pull-left text-muted">
                 <a href="/chapter/<?=$aPost['chapter_name']?>">&laquo;<?=$aPost['chapter_title']?>&raquo;</a> /
-                смотрели: <?=$aPost['views']?> /
+                <?=$this->lang(array('en' => 'visited'),'смотрели')?>: <?=$aPost['views']?> /
                 <?=SSCE\H\date2ru($aPost['cdate'], true)?>
             </p>
         </div>
@@ -49,8 +49,8 @@
                 </div>
                 <div class="media-body">
                     <p class="media-heading"><strong><?=htmlspecialchars($aPost['last_comment_nickname'])?></strong>, 
-                        <span class="text-muted"><?=SSCE\H\date2ru($aPost['last_comment_cdate'])?> 
-                        написал<?=($aPost['last_comment_gender']=='U')?'(а)':($aPost['last_comment_gender']=='F'?'а':'')?>:</span>
+                        <span class="text-muted"><?=SSCE\H\date2ru($aPost['last_comment_cdate'])?>
+                        <?=$this->lang(array('en' => 'posted'),'написал'.(($aPost['last_comment_gender']=='U')?'(а)':($aPost['last_comment_gender']=='F'?'а':'')))?>:</span>
                     </p>
                     <div class="b-comment__text">
                         <?=nl2br(htmlspecialchars($aPost['last_comment_text']));?>
@@ -64,11 +64,11 @@
         <div class="b-post__data b-post__lastcomment">
             <? $iImgCnt = \SSCE\H\getImageCount($aPost['title'])?>
             <?if ($iImgCnt) :?>
-                <a href="/post/<?=$aPost['id']?>" class="btn btn-primary">Изображений в записи: <?=$iImgCnt?></a>
+                <a href="/post/<?=$aPost['id']?>" class="btn btn-primary"><?=$this->lang(array('en' => 'Images in post'),'Изображений в записи')?>: <?=$iImgCnt?></a>
             <?endif;?>
         
             <?if ($bIsLogged) :?>
-                <button class="btn btn-default b-comment__login"><i class="fa fa-comment-o"></i>&nbsp; <?=$aPost['last_comment_text']?'Ответить':'Комментировать'?></button>
+                <button class="btn btn-default b-comment__login"><i class="fa fa-comment-o"></i>&nbsp; <?=$aPost['last_comment_text']?$this->lang(array('en' => 'Answer'),'Ответить'):$this->lang(array('en' => 'Post comment'),'Комментировать')?></button>
                 <div class="media b-commentform hidden">
                     <div class="media-left">
                         <a href="/home">
@@ -78,15 +78,19 @@
                     <div class="media-body">
                         <form action="/post/<?=$aPost['id']?>" method="post">
                             <div class="form-group b-commentform__group">
-                                <textarea class="form-control b-commentform__div" name="comment" rows="5" placeholder="Текст комментария"></textarea>
-                                <button type="submit" class="btn btn-primary">Отправить</button>
+                                <textarea class="form-control b-commentform__div" name="comment" rows="5" placeholder="<?=$this->lang(array('en' => 'Comment text'),'Текст комментария')?>"></textarea>
+                                <button type="submit" class="btn btn-primary"><?=$this->lang(array('en' => 'Send'),'Отправить')?></button>
                             </div>
                         </form>
                     </div>
                 </div>
             <?else:?>
-                <button class="btn btn-default b-comment__logout"><i class="fa fa-comment-o"></i>&nbsp; <?=$aPost['last_comment_text']?'Ответить':'Комментировать'?></button>
-                <p class="hidden">Необходимо <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'#post_'.$aPost['id'])?>&lang=ru" class="loginza">авторизоваться</a>, чтобы оставить свой комментарий</p>
+                <button class="btn btn-default b-comment__logout"><i class="fa fa-comment-o"></i>&nbsp; <?=$aPost['last_comment_text']?$this->lang(array('en' => 'Answer'),'Ответить'):$this->lang(array('en' => 'Post comment'),'Комментировать')?></button>
+                <? if ($this->isLang('en')) :?>
+                    <p class="hidden">You have to <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'#post_'.$aPost['id'])?>" class="loginza">login</a> first to post your comment</p>
+                <? else :?>
+                    <p class="hidden">Необходимо <a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'#post_'.$aPost['id'])?>" class="loginza">авторизоваться</a>, чтобы оставить свой комментарий</p>
+                <? endif;?>
             <?endif;?>
         </div>
     <?endif;?>

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Тямпуру &ndash; <?=$title?></title>
+    <title><?=$title?></title>
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
@@ -32,12 +32,12 @@
                             </div>
                             <div class="media-body hidden-xs">
                                 <h4 class="media-heading"><a class="b-header__link-white" href="/home"><?=htmlspecialchars($_SESSION['user']['nickname'])?></a></h4>
-                                <i class="fa fa-sign-out b-header__link"></i>&nbsp;<a class="b-header__link" href="/logout">выйти</a>
+                                <i class="fa fa-sign-out b-header__link"></i>&nbsp;<a class="b-header__link" href="/logout"><?=$this->lang(array('en' => 'logout'),'выйти')?></a>
                             </div>
                         </div>
                     <? else :?>
                         <div class="b-headerform">
-                            <a id="sign_in_btn" href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="btn btn-sm btn-primary loginza"><i class="fa fa-sign-in"></i>&nbsp; вход / регистрация</a>
+                            <a id="sign_in_btn" href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>" class="btn btn-sm btn-primary loginza"><i class="fa fa-sign-in"></i>&nbsp; <?=$this->lang(array('en' => 'login / registration'),'вход / регистрация')?></a>
                         </div>
                     <? endif;?>
                     <p class="visible-xs"></p>
@@ -52,28 +52,28 @@
                         &nbsp;
                         <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
                         <ul class="dropdown-menu">
-                            <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
+                            <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/"><?=$this->lang(array('en' => 'All chapters'),'Все разделы')?></a></li>
                             <? foreach ($aChapters as $aVal) :?>
                                 <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                             <? endforeach;?>
                             <li role="separator" class="divider"></li>
                             <? if ($bIsLogged) :?>
-                                <li role="presentation"><a href="/home">Личный кабинет</a>
+                                <li role="presentation"><a href="/home"><?=$this->lang(array('en' => 'Home Page'),'Личный кабинет')?></a>
                                 </li>
-                                <li role="presentation"><a href="/logout">Выйти</a>
+                                <li role="presentation"><a href="/logout"><?=$this->lang(array('en' => 'Logout'),'Выйти')?></a>
                                 </li>
                             <? else :?>
-                                <li role="presentation"><a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>&lang=ru" class="loginza">Вход / регистрация</a></li>
+                                <li role="presentation"><a href="http://loginza.ru/api/widget?token_url=<?=urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])?>" class="loginza"><?=$this->lang(array('en' => 'Login / regisrtation'),'Вход / регистрация')?></a></li>
                             <? endif;?>
                         </ul>
                     </div>
                     <form class="form-inline b-headerform" method="post" action="/search" id="search">
                         <span class="hidden-xs">
-                            например: <a href="/search/<?=urlencode($sRandomTag)?>" title="Все записи по запросу &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a> &nbsp; 
+                            <?=$this->lang(array('en' => 'example'),'например')?>: <a href="/search/<?=urlencode($sRandomTag)?>" title="<?=$this->lang(array('en' => 'All posts by request'),'Все записи по запросу')?> &laquo;<?=$sRandomTag?>&raquo;" class="b-header__link"><?=$sRandomTag?></a> &nbsp; 
                         </span>
                         <div class="input-group">
-                            <input type="text" class="form-control input-sm" id="search_query" placeholder="поиск"> 
-                            <span id="search_btn" class="input-group-addon btn b-search__btn">найти</span>
+                            <input type="text" class="form-control input-sm" id="search_query" placeholder="<?=$this->lang(array('en' => 'Search...'),'поиск')?>"> 
+                            <span id="search_btn" class="input-group-addon btn b-search__btn"><?=$this->lang(array('en' => 'search'),'найти')?></span>
                         </div>
                     </form>
                 </div>
@@ -82,15 +82,15 @@
     </header>
     <div class="container">
         <div class="b-poster h-shadow">
-            <img src="<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg" class="b-poster__image" alt="Tyampuru" />
-            <a class="b-title" title="Тямпуру - главная страница" href="/">
+            <img src="<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg" class="b-poster__image" alt="<?=$this->lang(array('en' => 'Tyampuru'), 'Тямпуру')?>" />
+            <a class="b-title" title="<?=$this->lang(array('en' => 'Main Page'),'Главная страница')?>" href="/">
                 <img class="b-title__img" src="<?=$path?>/img/tyampuru.png" />
             </a>
         </div>
         
         <nav class="b-menu hidden-xs">
             <ul class="nav nav-pills">
-                <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/">Все разделы</a></li>
+                <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/"><?=$this->lang(array('en' => 'All chapters'),'Все разделы')?></a></li>
                 <? foreach ($aChapters as $aVal) :?>
                     <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                 <? endforeach;?>
@@ -101,15 +101,14 @@
             <?include $template;?>
             <aside class="b-main col-md-3">
                 <div class="b-llist list-group h-shadow">
-                    <a href="/rss" class="list-group-item"><i class="fa fa-fw fa-rss-square"></i> RSS-лента</a>
+                    <a href="/rss" class="list-group-item"><i class="fa fa-fw fa-rss-square"></i> <?=$this->lang(array('en' => 'RSS Feed'),'RSS-лента')?></a>
                 </div>
-                
                 <div class="row">
                     <div class="col-xs-12 col-sm-5 col-md-12">
                         <!-- VK Widget -->
                         <div class="b-post h-shadow b-vk">
                             <div class="b-post__panel">
-                                <p class="b-post__title b-post__title-small">Подпишись на новости в группе</p>
+                                <p class="b-post__title b-post__title-small"><?=$this->lang(array('en' => 'Subscribe on VK.com'),'Подпишись на новости в группе')?></p>
                             </div>
                             <div class="b-post__data">
                                 <div id="vk_groups" class="center-block b-vk__widget"></div>
@@ -123,7 +122,7 @@
                     <div class="col-sm-7 col-xs-12 col-md-12">
                         <div class="b-post h-shadow">
                             <div class="b-post__panel">
-                                <p class="b-post__title b-post__title-small">Последние сообщения пользователей</p>
+                                <p class="b-post__title b-post__title-small"><?=$this->lang(array('en' => 'Users last comments'),'Последние комментарии пользователей')?></p>
                             </div>
                             <div class="b-post__data">
                                 <? foreach ($aCommentsLast as $aComment) :?>
@@ -132,7 +131,6 @@
                                         <strong><?=htmlspecialchars($aComment['nickname'])?></strong> &rarr;
                                         <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$aComment['title']?></a><br />
                                         <?=htmlspecialchars(trim($aComment['text']))?><br />
-                                        
                                     </p>
                                 <? endforeach;?>
                             </div>
@@ -146,11 +144,12 @@
         <footer class="b-footer">
             <div class="row">
                 <div class="col-md-9">
-                    <h4>Предупреждение 18+</h4>
-                    На сайте могут присутствовать материалы с нецензурной лексикой и частичным обнажением. Если вам меньше 18 лет, просим воздержаться от просмотра сайта.
+                    <h4><?=$this->lang(array('en' => 'Warning 18+'),'Предупреждение 18+')?></h4>
+                    <?=$this->lang(array('en' => 'This site is intended for watch by persons 18 or older, and not by children'),
+                    'На сайте могут присутствовать материалы с нецензурной лексикой и частичным обнажением. Если вам меньше 18 лет, просим воздержаться от просмотра сайта.')?>
                 </div>
                 <div class="col-md-3">
-                    <h4>Рассказать друзьям</h4>
+                    <h4><?=$this->lang(array('en' => 'Share with friends'),'Рассказать друзьям')?></h4>
 
                     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4dd2496750e0e873"></script>
                     <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
@@ -168,7 +167,8 @@
             <div class="row">
                 <div class="col-md-9">
                     <p>&nbsp;</p>
-                    <p><strong>2014–<?=date('Y')?> &copy;</strong> Смешные комиксы, фотографии красивых девушек, веселые гифки, отборные коубы, приколы, игры и много чего еще самого интересного из сети</p>
+                    <p><strong>2014–<?=date('Y')?> &copy;</strong> <?=$this->lang(array('en' => 'Funny comics and comicstrips, photos of beautiful girls, funny gifs, best Coubs, videos, jokes, games, art-pictures and other best stuff from the Internet'),
+                    'Смешные комиксы, фотографии красивых девушек, веселые гифки, отборные коубы, приколы, игры и много чего еще самого интересного из сети')?></p>
                 </div>
             </div>
         </footer>

@@ -13,10 +13,12 @@ class View {
     private $_sPathName     = 'path';
     private $_sTitleName    = 'title';
     private $_sTplPath      = '/tpl';
+    private $_sLang         = '';
     
     
-    public function __construct($sTemplatePath){
+    public function __construct($sTemplatePath, $sLang){
         $this->_sTemplatePath   = $sTemplatePath;
+        $this->_sLang           = $sLang;
     }
     
     public function assign($sName, $mVal){
@@ -82,5 +84,17 @@ class View {
     
     public function getLayout(){
         return $this->_sLayout;
+    }
+    
+    public function lang($aStrings, $sDefault = ''){
+        return (isset($aStrings[$this->_sLang]) && $aStrings[$this->_sLang] != '') ? $aStrings[$this->_sLang] : $sDefault;
+    }
+    
+    public function getLang(){
+        return $this->_sLang;
+    }
+    
+    public function isLang($sLang){
+        return ($this->_sLang === $sLang);
     }
 }
