@@ -1,6 +1,6 @@
     <div class="col-xs-12">
         <h1><?=$title?></h1>
-        <p>Всего записей: <strong><?=$aFound['total']?></strong></p>
+        <p><?=$this->lang(array('en' => 'Posts found'),'Записей найдено')?>: <strong><?=$aFound['total']?></strong></p>
     </div>
 </div>
 <div class="row">

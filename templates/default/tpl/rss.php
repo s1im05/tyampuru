@@ -10,8 +10,8 @@
         <description><![CDATA[<?=$aRss['description']?>]]></description>
         <pubDate><?=date('r')?></pubDate>
         <lastBuildDate><?=date('r')?></lastBuildDate>
-        <managingEditor>me@vsul.ru (Vadim Suleimanov)</managingEditor>
-        <webMaster>me@vsul.ru (Vadim Suleimanov)</webMaster>
+        <managingEditor>me@vsul.ru (Admin)</managingEditor>
+        <webMaster>me@vsul.ru (Admin)</webMaster>
         <copyright><?=$_SERVER['HTTP_HOST']?></copyright>
         <image>
             <url>http://<?=$_SERVER['HTTP_HOST']?>/templates/default/img/tyampuru.png</url>
@@ -19,7 +19,7 @@
             <link>http://<?=$_SERVER['HTTP_HOST']?>/rss</link>
         </image>
         <generator>S.S.C.E.</generator>
-        <language>ru</language>
+        <language><?=$this->lang(array('en' => 'en'),'ru')?></language>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <?foreach ($aRss['items'] as $aItem) :?>
         <item>
@@ -28,7 +28,7 @@
             <guid>http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?></guid>
             <description><![CDATA[
                 <?=$aItem['description']?> 
-                <p><a href="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?>">Смотреть целиком</a></p>
+                <p><a href="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?>"><?=$this->lang(array('en' => 'Full Post'),'Смотреть целиком')?></a></p>
                 <? if ($aItem['tags']) :?>
                 <div class="b-post__tags h-clear">
                     <? foreach ($aItem['tags'] as $aTag) :?>
@@ -39,7 +39,7 @@
             ]]></description>
             <content:encoded><![CDATA[
                 <?=$aItem['description']?> 
-                <p><a href="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?>">Смотреть целиком</a></p>
+                <p><a href="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?>"><?=$this->lang(array('en' => 'Full Post'),'Смотреть целиком')?></a></p>
                 <? if ($aItem['tags']) :?>
                 <div class="b-post__tags h-clear">
                     <? foreach ($aItem['tags'] as $aTag) :?>

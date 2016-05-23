@@ -10,7 +10,7 @@
                 <a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a>,
                 <small class="text-muted"><?=SSCE\H\date2ru($aPost['like_date'], true)?></small>
             </h4>
-            <p><a data-id="<?=$aPost['id']?>" class="btn btn-default btn-sm b-likedel"><i class="fa fa-times b-like" title="Убрать из списка"></i> убрать лайк</a></p>
+            <p><a data-id="<?=$aPost['id']?>" class="btn btn-default btn-sm b-likedel"><i class="fa fa-times b-like" title="<?=$this->lang(array('en' => 'Remove from list'),'Убрать из списка')?>"></i> <?=$this->lang(array('en' => 'Remove like'),'убрать лайк')?></a></p>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <? if ($iPage == 0 && sizeof($aCommentList) == 0) :?>
-    <p class="panel panel-body h-shadow">Вы еще не написали ни одного комментария</p>
+    <p class="panel panel-body h-shadow"><?=$this->lang(array('en' => 'You haven\'t post any comments yet'),'Вы еще не написали ни одного комментария')?></p>
 <? else :?>
     <? foreach ($aCommentList as $aComment) :?>
         <div class="b-post__data">
@@ -20,6 +20,6 @@
         </div>
     <? endforeach;?>
     <? if (!$bAllLoaded) :?>
-        <button class="btn btn-default b-btn__ajaxpage form-control" data-url="/home/ajax/commentlist" data-page="<?=($iPage+1)?>"><i class="fa fa-refresh"></i>&nbsp; Загрузить еще</button>
+        <button class="btn btn-default b-btn__ajaxpage form-control" data-url="/home/ajax/commentlist" data-page="<?=($iPage+1)?>"><i class="fa fa-refresh"></i>&nbsp; <?=$this->lang(array('en' => 'Load More'),'Загрузить еще')?></button>
     <? endif;?>
 <?endif;?>
