@@ -6,6 +6,11 @@ class Bootstrap extends Base {
     private $_iLastCommentCount = 5;
 
     public function run(){
+        
+        if (isset($_GET['lang'])) {
+            $this->request->setLang(substr($_GET['lang'], 0, 2))->refresh();
+        }
+        
         $oUser  = $this->doLogin();
         
         $oChapters  = new \SSCE\Models\ChapterList($this->options);

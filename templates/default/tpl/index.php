@@ -57,6 +57,8 @@
                                 <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
                             <? endforeach;?>
                             <li role="separator" class="divider"></li>
+                            <li role="presentation"><a href="?lang=<?=$this->lang(array('en' => 'ru'),'en')?>"><?=$this->lang(array('en' => 'Русская версия'),'Switch to EN')?></a></li>
+                            <li role="separator" class="divider"></li>
                             <? if ($bIsLogged) :?>
                                 <li role="presentation"><a href="/home"><?=$this->lang(array('en' => 'Home Page'),'Личный кабинет')?></a>
                                 </li>
@@ -75,6 +77,7 @@
                             <input type="text" class="form-control input-sm" id="search_query" placeholder="<?=$this->lang(array('en' => 'Search...'),'поиск')?>"> 
                             <span id="search_btn" class="input-group-addon btn b-search__btn"><?=$this->lang(array('en' => 'search'),'найти')?></span>
                         </div>
+                        <a class="btn btn-sm btn-primary hidden-xs" href="?lang=<?=$this->lang(array('en' => 'ru'),'en')?>"><?=$this->lang(array('en' => 'RU'),'EN')?></a>
                     </form>
                 </div>
             </div>
