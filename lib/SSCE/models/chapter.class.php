@@ -61,6 +61,7 @@ class Chapter extends Base {
                     p.*,
                     pl.state    AS like_state,
                     c.title     AS chapter_title,
+                    c.title_en  AS chapter_title_en,
                     c.class     AS chapter_name,
                     cm.id       AS last_comment_id,
                     cm.text     AS last_comment_text,

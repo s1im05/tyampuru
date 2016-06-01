@@ -31,9 +31,9 @@
                 </div>
             </div>
             <p class="pull-left text-muted">
-                <a href="/chapter/<?=$aPost['chapter_name']?>">&laquo;<?=$aPost['chapter_title']?>&raquo;</a> /
+                <a href="/chapter/<?=$aPost['chapter_name']?>">&laquo;<?=$this->lang(array('en' => $aPost['chapter_title_en']),$aPost['chapter_title'])?>&raquo;</a> /
                 <?=$this->lang(array('en' => 'visited'),'смотрели')?>: <?=$aPost['views']?> /
-                <?=SSCE\H\date2ru($aPost['cdate'], true)?>
+                <?=$this->lang(array('en' => SSCE\H\date2en($aPost['cdate'], true)),SSCE\H\date2ru($aPost['cdate'], true))?>
             </p>
         </div>
     </div>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="media-body">
                     <p class="media-heading"><strong><?=htmlspecialchars($aPost['last_comment_nickname'])?></strong>, 
-                        <span class="text-muted"><?=SSCE\H\date2ru($aPost['last_comment_cdate'])?>
+                        <span class="text-muted"><?=$this->lang(array('en' => SSCE\H\date2en($aPost['last_comment_cdate'], true)),SSCE\H\date2ru($aPost['last_comment_cdate'], true))?>
                         <?=$this->lang(array('en' => 'posted'),'написал'.(($aPost['last_comment_gender']=='U')?'(а)':($aPost['last_comment_gender']=='F'?'а':'')))?>:</span>
                     </p>
                     <div class="b-comment__text">

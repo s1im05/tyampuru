@@ -10,7 +10,7 @@
                 <div class="media-body">
                     <h4 class="media-heading">
                         <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$aComment['title']?></a>,
-                        <small class="text-muted"><?=SSCE\H\date2ru($aComment['cdate'], true)?></small>
+                        <small class="text-muted"><?=$this->lang(array('en' => SSCE\H\date2en($aComment['cdate'], true)),SSCE\H\date2ru($aComment['cdate'], true))?></small>
                     </h4>
                     <div class="b-comment__text">
                         <?=nl2br(htmlspecialchars($aComment['text']));?>

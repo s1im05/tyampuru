@@ -24,6 +24,7 @@ class Post extends Base {
 
         $oPost->chapter_name    = $oChapter->class;
         $oPost->chapter_title   = $oChapter->title;
+        $oPost->chapter_title_en    = $oChapter->title_en;
         
         $this->db->query("UPDATE LOW_PRIORITY ?_posts SET views = views+1 WHERE id = ?d LIMIT 1;", $iPostId);
         

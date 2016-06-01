@@ -56,7 +56,7 @@
                         <ul class="dropdown-menu">
                             <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/"><?=$this->lang(array('en' => 'All chapters'),'Все разделы')?></a></li>
                             <? foreach ($aChapters as $aVal) :?>
-                                <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
+                                <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$this->lang(array('en' => $aVal['title_en']),$aVal['title'])?></a></li>
                             <? endforeach;?>
                             <li role="separator" class="divider"></li>
                             <li role="presentation"><a href="?lang=<?=$this->lang(array('en' => 'ru'),'en')?>"><?=$this->lang(array('en' => 'Русская версия'),'Switch to EN')?></a></li>
@@ -97,7 +97,7 @@
             <ul class="nav nav-pills">
                 <li role="presentation" <?=isset($sChapter) && ($sChapter==='all')?'class="active"':''?>><a href="/"><?=$this->lang(array('en' => 'All chapters'),'Все разделы')?></a></li>
                 <? foreach ($aChapters as $aVal) :?>
-                    <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$aVal['title']?></a></li>
+                    <li role="presentation" <?=isset($sChapter) && ($sChapter===$aVal['class'])?'class="active"':''?>><a href="/chapter/<?=$aVal['class']?>"><?=$this->lang(array('en' => $aVal['title_en']),$aVal['title'])?></a></li>
                 <? endforeach;?>
             </ul>
         </nav>
@@ -132,7 +132,7 @@
                             <div class="b-post__data">
                                 <? foreach ($aCommentsLast as $aComment) :?>
                                     <p class="b-comment__last">
-                                        <span class="text-muted"><?=SSCE\H\date2ru($aComment['cdate'], true)?></span><br />
+                                        <span class="text-muted"><?=$this->lang(array('en' => SSCE\H\date2en($aComment['cdate'], true)), SSCE\H\date2ru($aComment['cdate'], true))?></span><br />
                                         <strong><?=htmlspecialchars($aComment['nickname'])?></strong> &rarr;
                                         <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$aComment['title']?></a><br />
                                         <?=htmlspecialchars(trim($aComment['text']))?><br />

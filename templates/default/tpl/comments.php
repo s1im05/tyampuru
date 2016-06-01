@@ -11,7 +11,7 @@
                     </div>
                     <div class="media-body <?=$aComment['id']==$iLastAdded?'bg-success':''?>">
                         <p class="media-heading"><strong><?=htmlspecialchars($aComment['nickname'])?></strong>, 
-                            <span class="text-muted"><?=SSCE\H\date2ru($aComment['cdate'])?> 
+                            <span class="text-muted"><?=$this->lang(array('en' => SSCE\H\date2en($aComment['cdate'], true)),SSCE\H\date2ru($aComment['cdate'], true))?>
                             <? if ($this->isLang('en')) :?>
                                 posted:
                             <? else :?>
