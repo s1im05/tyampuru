@@ -2,7 +2,7 @@
     <div class="b-post__panel">
         <? if ($bPostFull) :?>
             <h1 class="b-post__title">
-                <?=$aPost['title']?>
+                <?=$this->lang(array('en' => $aPost['title_en']),$aPost['title'])?>
                 <i title="<?=$this->lang(array('en' => 'I like it!'),'Мне нравится!')?>" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
                 <? if ($aPost['likes'] > 0) :?>
                     <sup class="b-likes__count"><?=$aPost['likes']?></sup>
@@ -10,7 +10,7 @@
             </h1>
         <? else :?>
             <h2 class="b-post__title">
-                <a href="/post/<?=$aPost['id']?>"><?=$aPost['title']?></a>
+                <a href="/post/<?=$aPost['id']?>"><?=$this->lang(array('en' => $aPost['title_en']),$aPost['title'])?></a>
                 <i title="<?=$this->lang(array('en' => 'I like it!'),'Мне нравится!')?>" data-id="<?=$aPost['id']?>" class="fa <?=$aPost['like_state']?'fa-heart':'fa-heart-o'?> b-like b-like-<?=$bIsLogged?'on':'off'?>"></i>
                 <? if ($aPost['likes'] > 0) :?>
                     <sup class="b-likes__count"><?=$aPost['likes']?></sup>
@@ -21,7 +21,7 @@
             <div class="pull-right hidden-xs">
                 <div class="addthis_toolbox addthis_default_style addthis_16x16_style"
                     addthis:url="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aPost['id']?>"
-                    addthis:title="<?=$aPost['title']?>">
+                    addthis:title="<?=$this->lang(array('en' => $aPost['title_en']),$aPost['title'])?>">
                     <a class="addthis_button_vk"></a>
                     <a class="addthis_button_odnoklassniki_ru"></a>
                     <a class="addthis_button_mymailru"></a>
@@ -98,7 +98,7 @@
     
     <?if ($aPost['tags']):?>
         <div class="b-post__tags b-post__footer">
-            <?$aTags    = explode("\n", $aPost['tags']);?>
+            <?$aTags    = explode("\n", $this->lang(array('en' => $aPost['tags_en']),$aPost['tags']));?>
             <?foreach($aTags as $sTag):?>
                 <a href="/tag/<?=urlencode(trim($sTag))?>" class="btn btn-default b-tag"><i class="fa fa-tag"></i> <?=$sTag?></a>
             <?endforeach;?>

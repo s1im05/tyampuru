@@ -25,7 +25,7 @@ class Home extends Base {
             $this->view->assign('sViewType', isset($_COOKIE['vt'])?($_COOKIE['vt']=='list' ? 'list':'thumb'):'thumb');
         }
         
-        $this->setTitle('Домашняя страница');
+        $this->setTitle($this->view->lang(array('en' => 'Home Page'), 'Домашняя страница'));
     }
     
     public function getCommentAction($iPage){
@@ -107,7 +107,7 @@ class Home extends Base {
         if ($sNickname){
             $_SESSION['user']['nickname'] = $sNickname;
         } else {
-            $this->view->assign('sError', 'Ошибка сохранения поля "Никнейм"');
+            $this->view->assign('sError', $this->view->lang(array('en' => 'Can\'t save field "Nickname"'), 'Ошибка сохранения поля "Никнейм"'));
             return;
         }
         
@@ -115,11 +115,11 @@ class Home extends Base {
         if (in_array($_POST['gender'], array('M','F','U'))){
             $_SESSION['user']['gender'] = $cGender;
         } else {
-            $this->view->assign('sError', 'Ошибка сохранения поля "Пол"');
+            $this->view->assign('sError', $this->view->lang(array('en' => 'Can\'t save field "Sex"'), 'Ошибка сохранения поля "Пол"'));
             return;
         }
         
         $this->db->query("UPDATE LOW_PRIORITY ?_users SET nickname = ?, gender = ? WHERE id = ?d LIMIT 1;", $sNickname, $cGender, $_SESSION['user']['id']);
-        $this->view->assign('sSuccess', 'Успешно сохранено');
+        $this->view->assign('sSuccess', $this->view->lang(array('en' => 'Saved successfully!'), 'Успешно сохранено!'));
     }
 }

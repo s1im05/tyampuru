@@ -8,7 +8,7 @@ class Chapter extends Base {
 
 
     public function allAction($iPage = 1){
-        $this->setTitle('Прикольные картинки и гифки из всех разделов');
+        $this->setTitle($this->view->lang(array('en' => 'Funny Pictures From All Chapters'), 'Прикольные картинки и гифки из всех разделов'));
         $this->_process('all', $iPage);
     }
     
@@ -16,7 +16,7 @@ class Chapter extends Base {
         if ($aChapters  = $this->view->getVar('aChapters')){
             foreach ($aChapters as $aVal){
                 if ($aVal['class'] === $sChapter){
-                $this->setTitle("Прикольные картинки и гифки из раздела &laquo;{$aVal['title']}&raquo;");
+                    $this->setTitle($this->view->lang(array('en' => "Funny Pictures and GIFs From Chapter &laquo;{$aVal['title_en']}&raquo;"), "Прикольные картинки и гифки из раздела &laquo;{$aVal['title']}&raquo;"));
                     break;
                 } 
             }

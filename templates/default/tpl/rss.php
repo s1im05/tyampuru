@@ -23,13 +23,19 @@
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <?foreach ($aRss['items'] as $aItem) :?>
         <item>
-            <title><![CDATA[<?=$aItem['title']?>]]></title>
+            <title><![CDATA[<?=$this->lang(array('en' => $aItem['title_en']),$aItem['title'])?>]]></title>
             <link>http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?></link>
             <guid>http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?></guid>
             <description><![CDATA[
                 <?=$aItem['description']?> 
                 <p><a href="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?>"><?=$this->lang(array('en' => 'Full Post'),'Смотреть целиком')?></a></p>
-                <? if ($aItem['tags']) :?>
+                <? if ($this->isLang('en') && $aItem['tags_en']) :?>
+                <div class="b-post__tags h-clear">
+                    <? foreach ($aItem['tags_en'] as $aTag) :?>
+                        <a style="color:#000;padding:.5em 1em;margin-right:1em;border-radius:4px;background:#ccc;text-decoration:none;" href="/tag/<?=$aTag[0]?>">#<?=$aTag[1]?></a>
+                    <? endforeach;?>
+                </div>
+                <? elseif ($aItem['tags']) :?>
                 <div class="b-post__tags h-clear">
                     <? foreach ($aItem['tags'] as $aTag) :?>
                         <a style="color:#000;padding:.5em 1em;margin-right:1em;border-radius:4px;background:#ccc;text-decoration:none;" href="/tag/<?=$aTag[0]?>">#<?=$aTag[1]?></a>
@@ -40,6 +46,12 @@
             <content:encoded><![CDATA[
                 <?=$aItem['description']?> 
                 <p><a href="http://<?=$_SERVER['HTTP_HOST']?>/post/<?=$aItem['id']?>"><?=$this->lang(array('en' => 'Full Post'),'Смотреть целиком')?></a></p>
+                <? if ($this->isLang('en') && $aItem['tags_en']) :?>
+                <div class="b-post__tags h-clear">
+                    <? foreach ($aItem['tags_en'] as $aTag) :?>
+                        <a style="color:#000;padding:.5em 1em;margin-right:1em;border-radius:4px;background:#ccc;text-decoration:none;" href="/tag/<?=$aTag[0]?>">#<?=$aTag[1]?></a>
+                    <? endforeach;?>
+                </div>
                 <? if ($aItem['tags']) :?>
                 <div class="b-post__tags h-clear">
                     <? foreach ($aItem['tags'] as $aTag) :?>

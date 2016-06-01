@@ -21,7 +21,7 @@ class Search extends Base {
         $this->view->assign('bAllLoaded',   ($iPage+1)*$iLimit >= $aFound['total']);
         $this->view->assign('bByTag',       false);
         
-        $this->setTitle('Поиск по запросу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
+        $this->setTitle($this->view->lang(array('en' => 'Search by Request'), 'Поиск по запросу').' &laquo;'.htmlspecialchars($sQuery).'&raquo;');
     }
     
     public function searchAjaxAction($sQuery, $iPage, $bByTag = false){
@@ -46,7 +46,7 @@ class Search extends Base {
     
     public function searchByTagAction($sQuery){
         $this->searchAction($sQuery, true);
-        $this->setTitle('Поиск по тэгу &laquo;'.htmlspecialchars($sQuery).'&raquo;');
+        $this->setTitle($this->view->lang(array('en' => 'Search by Tag'), 'Поиск по тэгу').' &laquo;'.htmlspecialchars($sQuery).'&raquo;');
         $this->view->assign('bByTag', true);
     }
     
@@ -67,12 +67,14 @@ class Search extends Base {
             }
             if (!empty($aWords)){
                 $iLimit = (int)$this->config->project->postsppage;
+                $sLn    = $this->view->lang(array('en' => '_en'), '');
                 if ($aData  = $this->db->selectPage($iCnt, 
                                                     "SELECT
                                                         p.*,
                                                         pl.state    AS like_state,
                                                         c.class     AS chapter_name,
-                                                        c.title     AS chapter_title
+                                                        c.title     AS chapter_title,
+                                                        c.title_en  AS chapter_title_en
                                                     FROM 
                                                         ?_chapters c
                                                     JOIN
@@ -84,8 +86,8 @@ class Search extends Base {
                                                     WHERE
                                                         c.id    = p.chapter_id AND
                                                         (
-                                                            p.tags LIKE '%".implode("%' OR tags LIKE '%", $aWords)."%'
-                                                            ".(!$bByTagOnly ? "OR p.title LIKE '%".implode("%' OR title LIKE '%", $aWords)."%'" : '' )."
+                                                            p.tags{$sLn} LIKE '%".implode("%' OR tags{$sLn} LIKE '%", $aWords)."%'
+                                                            ".(!$bByTagOnly ? "OR p.title{$sLn} LIKE '%".implode("%' OR title{$sLn} LIKE '%", $aWords)."%'" : '' )."
                                                         ) AND
                                                         p.cdate < NOW()
                                                     ORDER BY
