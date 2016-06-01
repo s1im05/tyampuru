@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     <? if (isset($aPost) && $aPost) :?>
-    <meta name="keywords" content="<?=$this->lang(array('en' => implode(', ', explode("\n", $aPost['tags_en']))), implode(', ', explode("\n", $aPost['tags'])))?>">
+    <meta name="keywords" content="<?=$this->lang(array('en' => implode(', ', explode("\r\n", $aPost['tags_en']))), implode(', ', explode("\r\n", $aPost['tags'])))?>">
     <? endif;?>
     
     <title><?=$title?></title>
