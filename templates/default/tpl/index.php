@@ -6,6 +6,10 @@
     <meta http-equiv="content-language" content="<?=$this->lang(array('en' => 'en'),'ru')?>">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
+    <? if (isset($aPost) && $aPost) :?>
+    <meta name="keywords" content="<?=$this->lang(array('en' => implode(', ', explode("\n", $aPost['tags_en']))), implode(', ', explode("\n", $aPost['tags'])))?>">
+    <? endif;?>
+    
     <title><?=$title?></title>
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
