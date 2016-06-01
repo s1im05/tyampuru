@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-language" content="<?=$this->lang(array('en' => 'en'),'ru')?>">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
     <title><?=$title?></title>
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
@@ -77,7 +79,7 @@
                             <input type="text" class="form-control input-sm" id="search_query" placeholder="<?=$this->lang(array('en' => 'Search...'),'поиск')?>"> 
                             <span id="search_btn" class="input-group-addon btn b-search__btn"><?=$this->lang(array('en' => 'search'),'найти')?></span>
                         </div>
-                        <a class="btn btn-sm btn-primary hidden-xs" href="?lang=<?=$this->lang(array('en' => 'ru'),'en')?>"><?=$this->lang(array('en' => 'RU'),'EN')?></a>
+                        <a class="btn btn-sm btn-primary hidden-xs i-flag i-flag-<?=$this->lang(array('en' => 'ru'),'en')?>" title="<?=$this->lang(array('en' => 'Русская версия'),'Switch to EN')?>" href="?lang=<?=$this->lang(array('en' => 'ru'),'en')?>">&nbsp;</a>
                     </form>
                 </div>
             </div>
