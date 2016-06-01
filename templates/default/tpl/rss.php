@@ -52,7 +52,7 @@
                         <a style="color:#000;padding:.5em 1em;margin-right:1em;border-radius:4px;background:#ccc;text-decoration:none;" href="/tag/<?=$aTag[0]?>">#<?=$aTag[1]?></a>
                     <? endforeach;?>
                 </div>
-                <? if ($aItem['tags']) :?>
+                <? elseif ($aItem['tags']) :?>
                 <div class="b-post__tags h-clear">
                     <? foreach ($aItem['tags'] as $aTag) :?>
                         <a style="color:#000;padding:.5em 1em;margin-right:1em;border-radius:4px;background:#ccc;text-decoration:none;" href="/tag/<?=$aTag[0]?>">#<?=$aTag[1]?></a>

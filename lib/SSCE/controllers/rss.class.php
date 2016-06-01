@@ -6,7 +6,6 @@ class Rss extends Base {
     protected $_sLayout     = 'rss.php';
 
     public function rssAction(){
-        $sLn    = $this->view->lang(array('en' => '_en'), '');
         $aRss   = array(
             'title'         => $this->view->lang(array('en' => 'Tyampuru! Only the best stuff from Internet!'), 'Тямпуру! Все только самое отборное и интересное!'),
             'description'   => '',
