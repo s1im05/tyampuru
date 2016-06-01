@@ -134,7 +134,7 @@
                                     <p class="b-comment__last">
                                         <span class="text-muted"><?=$this->lang(array('en' => SSCE\H\date2en($aComment['cdate'], true)), SSCE\H\date2ru($aComment['cdate'], true))?></span><br />
                                         <strong><?=htmlspecialchars($aComment['nickname'])?></strong> &rarr;
-                                        <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$aComment['title']?></a><br />
+                                        <a href="/post/<?=$aComment['post_id']?>#comment_<?=$aComment['id']?>"><?=$this->lang(array('en' => $aComment['title_en']),$aComment['title'])?></a><br />
                                         <?=htmlspecialchars(trim($aComment['text']))?><br />
                                     </p>
                                 <? endforeach;?>

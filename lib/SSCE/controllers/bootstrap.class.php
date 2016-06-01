@@ -19,6 +19,7 @@ class Bootstrap extends Base {
         $aCommentsLast  = $this->db->select("SELECT 
                                                     c.*,
                                                     p.title,
+                                                    p.title_en,
                                                     u.nickname,
                                                     u.gender
                                                 FROM 
