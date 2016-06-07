@@ -32,7 +32,7 @@ class Post extends Base {
             $oPost->like_state    = $this->db->selectCell("SELECT state FROM ?_posts__likes WHERE state = 1 AND post_id = ?d AND user_id = ?d LIMIT 1;", $iPostId, $oUser->id);
         }
 
-        $this->setTitle($oPost->chapter_title.' &ndash; '.$oPost->title);
+        $this->setTitle($oPost->title);
         $this->view->assign('sChapter',    $oChapter->class);
         $this->view->assign('aPost',       $oPost->data);
     }
