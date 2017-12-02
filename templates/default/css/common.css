@@ -34,10 +34,10 @@ a:hover, a:focus {
     margin-bottom: 2em;
     background: #fff;
     position: relative;
-    min-height: 55px;
-}
-.b-poster__image {
-    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1140px auto;
 }
 .b-title {
     position: absolute;

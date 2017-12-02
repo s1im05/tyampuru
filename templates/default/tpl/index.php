@@ -90,8 +90,7 @@
         </div>
     </header>
     <div class="container">
-        <div class="b-poster h-shadow">
-            <img src="<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg" class="b-poster__image" alt="<?=$this->lang(array('en' => 'Tyampuru'), 'Тямпуру')?>" />
+        <div class="b-poster h-shadow" style="background-image: url(<?=$path?>/img/bg/<?=mt_rand(1,46)?>.jpg);">
             <a class="b-title" title="<?=$this->lang(array('en' => 'Main Page'),'Главная страница')?>" href="/">
                 <img class="b-title__img" src="<?=$path?>/img/tyampuru.png" />
             </a>
