@@ -10,7 +10,7 @@
     <meta name="keywords" content="<?=$this->lang(array('en' => implode(', ', explode("\r\n", $aPost['tags_en']))), implode(', ', explode("\r\n", $aPost['tags'])))?>">
     <? endif;?>
     
-    <title><?=$title?></title>
+    <title>Тямпуру - <?=$title?></title>
     
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$path?>/css/font-awesome.min.css" />
