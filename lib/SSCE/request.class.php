@@ -69,7 +69,7 @@ class Request {
     }
     
     public function getLang(){
-        return isset($_SESSION['SSCE_LANG']) ? $_SESSION['SSCE_LANG'] : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        return isset($_SESSION['SSCE_LANG']) ? $_SESSION['SSCE_LANG'] : 'ru';
     }
     
     public function setLang($sLang){
