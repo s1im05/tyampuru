@@ -29,7 +29,7 @@
 <div class="row">
     <main class="b-main col-md-9">
         <? $bPostFull   = false;?>
-        <?foreach($aPostList as $aPost):?>
+        <?foreach($aPostList as $iKey => $aPost):?>
             <?include 'article.php';?>
         <?endforeach;?>
 
